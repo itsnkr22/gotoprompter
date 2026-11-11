@@ -1,0 +1,65 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { getCollection } from 'astro:content';
+import { APP_NAME } from '../../brand';
+import MacLanding from '../../components/MacLanding.astro';
+import defaultFaqs from '../../data/default-faqs.json';
+import Base from '../../layouts/Base.astro';
+import { breadcrumbs, howTo as howToLd, softwareApp } from '../../lib/seo';
+import { howToSteps, mergeFaqs } from '../../lib/use-cases';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('useCases');
+  return cases.map((c) => ({ params: { slug: c.data.slug }, props: { entry: c.data } }));
+}
+const { entry } = Astro.props;
+const faqs = mergeFaqs(defaultFaqs, entry.faqOverrides, entry.extraFaqs, entry.platformName);
+const howToFaq = faqs.find((f) => f.id === 'how-to');
+const steps = howToFaq ? howToSteps(howToFaq.a) : [];
+const howTo = howToFaq && steps.length > 0 ? { name: `How to use ${entry.name} with ${APP_NAME}`, steps } : undefined;
+const offers = (pricing.plans as { name: string; price: number }[]).map((p) => ({ name: p.name, price: p.price }));
+const url = `/mac/${entry.slug}/`;
+const ld = [
+  softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url, offers }),
+  breadcrumbs([
+    { name: 'Home', url: '/' },
+    { name: 'Mac', url: '/mac/' },
+    { name: entry.name, url },
+  ]),
+  ...(howTo ? [howToLd(howTo.name, howTo.steps)] : []),
+];
+---
+
+<Base title={entry.metaTitle} description={entry.metaDescription} jsonLd={ld}>
+  <nav class="container crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> › <a href="/mac/">Mac</a> › <span aria-current="page">{entry.name}</span>
+  </nav>
+  <MacLanding
+    eyebrow={entry.eyebrow}
+    badge={entry.badgeText}
+    title={entry.heroTitle}
+    sub={entry.heroSubtitle}
+    trust="macOS 14+ · Apple silicon & Intel · Free for 3 scripts"
+    downloadEvent={`usecase-${entry.slug}-download`}
+    pricingEvent={`usecase-${entry.slug}-pricing`}
+    videoId={entry.heroVideoId}
+    audience={entry.audienceItems}
+    faqs={faqs}
+    footerHeadline={entry.footerCtaHeadline}
+    footerPrimaryEvent={`usecase-${entry.slug}-footer-download`}
+    footerSecondaryEvent={`usecase-${entry.slug}-footer-web`}
+    hide={entry.hideSections}
+    howTo={howTo}
+  />
+</Base>
+
+<style>
+  .crumbs {
+    padding-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--vp-color-text-muted);
+  }
+  .crumbs a {
+    color: var(--vp-color-text-muted);
+  }
+</style>

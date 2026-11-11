@@ -1,0 +1,247 @@
+{
+  "script": "Sentence one is short. Sentence two is a little longer than one. Sentence three asks a question? Sentence four ends it all!",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Sentence",
+      "clean": "sentence",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "one",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "short.",
+      "clean": "short",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "Sentence",
+      "clean": "sentence",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "little",
+      "clean": "little",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "longer",
+      "clean": "longer",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "than",
+      "clean": "than",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "one.",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 11
+    },
+    {
+      "raw": "Sentence",
+      "clean": "sentence",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "asks",
+      "clean": "asks",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "question?",
+      "clean": "question",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 16
+    },
+    {
+      "raw": "Sentence",
+      "clean": "sentence",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "ends",
+      "clean": "ends",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "it",
+      "clean": "it",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "all!",
+      "clean": "all",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 21
+    }
+  ],
+  "expectIndexAfterEach": [
+    4,
+    4,
+    12,
+    12,
+    17,
+    17,
+    21
+  ],
+  "expectResults": [
+    "command:go next",
+    "none",
+    "command:go next",
+    "none",
+    "command:go next",
+    "none",
+    "command:go next"
+  ]
+}

@@ -1,0 +1,634 @@
+{
+  "script": "Alpha bravo charlie delta echo. item1 item2 item3 item4 item5 item6 item7 item8 item9 item10 item11 item12 item13 item14 item15 item16 item17 item18 item19 item20 item21 item22 item23 item24 item25 item26 item27 item28 item29 item30 item31 item32 item33 item34 item35 item36 item37 item38 item39 item40 item41 item42 item43 item44 item45 item46 item47 item48 item49 item50 item51 item52 item53 item54 item55 item56 item57 item58 item59 item60 Zulu yankee.",
+  "events": [
+    {
+      "tap": 62
+    },
+    {
+      "transcript": "bravo charlie delta"
+    },
+    {
+      "transcript": "alpha bravo charlie delta"
+    },
+    {
+      "transcript": "alpha bravo charlie delta echo"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Alpha",
+      "clean": "alpha",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "bravo",
+      "clean": "bravo",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "charlie",
+      "clean": "charlie",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "delta",
+      "clean": "delta",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "echo.",
+      "clean": "echo",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "item1",
+      "clean": "item1",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "item2",
+      "clean": "item2",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "item3",
+      "clean": "item3",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "item4",
+      "clean": "item4",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "item5",
+      "clean": "item5",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "item6",
+      "clean": "item6",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "item7",
+      "clean": "item7",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "item8",
+      "clean": "item8",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "item9",
+      "clean": "item9",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "item10",
+      "clean": "item10",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "item11",
+      "clean": "item11",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "item12",
+      "clean": "item12",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "item13",
+      "clean": "item13",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "item14",
+      "clean": "item14",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "item15",
+      "clean": "item15",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "item16",
+      "clean": "item16",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "item17",
+      "clean": "item17",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "item18",
+      "clean": "item18",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "item19",
+      "clean": "item19",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 23
+    },
+    {
+      "raw": "item20",
+      "clean": "item20",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 24
+    },
+    {
+      "raw": "item21",
+      "clean": "item21",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 25
+    },
+    {
+      "raw": "item22",
+      "clean": "item22",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 26
+    },
+    {
+      "raw": "item23",
+      "clean": "item23",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 27
+    },
+    {
+      "raw": "item24",
+      "clean": "item24",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 28
+    },
+    {
+      "raw": "item25",
+      "clean": "item25",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 29
+    },
+    {
+      "raw": "item26",
+      "clean": "item26",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 30
+    },
+    {
+      "raw": "item27",
+      "clean": "item27",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 31
+    },
+    {
+      "raw": "item28",
+      "clean": "item28",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 32
+    },
+    {
+      "raw": "item29",
+      "clean": "item29",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 33
+    },
+    {
+      "raw": "item30",
+      "clean": "item30",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 34
+    },
+    {
+      "raw": "item31",
+      "clean": "item31",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 35
+    },
+    {
+      "raw": "item32",
+      "clean": "item32",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 36
+    },
+    {
+      "raw": "item33",
+      "clean": "item33",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 37
+    },
+    {
+      "raw": "item34",
+      "clean": "item34",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 38
+    },
+    {
+      "raw": "item35",
+      "clean": "item35",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 39
+    },
+    {
+      "raw": "item36",
+      "clean": "item36",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 40
+    },
+    {
+      "raw": "item37",
+      "clean": "item37",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 41
+    },
+    {
+      "raw": "item38",
+      "clean": "item38",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 42
+    },
+    {
+      "raw": "item39",
+      "clean": "item39",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 43
+    },
+    {
+      "raw": "item40",
+      "clean": "item40",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 44
+    },
+    {
+      "raw": "item41",
+      "clean": "item41",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 45
+    },
+    {
+      "raw": "item42",
+      "clean": "item42",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 46
+    },
+    {
+      "raw": "item43",
+      "clean": "item43",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 47
+    },
+    {
+      "raw": "item44",
+      "clean": "item44",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 48
+    },
+    {
+      "raw": "item45",
+      "clean": "item45",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 49
+    },
+    {
+      "raw": "item46",
+      "clean": "item46",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 50
+    },
+    {
+      "raw": "item47",
+      "clean": "item47",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 51
+    },
+    {
+      "raw": "item48",
+      "clean": "item48",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 52
+    },
+    {
+      "raw": "item49",
+      "clean": "item49",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 53
+    },
+    {
+      "raw": "item50",
+      "clean": "item50",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 54
+    },
+    {
+      "raw": "item51",
+      "clean": "item51",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 55
+    },
+    {
+      "raw": "item52",
+      "clean": "item52",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 56
+    },
+    {
+      "raw": "item53",
+      "clean": "item53",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 57
+    },
+    {
+      "raw": "item54",
+      "clean": "item54",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 58
+    },
+    {
+      "raw": "item55",
+      "clean": "item55",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 59
+    },
+    {
+      "raw": "item56",
+      "clean": "item56",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 60
+    },
+    {
+      "raw": "item57",
+      "clean": "item57",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 61
+    },
+    {
+      "raw": "item58",
+      "clean": "item58",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 62
+    },
+    {
+      "raw": "item59",
+      "clean": "item59",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 63
+    },
+    {
+      "raw": "item60",
+      "clean": "item60",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 64
+    },
+    {
+      "raw": "Zulu",
+      "clean": "zulu",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 65
+    },
+    {
+      "raw": "yankee.",
+      "clean": "yankee",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 66
+    }
+  ],
+  "expectIndexAfterEach": [
+    62,
+    62,
+    4,
+    5
+  ],
+  "expectResults": [
+    "tap",
+    "none",
+    "jump",
+    "near"
+  ]
+}

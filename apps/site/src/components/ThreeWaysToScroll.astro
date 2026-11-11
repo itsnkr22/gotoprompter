@@ -1,0 +1,24 @@
+---
+const ways = [
+  { title: 'Voice scrolling', text: 'Follows your speech word by word in 60+ auto-detected languages. Pause, ad-lib or backtrack — it stays with you.' },
+  { title: 'Sound scrolling', text: 'Scrolls while your mic hears you and pauses when you go quiet. No speech recognition, so it works in any language.' },
+  { title: 'Constant speed', text: 'A classic steady crawl at the pace you set. No microphone needed.' },
+];
+---
+
+<section class="container block" id="three-ways">
+  <div class="section-head">
+    <h2>Three ways to scroll</h2>
+    <p>Pick the mode that fits the moment.</p>
+  </div>
+  <div class="grid-3">
+    {
+      ways.map((w) => (
+        <div class="card">
+          <h3>{w.title}</h3>
+          <p class="muted" style="margin:0">{w.text}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

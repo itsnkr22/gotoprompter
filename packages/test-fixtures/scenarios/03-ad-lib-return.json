@@ -1,0 +1,44 @@
+{
+  "script": "Welcome to the kitchen.\nToday's recipe is a simple tomato soup with basil and a slice of toasted bread.\nStart by heating the olive oil in a wide pan.",
+  "events": [
+    {
+      "transcript": "welcome"
+    },
+    {
+      "transcript": "welcome to"
+    },
+    {
+      "transcript": "welcome to the"
+    },
+    {
+      "transcript": "welcome to the kitchen"
+    },
+    {
+      "transcript": "welcome to the kitchen todays"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a simple"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a simple tomato"
+    },
+    {
+      "transcript": "by the way my neighbour dropped by yesterday with a basket of apples from her garden which was lovely"
+    },
+    {
+      "transcript": "and she stayed for tea while we talked about the weather"
+    },
+    {
+      "transcript": "anyway start by heating the olive"
+    }
+  ]
+}

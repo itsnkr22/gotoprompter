@@ -1,0 +1,47 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { APP_NAME } from '../../brand';
+import MacLanding from '../../components/MacLanding.astro';
+import defaultFaqs from '../../data/default-faqs.json';
+import Base from '../../layouts/Base.astro';
+import { breadcrumbs, softwareApp } from '../../lib/seo';
+import { mergeFaqs } from '../../lib/use-cases';
+
+const faqs = mergeFaqs(defaultFaqs, {}, [], 'FaceTime, Zoom and Teams', 'Everything happens on your Mac; no audio is ever sent anywhere. It works offline.');
+const offers = (pricing.plans as { name: string; price: number }[]).map((p) => ({ name: p.name, price: p.price }));
+const audience = [
+  { icon: 'briefcase', title: 'Sales reps', description: 'keep talking points in view on calls without the client ever seeing them' },
+  { icon: 'video', title: 'YouTubers & course creators', description: 'read a script while looking straight into the camera' },
+  { icon: 'book', title: 'Webinar hosts', description: 'stay on track for an hour without losing their place' },
+  { icon: 'mic', title: 'Podcasters', description: 'nail scripted intros, ad reads and structured interviews' },
+  { icon: 'globe', title: 'Non-native speakers', description: 'present in a second language with confidence' },
+  { icon: 'monitor', title: 'Demo recorders', description: 'get the take in one go instead of five' },
+];
+const ld = [
+  softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url: '/mac/', offers }),
+  breadcrumbs([
+    { name: 'Home', url: '/' },
+    { name: 'Mac app', url: '/mac/' },
+  ]),
+];
+---
+
+<Base
+  title="The teleprompter for Mac that stays invisible on screen share"
+  description="A floating teleprompter window that follows your voice, stays on top of every app, and disappears from Zoom, Google Meet, Teams, OBS and recordings. Free for 3 scripts."
+  jsonLd={ld}
+>
+  <MacLanding
+    eyebrow={`${APP_NAME} for macOS`}
+    title="The teleprompter that only you can see."
+    sub="A floating window that follows your voice, stays on top of every app, and is excluded from screen sharing and recordings."
+    trust="macOS 14+ · Apple silicon & Intel · Free for 3 scripts"
+    downloadEvent="mac-hero-download"
+    pricingEvent="mac-hero-pricing"
+    audience={audience}
+    faqs={faqs}
+    footerHeadline="Ready to stop memorising?"
+    footerPrimaryEvent="mac-footer-download"
+    footerSecondaryEvent="mac-footer-web"
+  />
+</Base>

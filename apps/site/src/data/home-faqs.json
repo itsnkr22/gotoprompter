@@ -1,0 +1,62 @@
+[
+  {
+    "id": "free",
+    "q": "Is {{APP_NAME}} free?",
+    "a": "The web app is completely free and open source (MIT). The Mac app is free to use with up to 3 custom scripts plus a demo script. If you need more, Pro (yearly) or Lifetime (one-time) unlock unlimited scripts."
+  },
+  {
+    "id": "how",
+    "q": "How does voice scrolling work?",
+    "a": "{{APP_NAME}} transcribes what you say on your device and matches it against your whole script, not just the next line. It advances as you speak, waits when you pause, and finds you again if you skip ahead or go back."
+  },
+  {
+    "id": "web-vs-mac",
+    "q": "What's the difference between the web app and the Mac app?",
+    "a": "Both scroll with your voice. The web app runs in a browser tab with no download. The Mac app adds a floating window that stays on top of every app and is excluded from screen sharing and recordings, 60+ languages, a script library, presets, stats and menu-bar controls."
+  },
+  {
+    "id": "hidden",
+    "q": "Will other people see my script on a call?",
+    "a": "On Mac, no. The prompter window is excluded from screen capture at the operating-system level, so Zoom, Google Meet, Teams, OBS, QuickTime and similar tools do not record it. Only you see it."
+  },
+  {
+    "id": "off-script",
+    "q": "What happens if I go off-script?",
+    "a": "Nothing breaks. The script waits while you improvise and picks up as soon as you return to the text. If you jump to another section, it jumps with you — forwards or backwards. You can also click any word to continue from there."
+  },
+  {
+    "id": "platforms",
+    "q": "Which platforms are supported?",
+    "a": "The web app works in Chrome, Edge and Safari on macOS, Windows, Linux, Android, iPhone and iPad. The native app is for macOS 14 or later (Apple silicon and Intel)."
+  },
+  {
+    "id": "windows",
+    "q": "Does it work on Windows or Android?",
+    "a": "Yes, through the web app in Chrome or Edge. There is no native Windows or Android app yet."
+  },
+  {
+    "id": "privacy",
+    "q": "Is my script private?",
+    "a": "Yes. Scripts stay on your device and there is no account. Speech recognition runs in your browser or on your Mac. The only network calls the Mac app makes are license checks and update checks."
+  },
+  {
+    "id": "account",
+    "q": "Do I need an account?",
+    "a": "No. There is no sign-up anywhere. Mac purchases are delivered as a license key by email."
+  },
+  {
+    "id": "languages",
+    "q": "How many languages are supported?",
+    "a": "The web app supports 34 languages with automatic detection. The Mac app supports every language Apple's on-device speech recognition offers — more than 60."
+  },
+  {
+    "id": "notes",
+    "q": "Can I add notes I don't want to read aloud?",
+    "a": "Yes. Put anything in square brackets, like [pause] or [show slide]. It is displayed but skipped by voice tracking."
+  },
+  {
+    "id": "jump",
+    "q": "Can I jump to a specific part of my script?",
+    "a": "Yes. Click or tap any word and the prompter continues from there. Voice commands 'go back', 'go next', 'go start' and 'go finish' also move you around hands-free."
+  }
+]

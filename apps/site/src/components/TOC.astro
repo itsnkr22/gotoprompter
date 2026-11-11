@@ -1,0 +1,49 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+const { headings } = Astro.props;
+const h2s = headings.filter((h) => h.depth === 2);
+---
+
+{
+  h2s.length >= 3 && (
+    <nav class="toc" aria-label="On this page">
+      <p class="eyebrow">On this page</p>
+      <ol>
+        {h2s.map((h) => (
+          <li>
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    font-size: 0.9375rem;
+  }
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li + li {
+    margin-top: 0.4rem;
+  }
+  a {
+    color: var(--vp-color-text-muted);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--vp-color-text);
+  }
+  @media (min-width: 1024px) {
+    .toc {
+      position: sticky;
+      top: 5rem;
+    }
+  }
+</style>

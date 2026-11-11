@@ -1,0 +1,88 @@
+{
+  "script": "one two three four five six",
+  "options": {
+    "lookaheadWords": 1
+  },
+  "events": [
+    {
+      "transcript": "three"
+    },
+    {
+      "transcript": "one"
+    },
+    {
+      "transcript": "one three"
+    },
+    {
+      "transcript": "one three two"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "one",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "five",
+      "clean": "five",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "six",
+      "clean": "six",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    }
+  ],
+  "expectIndexAfterEach": [
+    0,
+    1,
+    1,
+    2
+  ],
+  "expectResults": [
+    "none",
+    "near",
+    "none",
+    "near"
+  ]
+}

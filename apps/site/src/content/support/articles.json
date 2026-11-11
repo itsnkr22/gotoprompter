@@ -1,0 +1,206 @@
+[
+  {
+    "id": "start-script",
+    "question": "How do I start a script?",
+    "category": "Getting started",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p><strong>Mac:</strong> copy your script from anywhere (Notes, Google Docs, Word, email), click the menu-bar icon and choose <strong>Start from clipboard</strong>. The prompter opens with the script loaded and, by default, listening.</p><p><strong>Web app:</strong> open <a href=\"/app/\">/app/</a>, paste into the text box and press <strong>Start Teleprompter</strong>, then tap the microphone.</p>",
+    "keywords": "paste load begin clipboard textarea",
+    "searchPhrases": ["how to start", "load my script", "get started"],
+    "videoUrl": null
+  },
+  {
+    "id": "import-script",
+    "question": "How do I import a script from Google Docs, Word or a PDF?",
+    "category": "Getting started",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>Copy the text and start from the clipboard (Mac) or paste it (web). The web app can also import a Google Doc directly: click <strong>Google Docs Sync</strong>, paste the link, and make sure the document is shared as \"Anyone with the link — Viewer\".</p><p>For a PDF, open it in Preview, select all, copy, and paste. Scanned PDFs need text recognition first.</p>",
+    "keywords": "google docs word pdf docx import upload",
+    "searchPhrases": ["import from google docs", "paste from word", "pdf script"],
+    "videoUrl": null
+  },
+  {
+    "id": "text-formatting",
+    "question": "Can I use bold, colours or other formatting in my script?",
+    "category": "Getting started",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>Scripts are plain text. Use CAPITALS or emoji for emphasis, and put cues in square brackets — <strong>[pause]</strong>, <strong>[smile]</strong> — which are shown but never read. Rich text (bold, italics, colours, mixed sizes) is not supported because it makes smooth scrolling unreliable.</p>",
+    "keywords": "format bold italic colour highlight markdown brackets cues",
+    "searchPhrases": ["format my script", "highlight words", "add stage directions"],
+    "videoUrl": null
+  },
+  {
+    "id": "not-scrolling",
+    "question": "Why isn't the text scrolling with my voice?",
+    "category": "Voice scrolling",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<ol><li>Make sure <strong>Voice scrolling</strong> is selected and you pressed the microphone.</li><li><strong>Mac:</strong> allow Microphone and Speech Recognition in System Settings → Privacy &amp; Security, and make sure the language's dictation model is available (System Settings → Keyboard → Dictation).</li><li><strong>Web:</strong> use Chrome, Edge or Safari and allow the microphone when asked. Firefox has no speech recognition.</li><li>Check the recognition language matches what you're reading.</li><li>If you scrolled by hand, click the word you want to read from — the active word may be far from where you're looking.</li></ol><p>Still stuck? Turn on <strong>Show recognized words</strong> (Mac) to see what the app hears, and email us a short recording.</p>",
+    "keywords": "stuck frozen permission language siri dictation active word",
+    "searchPhrases": [
+      "voice scrolling not working",
+      "doesn't move when i speak",
+      "stops following"
+    ],
+    "videoUrl": null
+  },
+  {
+    "id": "slow-scrolling",
+    "question": "Voice scrolling is behind me. How do I make it faster?",
+    "category": "Voice scrolling",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>Voice scrolling can only follow words it recognises, so start with what the microphone hears: get closer, cut background noise, and use a wired or receiver-connected mic for distance. Strong accents and fast speech take the recogniser slightly longer. Lowering the Lookahead setting (web) makes it react to fewer words at a time; raising it tolerates skipped words better. The scroll-speed slider only affects Sound and Constant modes.</p>",
+    "keywords": "lag delay accent noise distance lookahead",
+    "searchPhrases": ["can't keep up", "falls behind", "too slow"],
+    "videoUrl": null
+  },
+  {
+    "id": "external-microphone",
+    "question": "Can I use an external microphone?",
+    "category": "Voice scrolling",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>Yes. <strong>Mac:</strong> pick it in Settings → Audio (or the menu bar) and watch the level meter move. <strong>Web:</strong> choose it under Microphone Source in Settings; voice scrolling itself uses the browser's default input, so set that in your OS. Bluetooth headsets work but add latency; a wired or USB-receiver mic is better for distance.</p>",
+    "keywords": "usb wireless receiver headset airpods bluetooth input device",
+    "searchPhrases": ["use my rode mic", "airpods not working", "select microphone"],
+    "videoUrl": null
+  },
+  {
+    "id": "hidden-mac",
+    "question": "How do I hide the script from screen sharing and recordings?",
+    "category": "Mac setup",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>It's on by default: Settings → Overlay → <strong>Hidden from screen sharing and recordings</strong>. The window stays visible to you and is excluded from capture by macOS. Do a quick test with your meeting or recording app before an important session, and turn the setting off temporarily if you're sending us a screen recording of a problem.</p>",
+    "keywords": "invisible capture zoom teams obs quicktime",
+    "searchPhrases": ["hide from zoom", "invisible on screen share"],
+    "videoUrl": null
+  },
+  {
+    "id": "external-monitor",
+    "question": "The prompter disappears on my external monitor or Elgato display.",
+    "category": "Mac setup",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Some capture-card and virtual-display setups treat the hidden window as not drawable. Turn off <strong>Hidden from screen sharing and recordings</strong>, move the window to that display again, and check Screen &amp; System Audio Recording permission in System Settings → Privacy &amp; Security. With the setting off, the script will be visible in shares and recordings — test before going live.</p>",
+    "keywords": "elgato display disappears blank second screen",
+    "searchPhrases": ["prompter disappeared on second screen", "elgato screen blank"],
+    "videoUrl": null
+  },
+  {
+    "id": "activate-license",
+    "question": "How do I activate my license?",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Your key arrives by email right after checkout. Open {APP_NAME} → Settings → <strong>License</strong>, paste the key and click <strong>Activate</strong>. The plan badge changes to Pro or Lifetime and the script limit disappears. Activation needs an internet connection once; afterwards the app checks the key about once a day and tolerates two weeks offline.</p>",
+    "keywords": "key activate pro lifetime unlock",
+    "searchPhrases": ["enter license key", "activate pro"],
+    "videoUrl": null
+  },
+  {
+    "id": "activation-limit",
+    "question": "\"Activation limit reached\" — what now?",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Each key works on three Macs at a time. On a Mac you no longer use, open Settings → License → <strong>Deactivate this Mac</strong>. If that Mac is gone, email us the email address you used at checkout and the last four characters of the key and we'll free a slot.</p>",
+    "keywords": "limit three devices slot",
+    "searchPhrases": ["activation limit reached", "too many devices"],
+    "videoUrl": null
+  },
+  {
+    "id": "lost-key",
+    "question": "I lost my license key.",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Go to <a href=\"/license/\">License &amp; billing</a>, enter the email you used at checkout and we'll resend every key on it. Also check your spam folder for the original email from Dodo Payments.</p>",
+    "keywords": "recover resend email lost missing",
+    "searchPhrases": ["didn't get my key", "resend license"],
+    "videoUrl": null
+  },
+  {
+    "id": "invoice",
+    "question": "How do I get an invoice or receipt?",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Checkout and billing are run by our merchant of record, <strong>Dodo Payments</strong>. The receipt is emailed at purchase, and invoices (with your tax details) are available from the billing portal — request a portal link on the <a href=\"/license/\">License &amp; billing</a> page.</p>",
+    "keywords": "receipt billing tax vat portal",
+    "searchPhrases": ["send me an invoice", "where is my receipt"],
+    "videoUrl": null
+  },
+  {
+    "id": "refunds",
+    "question": "Can I get a refund?",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Yes — 14 days, no questions asked, for Pro and Lifetime. Email {SUPPORT_EMAIL} from the address you used at checkout. See the <a href=\"/refund-policy/\">refund policy</a>.</p>",
+    "keywords": "money back cancel",
+    "searchPhrases": ["refund my purchase", "money back"],
+    "videoUrl": null
+  },
+  {
+    "id": "free-vs-pro",
+    "question": "What's free and what does Pro add?",
+    "category": "License & billing",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>The web app is entirely free. The Mac app is free with up to <strong>3 custom scripts</strong> (unlimited words and sessions) plus a demo script. Pro (yearly) and Lifetime (one-time) remove the script limit. The voice engine is the same in every tier.</p>",
+    "keywords": "price plan unlimited scripts limit",
+    "searchPhrases": ["why am i asked to pay", "is it free"],
+    "videoUrl": null
+  },
+  {
+    "id": "deactivate-device",
+    "question": "How do I move my license to a new Mac?",
+    "category": "License & billing",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Install the app on the new Mac and activate with the same key. If you've hit the three-Mac limit, deactivate the old one first (Settings → License → Deactivate this Mac) or ask us to release it.</p>",
+    "keywords": "transfer new computer migrate",
+    "searchPhrases": ["new mac", "transfer license"],
+    "videoUrl": null
+  },
+  {
+    "id": "updates",
+    "question": "How do updates work?",
+    "category": "Mac setup",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>The app checks for updates once a day and offers to install with one click (it uses the Sparkle framework; updates are signed and verified). You can check manually from the menu bar → <strong>Check for Updates…</strong>. Pro includes updates while subscribed; Lifetime includes all updates.</p>",
+    "keywords": "sparkle version upgrade new release",
+    "searchPhrases": ["check for updates", "latest version"],
+    "videoUrl": null
+  },
+  {
+    "id": "uninstall",
+    "question": "How do I uninstall?",
+    "category": "Mac setup",
+    "platforms": ["macOS"],
+    "answerHtml": "<p>Quit the app from the menu bar, then drag it from Applications to the Trash. To remove your scripts and settings too, delete <code>~/Library/Application Support/{APP_NAME}</code> and <code>~/Library/Preferences/{MAC_BUNDLE_ID}.plist</code>. Deactivate your license first if you plan to use the key elsewhere.</p>",
+    "keywords": "remove delete trash",
+    "searchPhrases": ["remove the app", "delete everything"],
+    "videoUrl": null
+  },
+  {
+    "id": "web-offline",
+    "question": "Does the web app work offline?",
+    "category": "Web app",
+    "platforms": ["web"],
+    "answerHtml": "<p>Yes, after you've opened it once. Install it as an app (Share → Add to Home Screen on iPhone/iPad, the install icon in Chrome/Edge on desktop) and it launches without a connection. Whether speech recognition works offline depends on the browser: Safari and recent Chrome versions process speech on-device for most languages.</p>",
+    "keywords": "pwa install no internet",
+    "searchPhrases": ["work without internet", "install the web app"],
+    "videoUrl": null
+  },
+  {
+    "id": "web-ipad-safari",
+    "question": "Voice scrolling doesn't work in the web app on my iPad or in Firefox.",
+    "category": "Web app",
+    "platforms": ["web"],
+    "answerHtml": "<p><strong>iPad home-screen app:</strong> Apple blocks speech recognition inside installed web apps on iPad. Open the site in Safari instead. <strong>Firefox:</strong> it doesn't ship the Web Speech API; use Chrome, Edge or Safari, or switch to Sound or Constant scrolling.</p>",
+    "keywords": "firefox ipad pwa blocked unsupported",
+    "searchPhrases": ["ipad voice not working", "firefox no voice"],
+    "videoUrl": null
+  },
+  {
+    "id": "privacy",
+    "question": "Is my script private? Can you see what I read?",
+    "category": "Privacy & support",
+    "platforms": ["macOS", "web"],
+    "answerHtml": "<p>No. Scripts and audio stay on your device; there is no account and nothing is uploaded. The Mac app contacts our server only to validate your license and check for updates, and the web app only when you import a Google Doc you chose. We can't access your Mac or your scripts, so when you email for help please include the details we ask for.</p>",
+    "keywords": "data upload server local remote",
+    "searchPhrases": ["is it private", "do you store my scripts"],
+    "videoUrl": null
+  }
+]

@@ -1,0 +1,138 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { SUPPORT_EMAIL } from '../brand';
+import { MAC_AVAILABLE } from '../launch';
+import PricingButtons, { type PricingButton } from './PricingButtons';
+
+interface Plan {
+  id: string;
+  name: string;
+  price: number;
+  priceLabel: string;
+  period: string;
+  billedLabel?: string;
+  tagline: string;
+  highlight?: boolean;
+  features: string[];
+  cta: { label: string; href?: string; plan?: string };
+}
+interface Props {
+  compact?: boolean;
+  autoSelect?: boolean;
+}
+const { compact = false, autoSelect = false } = Astro.props;
+const plans = pricing.plans as Plan[];
+const buttonFor = (p: Plan): PricingButton => ({
+  id: p.id,
+  label: p.cta.label,
+  ...(p.cta.plan ? { plan: p.cta.plan as PricingButton['plan'] } : { href: p.cta.href ?? '/download/' }),
+  highlight: Boolean(p.highlight),
+});
+---
+
+<div class="pricing">
+  <div class="grid-3 plans">
+    {
+      plans.map((p) => (
+        <div class={`card plan ${p.highlight ? 'highlight' : ''}`}>
+          {p.highlight && <span class="badge">Most popular</span>}
+          <h3>{p.name}</h3>
+          {!compact && <p class="muted tagline">{p.tagline}</p>}
+          <p class="price">
+            <span class="amount">{p.priceLabel}</span>
+            {p.period && <span class="period muted"> {p.period}</span>}
+          </p>
+          {p.billedLabel && <p class="muted billed">{p.billedLabel}</p>}
+          <ul>
+            {p.features.map((f) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+          <div class="cta">
+            {!MAC_AVAILABLE ? (
+              <span class="btn btn-secondary soon" aria-disabled="true">
+                Coming soon
+              </span>
+            ) : p.cta.plan ? (
+              <PricingButtons client:idle buttons={[buttonFor(p)]} supportEmail={SUPPORT_EMAIL} autoSelect={autoSelect} />
+            ) : (
+              <a class="btn btn-secondary" href={p.cta.href}>
+                {p.cta.label}
+              </a>
+            )}
+            {MAC_AVAILABLE && p.cta.plan && (
+              <noscript>
+                <p class="muted">Enable JavaScript to check out</p>
+              </noscript>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <p class="muted footnote">{pricing.footnote}</p>
+  <p class="muted footnote">{pricing.guarantee}</p>
+</div>
+
+<style>
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .highlight {
+    border-color: var(--vp-color-accent);
+  }
+  .badge {
+    position: absolute;
+    top: -0.75rem;
+    left: 1.25rem;
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--vp-radius-pill);
+  }
+  .tagline {
+    min-height: 2.5rem;
+  }
+  .price {
+    margin: 0.5rem 0 0;
+  }
+  .amount {
+    font-size: 2.25rem;
+    font-weight: 800;
+  }
+  .billed {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  ul {
+    padding-left: 1.2rem;
+    margin: 1rem 0 1.5rem;
+    flex: 1;
+  }
+  li + li {
+    margin-top: 0.35rem;
+  }
+  .cta :global(.btn) {
+    width: 100%;
+  }
+  .soon {
+    cursor: default;
+    opacity: 0.7;
+  }
+  .cta :global(.pricing-error) {
+    color: var(--vp-color-danger);
+    font-size: 0.9375rem;
+    margin-top: 0.75rem;
+  }
+  .footnote {
+    font-size: 0.875rem;
+    margin: 1.25rem 0 0;
+  }
+  .footnote + .footnote {
+    margin-top: 0.25rem;
+  }
+</style>

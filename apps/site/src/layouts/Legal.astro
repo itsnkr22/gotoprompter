@@ -1,0 +1,29 @@
+---
+import Base from './Base.astro';
+import type { JsonLd } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  wide?: boolean;
+  jsonLd?: JsonLd | JsonLd[];
+  noindex?: boolean;
+}
+const { title, description, wide = false, jsonLd, noindex } = Astro.props;
+---
+
+<Base title={title} description={description} jsonLd={jsonLd} noindex={noindex}>
+  <article class={`container legal prose ${wide ? 'wide' : ''}`}>
+    <slot name="heading"><h1>{title}</h1></slot>
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .legal {
+    padding-block: 3rem 2rem;
+  }
+  .legal.wide {
+    max-width: 56rem;
+  }
+</style>

@@ -1,0 +1,69 @@
+{
+  "slug": "zoom",
+  "name": "Zoom",
+  "platformName": "Zoom",
+  "badgeText": "Works with Zoom",
+  "metaTitle": "Teleprompter for Zoom that nobody else can see",
+  "metaDescription": "Read your notes naturally on Zoom. A floating teleprompter that follows your voice and is hidden from screen sharing and Zoom recordings.",
+  "eyebrow": "Zoom",
+  "heroTitle": "The teleprompter for Zoom meetings",
+  "heroSubtitle": "Read your notes naturally while you present. The window floats over Zoom, scrolls as you speak, and never appears in a screen share or recording.",
+  "heroVideoId": "",
+  "footerCtaHeadline": "Ready for your next Zoom call?",
+  "hideSections": [],
+  "audienceItems": [
+    {
+      "icon": "briefcase",
+      "title": "Sales professionals",
+      "description": "running demos and pitches with key points always in view"
+    },
+    {
+      "icon": "book",
+      "title": "Webinar hosts",
+      "description": "delivering structured sessions without losing their place"
+    },
+    {
+      "icon": "users",
+      "title": "Product managers",
+      "description": "presenting roadmaps and updates with confidence"
+    },
+    {
+      "icon": "mic",
+      "title": "Conference speakers",
+      "description": "giving keynotes over Zoom Webinars and Events"
+    },
+    {
+      "icon": "globe",
+      "title": "Non-native speakers",
+      "description": "presenting in a second language without the nerves"
+    },
+    {
+      "icon": "star",
+      "title": "Customer success managers",
+      "description": "running scripted onboarding and training calls"
+    }
+  ],
+  "faqOverrides": {
+    "screen-sharing": {
+      "q": "Will other Zoom participants see the teleprompter?",
+      "a": "No. When you share your screen or a window in Zoom, the prompter is hidden by macOS at the system level. Participants see your slides or screen, never the script."
+    }
+  },
+  "extraFaqs": [
+    {
+      "id": "zoom-marketplace",
+      "q": "Do I need to authorise anything in the Zoom App Marketplace?",
+      "a": "No. {{APP_NAME}} is a standalone macOS app that doesn't connect to Zoom's API. Nothing to install or authorise."
+    },
+    {
+      "id": "zoom-recording",
+      "q": "Will Zoom's local or cloud recording capture the window?",
+      "a": "No. The window is excluded from capture, so neither local nor cloud recordings contain it."
+    },
+    {
+      "id": "how-to",
+      "q": "How do I use a teleprompter with Zoom?",
+      "a": "<ol><li>Launch {{APP_NAME}} from the menu bar.</li><li>Copy your script and click Start from clipboard.</li><li>Drag the transparent window next to your webcam.</li><li>Join the Zoom call and share your screen if needed — the prompter stays hidden.</li><li>Speak naturally; the script follows your voice.</li></ol>"
+    }
+  ]
+}

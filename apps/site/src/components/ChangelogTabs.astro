@@ -1,0 +1,112 @@
+---
+import { marked } from 'marked';
+
+interface Props {
+  markdown: string;
+}
+const { markdown } = Astro.props;
+const slug = (s: string) =>
+  s
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-');
+const idFor = (title: string) => (title === 'Mac app' ? 'mac' : title === 'Web app' ? 'web' : slug(title));
+
+const parts = markdown.split(/^## /m).slice(1);
+const tabs = parts.map((part) => {
+  const nl = part.indexOf('\n');
+  const title = part.slice(0, nl).trim();
+  const id = idFor(title);
+  const body = part.slice(nl + 1).replace(/^### (.+)$/gm, (_m, h: string) => `<h3 id="${id}-${slug(h.split(' — ')[0] ?? h)}">${h}</h3>`);
+  return { id, title, html: marked.parse(body) as string };
+});
+---
+
+<div class="changelog">
+  <div role="tablist" aria-label="Changelog sections" class="tabs">
+    {
+      tabs.map((t, i) => (
+        <button role="tab" type="button" id={`tab-${t.id}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${t.id}`} data-tab={t.id} class={i === 0 ? 'active' : ''} tabindex={i === 0 ? 0 : -1}>
+          {t.title}
+        </button>
+      ))
+    }
+  </div>
+  {
+    tabs.map((t, i) => (
+      <section role="tabpanel" id={`panel-${t.id}`} aria-labelledby={`tab-${t.id}`} class={`prose ${i === 0 ? 'active' : ''}`} hidden={i !== 0} set:html={t.html} />
+    ))
+  }
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.querySelector('.changelog');
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role=tab]'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('[role=tabpanel]'));
+    function activate(id, push) {
+      var found = false;
+      tabs.forEach(function (t) {
+        var on = t.dataset.tab === id;
+        if (on) found = true;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      if (!found) return activate(tabs[0].dataset.tab, false);
+      panels.forEach(function (p) {
+        var on = p.id === 'panel-' + id;
+        p.hidden = !on;
+        p.classList.toggle('active', on);
+      });
+      if (push) history.replaceState(null, '', '#' + id);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        activate(t.dataset.tab, true);
+      });
+      t.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        next.focus();
+        activate(next.dataset.tab, true);
+      });
+    });
+    function fromHash() {
+      var h = location.hash.slice(1);
+      var tabId = h.split('-')[0];
+      activate(tabId || tabs[0].dataset.tab, false);
+      if (h.indexOf('-') > 0) {
+        var el = document.getElementById(h);
+        if (el) el.scrollIntoView();
+      }
+    }
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+  })();
+</script>
+
+<style>
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--vp-color-border);
+    margin-bottom: 1.5rem;
+  }
+  [role='tab'] {
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    color: var(--vp-color-text-muted);
+    font: inherit;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+  }
+  [role='tab'].active {
+    color: var(--vp-color-text);
+    border-bottom-color: var(--vp-color-accent);
+  }
+</style>

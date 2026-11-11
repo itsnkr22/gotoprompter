@@ -1,0 +1,25 @@
+---
+import { APP_NAME, SUPPORT_EMAIL } from '../../brand';
+import Legal from '../../layouts/Legal.astro';
+const updated = 'November 5, 2026';
+---
+
+<Legal title="Privacy policy" description={`How ${APP_NAME} handles your scripts, your voice and your purchase data. Short version: we don't collect them.`}>
+  <h2>Our commitment</h2>
+  <p>We don't collect, store or sell your scripts or your voice. There are no accounts.</p>
+  <h2>Web app</h2>
+  <p>Scripts live in your browser's local storage. Speech recognition is done by your browser; depending on the browser it may use the vendor's speech service — see your browser's privacy policy. Google Docs import fetches the document you choose through our proxy and nothing is stored.</p>
+  <h2>Mac app</h2>
+  <p>Scripts, settings and statistics are stored on your Mac. Speech recognition runs on-device through Apple's Speech framework. Network requests are limited to: license activation and validation (your license key, a hashed device identifier, device name, app and OS version), update checks (Sparkle: app version and OS version), and, only if you opt in, anonymous usage signals through TelemetryDeck that never include script content.</p>
+  <h2>Website analytics</h2>
+  <p>We use cookie-less, privacy-respecting analytics (Umami) to count page views and clicks. No personal data, no cross-site tracking.</p>
+  <h2>Payments</h2>
+  <p>Checkout is operated by Dodo Payments, our merchant of record, which processes your payment details under its own privacy policy. We receive your email address, purchase details and license key.</p>
+  <h2>Email</h2>
+  <p>We send transactional emails about your purchase and license. No marketing emails without consent.</p>
+  <h2>Your rights</h2>
+  <p>Under the GDPR, the CCPA and similar laws you can ask what personal data we hold about you (for most people: an email address and purchase records held with our merchant of record), ask for it to be corrected or deleted, and object to its processing. Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> and we'll answer within 30 days. Deleting purchase records disables the related license keys.</p>
+  <h2>Changes</h2>
+  <p>If this policy changes in a way that matters, we'll say so on this page and in the changelog. Continued use after a change means you accept it.</p>
+  <p class="muted">Last updated: {updated}.</p>
+</Legal>

@@ -1,0 +1,58 @@
+---
+import { formatDate } from '../lib/format';
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  date: Date;
+  image: string;
+  imageAlt: string;
+  keywords: string[];
+}
+const { slug, title, description, date, image, imageAlt, keywords } = Astro.props;
+---
+
+<article class="card article-card">
+  <a href={`/blog/${slug}/`} class="img">
+    <img src={image} alt={imageAlt} width="600" height="315" loading="lazy" decoding="async" />
+  </a>
+  <p class="eyebrow"><time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time></p>
+  <h3><a href={`/blog/${slug}/`}>{title}</a></h3>
+  <p class="muted">{description}</p>
+  <ul class="pills" aria-label="Topics">
+    {keywords.slice(0, 3).map((k) => <li class="pill">{k}</li>)}
+  </ul>
+</article>
+
+<style>
+  .article-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .img img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--vp-radius-md);
+    margin-bottom: 0.9rem;
+  }
+  h3 a {
+    color: var(--vp-color-text);
+    text-decoration: none;
+  }
+  h3 a:hover {
+    color: var(--vp-color-accent);
+  }
+  .pills {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: auto 0 0;
+  }
+  .pill {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import JsonLd from '../components/JsonLd.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import TOC from '../components/TOC.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import { formatDate, isoDay } from '../lib/format';
+import { article, breadcrumbs } from '../lib/seo';
+import Base from './Base.astro';
+import { MAC_AVAILABLE } from '../launch';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: { depth: number; slug: string; text: string }[];
+  tldr: string | null;
+  faqs: { q: string; a: string }[];
+  related: CollectionEntry<'blog'>[];
+}
+const { post, headings, tldr, faqs, related } = Astro.props;
+const { title, description, date, updated, image, imageAlt, video } = post.data;
+const url = `/blog/${post.id}/`;
+const ld = [
+  article({ title, description, image, datePublished: isoDay(date), dateModified: updated ? isoDay(updated) : undefined, url }),
+  breadcrumbs([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+    { name: title, url },
+  ]),
+];
+---
+
+<Base title={title} description={description} ogType="article" ogImage={`/og/blog/${post.id}.png`} jsonLd={ld}>
+  <div class="container article-layout">
+    <div class="main">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> › <a href="/blog/">Blog</a> › <span aria-current="page">{title}</span>
+      </nav>
+      <p class="eyebrow">
+        <time datetime={isoDay(date)}>{formatDate(date)}</time>
+        {updated && <span> · Updated {formatDate(updated)}</span>}
+      </p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <img class="hero" src={image} alt={imageAlt} width="1200" height="630" fetchpriority="high" decoding="async" />
+      {video?.videoId && <VideoEmbed videoId={video.videoId} title={title} />}
+      {
+        tldr && (
+          <aside class="tldr card">
+            <p class="eyebrow">TL;DR</p>
+            <p>{tldr}</p>
+          </aside>
+        )
+      }
+      <div class="prose">
+        <slot />
+      </div>
+      {faqs.length > 0 && <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }} />}
+      <RelatedArticles posts={related} />
+      <aside class="card try">
+        <p>{MAC_AVAILABLE ? 'Try it: the web app is free; the Mac app is free for three scripts.' : 'Try it: the web app is free. The Mac app is coming soon.'}</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="/app/" data-umami-event="cta-blog-open-app">Open the web app</a>
+          {
+            MAC_AVAILABLE ? (
+              <a class="btn btn-secondary" href="/download/" data-umami-event="cta-blog-download">Download for Mac</a>
+            ) : (
+              <a class="btn btn-secondary" href="/mac/" data-umami-event="cta-blog-mac-soon">Mac app — coming soon</a>
+            )
+          }
+        </div>
+      </aside>
+    </div>
+    <aside class="side">
+      <TOC headings={headings} />
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .article-layout {
+    display: grid;
+    gap: 2rem;
+    padding-block: 2.5rem;
+  }
+  @media (min-width: 1024px) {
+    .article-layout {
+      grid-template-columns: minmax(0, 44rem) 14rem;
+      justify-content: center;
+    }
+    .side {
+      order: 2;
+    }
+  }
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--vp-color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .crumbs a {
+    color: var(--vp-color-text-muted);
+  }
+  .lede {
+    font-size: 1.25rem;
+    color: var(--vp-color-text-muted);
+  }
+  .hero {
+    border-radius: var(--vp-radius-lg);
+    margin: 1.5rem 0;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+  .tldr {
+    margin: 0 0 2rem;
+    border-color: color-mix(in srgb, var(--vp-color-accent) 40%, var(--vp-color-border));
+  }
+  .tldr p:last-child {
+    margin: 0;
+  }
+  .try {
+    margin-top: 3rem;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>

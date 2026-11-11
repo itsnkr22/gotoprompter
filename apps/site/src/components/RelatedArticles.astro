@@ -1,0 +1,49 @@
+---
+import { formatDate } from '../lib/format';
+
+interface Props {
+  posts: { id: string; data: { title: string; description: string; date: Date } }[];
+}
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class="related">
+      <h2>Related articles</h2>
+      <ul>
+        {posts.map((p) => (
+          <li class="card">
+            <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+            <p class="muted">{p.data.description}</p>
+            <small class="muted">{formatDate(p.data.date)}</small>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .related {
+    margin-top: 3rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  li a {
+    font-weight: 700;
+    color: var(--vp-color-text);
+    text-decoration: none;
+  }
+  li a:hover {
+    color: var(--vp-color-accent);
+  }
+  li p {
+    margin: 0.35rem 0;
+  }
+</style>

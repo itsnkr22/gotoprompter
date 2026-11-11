@@ -1,0 +1,21 @@
+{
+  "script": "今日は晴れです。[間]明日も晴れるでしょう。",
+  "options": {
+    "locale": "ja-JP",
+    "segmenterDependent": true
+  },
+  "events": [
+    {
+      "transcript": "今日 は"
+    },
+    {
+      "transcript": "今日 は 晴れ です"
+    },
+    {
+      "transcript": "明日 も 晴れる"
+    },
+    {
+      "transcript": "明日 も 晴れる でしょう"
+    }
+  ]
+}

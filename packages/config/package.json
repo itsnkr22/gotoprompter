@@ -1,0 +1,20 @@
+{
+  "name": "@gotoprompter/config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.js",
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./tsconfig.dom.json": "./tsconfig.dom.json",
+    "./brand": "./brand.json",
+    "./pricing": "./pricing.json",
+    "./launch": "./launch.json"
+  },
+  "peerDependencies": {
+    "@eslint/js": "*",
+    "globals": "*",
+    "typescript-eslint": "*"
+  }
+}

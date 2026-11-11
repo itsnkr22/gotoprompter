@@ -1,0 +1,93 @@
+---
+import works from '../data/works-with.json';
+import { icon } from './icons';
+
+interface Props {
+  title?: string;
+}
+const { title = 'Works alongside:' } = Astro.props;
+const names = works as string[];
+---
+
+<section class="marquee-section container" aria-label="Works with">
+  <p class="eyebrow">{title}</p>
+  <div class="marquee">
+    <div class="track">
+      <ul>
+        {
+          names.map((n) => (
+            <li class="pill">
+              <span set:html={icon('camera')} />
+              {n}
+            </li>
+          ))
+        }
+      </ul>
+      <ul aria-hidden="true">
+        {
+          names.map((n) => (
+            <li class="pill">
+              <span set:html={icon('camera')} />
+              {n}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-section {
+    padding-block: 1rem 2rem;
+  }
+  .eyebrow {
+    text-align: center;
+  }
+  .marquee {
+    overflow: hidden;
+    height: 3rem;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+  .marquee:hover .track {
+    animation-play-state: paused;
+  }
+  ul {
+    display: flex;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 0.375rem;
+  }
+  .pill :global(svg) {
+    width: 18px;
+    height: 18px;
+    color: var(--vp-color-accent);
+  }
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+    .marquee {
+      height: auto;
+      mask-image: none;
+    }
+    .track ul[aria-hidden] {
+      display: none;
+    }
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

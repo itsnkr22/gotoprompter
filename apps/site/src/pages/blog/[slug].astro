@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import { faqFromMarkdown, splitTldr } from '../../lib/faq-from-markdown';
+import { relatedPosts } from '../../lib/related';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !(import.meta.env.PROD && data.draft));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
+}
+const { post, all } = Astro.props;
+const { Content, headings } = await render(post);
+const body = post.body ?? '';
+const { tldr } = splitTldr(body);
+const faqs = faqFromMarkdown(body);
+const related = relatedPosts(post, all);
+---
+
+<Article post={post} headings={headings} tldr={tldr} faqs={faqs} related={related}>
+  <Content />
+</Article>
+
+<style is:global>
+  /* The TL;DR blockquote is hoisted into the card above the body; hide the inline copy. */
+  .prose > blockquote:first-child {
+    display: none;
+  }
+</style>

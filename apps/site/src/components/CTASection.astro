@@ -1,0 +1,51 @@
+---
+interface Cta {
+  label: string;
+  href: string;
+  event: string;
+}
+interface Props {
+  headline: string;
+  sub?: string;
+  primary: Cta;
+  secondary?: Cta;
+}
+const { headline, sub, primary, secondary } = Astro.props;
+---
+
+<section class="cta-band container">
+  <div class="inner">
+    <h2>{headline}</h2>
+    {sub && <p class="muted">{sub}</p>}
+    <div class="ctas">
+      <a class="btn btn-primary" href={primary.href} data-umami-event={primary.event}>{primary.label}</a>
+      {
+        secondary && (
+          <a class="btn btn-secondary" href={secondary.href} data-umami-event={secondary.event}>
+            {secondary.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    padding-block: 3rem;
+  }
+  .inner {
+    text-align: center;
+    background: color-mix(in srgb, var(--vp-color-accent) 10%, var(--vp-color-surface));
+    border: 1px solid color-mix(in srgb, var(--vp-color-accent) 30%, var(--vp-color-border));
+    border-radius: var(--vp-radius-lg);
+    padding: 3rem 1.5rem;
+  }
+  .ctas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+</style>

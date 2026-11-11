@@ -1,0 +1,177 @@
+---
+import { getCollection } from 'astro:content';
+import { APP_NAME, SUPPORT_EMAIL, fillBrand } from '../../brand';
+import SupportCenter from '../../components/SupportCenter';
+import Base from '../../layouts/Base.astro';
+import type { SupportArticle } from '../../lib/support-search';
+
+const entries = await getCollection('support');
+const articles: SupportArticle[] = entries.map((e) => ({ ...e.data, question: fillBrand(e.data.question), answerHtml: fillBrand(e.data.answerHtml) }));
+---
+
+<Base title="Support & tutorials" description="Answers about setup, voice scrolling, recording, licences and billing.">
+  <section class="container block support-page">
+    <h1>Get to know {APP_NAME} better</h1>
+    <p class="muted lede">Answers about setup, voice scrolling, recording, licences and billing.</p>
+    <SupportCenter client:load articles={articles} appName={APP_NAME} supportEmail={SUPPORT_EMAIL} />
+    <noscript>
+      <div class="static-list">
+        {
+          articles.map((a) => (
+            <details open id={`static-${a.id}`}>
+              <summary>{a.question}</summary>
+              <div set:html={a.answerHtml} />
+            </details>
+          ))
+        }
+      </div>
+    </noscript>
+  </section>
+</Base>
+
+<style is:global>
+  .support-page {
+    max-width: 52rem;
+  }
+  .support-page .lede {
+    font-size: 1.125rem;
+  }
+  .support input[type='search'] {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font: inherit;
+    font-size: 1.0625rem;
+    border-radius: var(--vp-radius-md);
+    border: 1px solid var(--vp-color-border);
+    background: var(--vp-color-surface-raised);
+    color: var(--vp-color-text);
+  }
+  .support .hint {
+    font-size: 0.8125rem;
+    margin: 0.4rem 0 1rem;
+  }
+  .support .chips,
+  .support .cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .support .pill {
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--vp-color-text);
+  }
+  .support .pill[aria-pressed='true'] {
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+    border-color: var(--vp-color-accent);
+  }
+  .support .cat {
+    background: none;
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-md);
+    color: var(--vp-color-text-muted);
+    font: inherit;
+    font-size: 0.9375rem;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+  }
+  .support .cat.active {
+    color: var(--vp-color-text);
+    border-color: var(--vp-color-text-muted);
+  }
+  .support .count {
+    color: var(--vp-color-text-muted);
+    font-size: 0.8125rem;
+  }
+  .support .list {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .support details {
+    background: var(--vp-color-surface);
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-md);
+    padding: 0 1rem;
+  }
+  .support summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+  }
+  .support summary::-webkit-details-marker {
+    display: none;
+  }
+  .support .q {
+    flex: 1;
+  }
+  .support .tag {
+    font-size: 0.75rem;
+    color: var(--vp-color-text-muted);
+    margin-left: 0.35rem;
+  }
+  .support .chev {
+    color: var(--vp-color-text-muted);
+  }
+  .support .answer {
+    color: var(--vp-color-text-muted);
+  }
+  .support .answer p:last-child {
+    margin-bottom: 0.5rem;
+  }
+  .support .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding-bottom: 0.75rem;
+  }
+  .support .small {
+    min-height: 2rem;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8125rem;
+  }
+  .support .small-text {
+    font-size: 0.8125rem;
+    word-break: break-all;
+  }
+  .support .empty {
+    margin: 1rem 0;
+  }
+  .support .contact {
+    margin-top: 2rem;
+  }
+  .contact-dialog {
+    background: var(--vp-color-surface);
+    color: var(--vp-color-text);
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-lg);
+    padding: 1.5rem;
+    max-width: 32rem;
+  }
+  .contact-dialog::backdrop {
+    background: rgb(0 0 0 / 0.6);
+  }
+  .contact-dialog .check {
+    display: block;
+    margin: 1rem 0;
+  }
+  .contact-dialog .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .contact-dialog .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .static-list details {
+    margin-bottom: 0.75rem;
+  }
+</style>

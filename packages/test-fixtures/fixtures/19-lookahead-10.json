@@ -1,0 +1,137 @@
+{
+  "script": "one two three four five six seven eight nine ten eleven twelve",
+  "options": {
+    "lookaheadWords": 10
+  },
+  "events": [
+    {
+      "transcript": "ten"
+    },
+    {
+      "transcript": "twelve"
+    },
+    {
+      "transcript": "eleven twelve"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "one",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "five",
+      "clean": "five",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "six",
+      "clean": "six",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "seven",
+      "clean": "seven",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "eight",
+      "clean": "eight",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "nine",
+      "clean": "nine",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "ten",
+      "clean": "ten",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "eleven",
+      "clean": "eleven",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "twelve",
+      "clean": "twelve",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    }
+  ],
+  "expectIndexAfterEach": [
+    10,
+    12,
+    12
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "finished"
+  ]
+}

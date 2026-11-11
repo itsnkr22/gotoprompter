@@ -1,0 +1,329 @@
+{
+  "script": "Chapter one is about planning your route.\nChapter two covers packing light for the trail.\nChapter three explains water filters and purification.\nChapter four is all about camp cooking.",
+  "events": [
+    {
+      "transcript": "chapter"
+    },
+    {
+      "transcript": "chapter one"
+    },
+    {
+      "transcript": "chapter one is"
+    },
+    {
+      "transcript": "explains water filters"
+    },
+    {
+      "transcript": "explains water filters and purification"
+    },
+    {
+      "transcript": "chapter four is all"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Chapter",
+      "clean": "chapter",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "one",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "about",
+      "clean": "about",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "planning",
+      "clean": "planning",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "your",
+      "clean": "your",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "route.",
+      "clean": "route",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 6
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "Chapter",
+      "clean": "chapter",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "covers",
+      "clean": "covers",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "packing",
+      "clean": "packing",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "light",
+      "clean": "light",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "for",
+      "clean": "for",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "trail.",
+      "clean": "trail",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 15
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "Chapter",
+      "clean": "chapter",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "explains",
+      "clean": "explains",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "water",
+      "clean": "water",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "filters",
+      "clean": "filters",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "purification.",
+      "clean": "purification",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 23
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 24
+    },
+    {
+      "raw": "Chapter",
+      "clean": "chapter",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 25
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 26
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 27
+    },
+    {
+      "raw": "all",
+      "clean": "all",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 28
+    },
+    {
+      "raw": "about",
+      "clean": "about",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 29
+    },
+    {
+      "raw": "camp",
+      "clean": "camp",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 30
+    },
+    {
+      "raw": "cooking.",
+      "clean": "cooking",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 31
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    22,
+    23,
+    26
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "jump",
+    "near",
+    "near"
+  ]
+}

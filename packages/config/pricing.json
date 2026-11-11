@@ -1,0 +1,60 @@
+{
+  "currency": "USD",
+  "freeTier": { "scripts": 3 },
+  "activationLimit": 3,
+  "refundDays": 14,
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "price": 0,
+      "priceLabel": "$0",
+      "period": "",
+      "tagline": "Try everything with 3 scripts",
+      "features": [
+        "3 custom scripts + demo script",
+        "Voice, sound and constant scrolling",
+        "Invisible on screen share",
+        "60+ languages",
+        "All display settings"
+      ],
+      "cta": { "label": "Download free", "href": "/download/" }
+    },
+    {
+      "id": "pro_yearly",
+      "name": "Pro",
+      "price": 39.99,
+      "priceLabel": "$3.34",
+      "period": "/ mo",
+      "billedLabel": "billed yearly ($39.99)",
+      "tagline": "For people who record every week",
+      "highlight": true,
+      "features": [
+        "Unlimited scripts",
+        "Everything in Free",
+        "All updates while subscribed",
+        "Use on up to 3 Macs",
+        "Cancel anytime"
+      ],
+      "cta": { "label": "Get Pro", "plan": "pro_yearly" }
+    },
+    {
+      "id": "lifetime",
+      "name": "Lifetime",
+      "price": 99.99,
+      "priceLabel": "$99.99",
+      "period": "one-time",
+      "tagline": "Pay once, keep it",
+      "features": [
+        "Unlimited scripts",
+        "Everything in Free",
+        "All future updates",
+        "Use on up to 3 Macs",
+        "No subscription"
+      ],
+      "cta": { "label": "Buy Lifetime", "plan": "lifetime" }
+    }
+  ],
+  "footnote": "No account required. Runs entirely on your Mac. Your text never leaves your device. Prices in USD; local taxes are calculated at checkout.",
+  "guarantee": "14-day money-back guarantee on Pro and Lifetime."
+}

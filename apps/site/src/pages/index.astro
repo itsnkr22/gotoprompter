@@ -1,0 +1,122 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { MAC_AVAILABLE, MAC_NOTIFY_HREF, MAC_NOTIFY_LABEL, MAC_SOON_LABEL } from '../launch';
+import { APP_NAME, fillBrand } from '../brand';
+import CTASection from '../components/CTASection.astro';
+import FAQ from '../components/FAQ.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import ReviewsWall from '../components/ReviewsWall.astro';
+import homeFaqs from '../data/home-faqs.json';
+import Base from '../layouts/Base.astro';
+import { softwareApp } from '../lib/seo';
+
+const faqs = homeFaqs.map((f) => ({ id: f.id, q: fillBrand(f.q), a: fillBrand(f.a) }));
+const offers = (pricing.plans as { name: string; price: number }[]).map((p) => ({ name: p.name, price: p.price }));
+const ld = [
+  softwareApp({ name: `${APP_NAME} Web`, os: 'Web', url: '/web/', offers: [{ name: 'Free', price: 0 }] }),
+  softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url: '/mac/', offers }),
+];
+const webBullets = [
+  'Scrolls with your voice, word by word',
+  'Works offline as an installable app',
+  'Mirror mode for teleprompter glass',
+  '34 languages, detected automatically',
+  'Voice commands: go back, go next, go start, go finish',
+  'Built-in video recording',
+  'Google Docs import',
+  'Your scripts never leave your device',
+];
+const macBullets = [
+  'Invisible in Zoom, Google Meet, Teams, OBS and recordings',
+  'Always on top, even over full-screen apps',
+  'Start from your clipboard in one click',
+  '60+ languages with automatic detection',
+  'Transparent window, follows your cursor',
+  'Presets, stats, audio input selection',
+  'Free for 3 scripts — upgrade when you need more',
+];
+---
+
+<Base
+  home
+  title="Teleprompter that follows your voice"
+  description="A teleprompter that scrolls as you speak. Free open-source web app, plus a Mac app that floats over every app and stays invisible in Zoom, Meet, Teams and recordings."
+  jsonLd={ld}
+>
+  <Hero
+    eyebrow="Voice-following teleprompter"
+    title="Read your script. Keep your eyes on the lens."
+    sub={`${APP_NAME} listens as you speak and scrolls to where you are — pause, ad-lib, skip ahead or go back, it follows. Free in your browser. Invisible on Mac screen shares.`}
+    primary={{ label: 'Open the free web app', href: '/app/', event: 'home-hero-open-app' }}
+    secondary={
+      MAC_AVAILABLE
+        ? { label: 'Download for Mac', href: '/download/', event: 'home-hero-download-mac' }
+        : { label: MAC_SOON_LABEL, href: '/mac/', event: 'home-hero-mac-soon' }
+    }
+    trust="Open source web app · No account · Nothing leaves your device"
+  />
+
+  <section class="container block products">
+    <div class="grid-2">
+      <div class="card product">
+        <p class="eyebrow">Web app · Free · Open source</p>
+        <h2>Runs in any browser. Costs nothing.</h2>
+        <ul>{webBullets.map((b) => <li>{b}</li>)}</ul>
+        <div class="links">
+          <a class="btn btn-primary" href="/web/" data-umami-event="home-cta-web-app">Learn more →</a>
+          <a href="/app/">Open the app</a>
+        </div>
+      </div>
+      <div class="card product">
+        <p class="eyebrow">{MAC_AVAILABLE ? 'Mac app · Free to try · Pro & Lifetime' : 'Mac app · Coming soon'}</p>
+        <h2>Floats over everything. Seen by no one.</h2>
+        <ul>{macBullets.map((b) => <li>{b}</li>)}</ul>
+        <div class="links">
+          <a class="btn btn-primary" href="/mac/" data-umami-event="home-cta-mac-app">See the Mac app →</a>
+          {MAC_AVAILABLE ? <a href="/download/">Download</a> : <a href={MAC_NOTIFY_HREF}>{MAC_NOTIFY_LABEL}</a>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <HowItWorks
+    steps={[
+      { title: 'Write anywhere', text: 'Notes, Google Docs, Notion — write it the way you talk.' },
+      { title: 'Paste or load', text: 'Paste into the web app, or press one key on Mac to start from your clipboard.' },
+      { title: 'Talk', text: 'The script follows your words. Look at the camera, not the screen.' },
+    ]}
+  />
+  <ReviewsWall filter="all" />
+  <FAQ items={faqs} />
+  <CTASection
+    headline="Stop memorising. Start recording."
+    primary={{ label: 'Open the web app', href: '/app/', event: 'home-footer-open-app' }}
+    secondary={
+      MAC_AVAILABLE
+        ? { label: 'Get the Mac app', href: '/mac/', event: 'home-footer-mac' }
+        : { label: MAC_SOON_LABEL, href: '/mac/', event: 'home-footer-mac-soon' }
+    }
+  />
+</Base>
+
+<style>
+  .product {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .product ul {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+    flex: 1;
+  }
+  .product li + li {
+    margin-top: 0.35rem;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>

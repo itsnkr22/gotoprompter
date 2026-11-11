@@ -1,0 +1,63 @@
+---
+import { APP_NAME, SUPPORT_EMAIL } from '../../brand';
+import LicenseForms from '../../components/LicenseForms';
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="License & billing" description={`Recover a lost license key, manage your subscription, or move ${APP_NAME} to another Mac.`}>
+  <section class="container block license">
+    <h1>License &amp; billing</h1>
+    <LicenseForms client:visible supportEmail={SUPPORT_EMAIL} />
+    <div class="grid-2 help">
+      <div class="card">
+        <h2>Move to another Mac</h2>
+        <p class="muted">Each licence works on up to three Macs. To free a slot: open {APP_NAME} → Settings → License → Deactivate this Mac. If the Mac is gone, email us the key's last four characters and we'll release it.</p>
+      </div>
+      <div class="card">
+        <h2>Invoices &amp; taxes</h2>
+        <p class="muted">Receipts and tax invoices are issued by our merchant of record, Dodo Payments, at checkout and from the billing portal.</p>
+        <h2>Refunds</h2>
+        <p class="muted"><a href="/refund-policy/">Read the refund policy</a> — 14 days, no questions asked.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .license-forms {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .license-forms {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .license-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .license-form input[type='email'] {
+    display: block;
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.7rem 0.9rem;
+    font: inherit;
+    border-radius: var(--vp-radius-md);
+    border: 1px solid var(--vp-color-border);
+    background: var(--vp-color-surface-raised);
+    color: var(--vp-color-text);
+  }
+  .license-form .hp {
+    position: absolute;
+    left: -9999px;
+  }
+  .license-form .status {
+    margin: 0.75rem 0 0;
+  }
+  .help h2 {
+    font-size: 1.25rem;
+  }
+</style>

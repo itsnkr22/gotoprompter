@@ -1,0 +1,144 @@
+---
+import { APP_NAME } from '../brand';
+import nav from '../data/nav.json';
+import { MAC_AVAILABLE } from '../launch';
+
+const path = Astro.url.pathname;
+const macish = path.startsWith('/mac/') || path === '/pricing/' || path === '/download/';
+const cta = macish && MAC_AVAILABLE
+  ? { label: 'Download for Mac', href: '/download/', event: 'header-download-mac' }
+  : { label: 'Open web app', href: '/app/', event: 'header-open-app' };
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label={`${APP_NAME} home`}>
+      <img src="/favicon.svg" width="28" height="28" alt="" />
+      <span>{APP_NAME}</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul>
+        {
+          nav.header.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn btn-primary cta" href={cta.href} data-umami-event={cta.event}>{cta.label}</a>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.menu-btn');
+    var nav = document.getElementById('site-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      nav.classList.toggle('open', !open);
+    });
+  })();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--vp-color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--vp-color-border);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4rem;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--vp-color-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+  .nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+  }
+  .nav.open {
+    display: flex;
+  }
+  .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .nav a:not(.cta) {
+    color: var(--vp-color-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--vp-radius-md);
+    display: block;
+  }
+  .nav a:not(.cta):hover,
+  .nav a[aria-current='page'] {
+    color: var(--vp-color-text);
+    background: var(--vp-color-surface);
+  }
+  .menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-md);
+    padding: 0.6rem;
+    cursor: pointer;
+  }
+  .menu-btn span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--vp-color-text);
+  }
+  @media (min-width: 768px) {
+    .menu-btn {
+      display: none;
+    }
+    .nav,
+    .nav.open {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: auto;
+      padding-bottom: 0;
+      gap: 1rem;
+    }
+    .nav ul {
+      flex-direction: row;
+      gap: 0.25rem;
+    }
+  }
+</style>

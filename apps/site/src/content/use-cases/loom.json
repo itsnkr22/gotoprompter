@@ -1,0 +1,60 @@
+{
+  "slug": "loom",
+  "name": "Loom",
+  "platformName": "Loom",
+  "badgeText": "Works with Loom",
+  "metaTitle": "Teleprompter for Loom recordings",
+  "metaDescription": "Loom has no built-in teleprompter. Add one: a floating window that follows your voice and never appears in your Loom recording.",
+  "eyebrow": "Loom",
+  "heroTitle": "The teleprompter Loom doesn't have",
+  "heroSubtitle": "Record Looms in one take. The script floats over whatever you're showing, scrolls as you talk, and is left out of the recording.",
+  "heroVideoId": "",
+  "footerCtaHeadline": "Ready to record Looms in one take?",
+  "hideSections": ["marquee"],
+  "audienceItems": [
+    {
+      "icon": "video",
+      "title": "Product teams",
+      "description": "recording feature walkthroughs for customers"
+    },
+    {
+      "icon": "users",
+      "title": "Managers",
+      "description": "sending async updates instead of meetings"
+    },
+    {
+      "icon": "briefcase",
+      "title": "Sales",
+      "description": "recording personalised prospecting videos"
+    },
+    {
+      "icon": "clipboard",
+      "title": "Support teams",
+      "description": "recording how-to answers once and reusing them"
+    },
+    { "icon": "book", "title": "Educators", "description": "recording lesson explanations" },
+    {
+      "icon": "star",
+      "title": "Founders",
+      "description": "recording investor and customer updates"
+    }
+  ],
+  "faqOverrides": {
+    "screen-sharing": {
+      "q": "Will the teleprompter appear in my Loom recording?",
+      "a": "No. Loom records your screen through macOS screen capture, and the prompter window is excluded from it. Your camera bubble is unaffected."
+    }
+  },
+  "extraFaqs": [
+    {
+      "id": "loom-bubble",
+      "q": "Can I keep the script near my camera bubble?",
+      "a": "Yes. Drag the window wherever your Loom camera bubble sits; the follow-cursor mode also keeps it under your pointer while you demo."
+    },
+    {
+      "id": "how-to",
+      "q": "How do I use a teleprompter with Loom?",
+      "a": "<ol><li>Start your script in {{APP_NAME}} from the clipboard.</li><li>Place the window near Loom's camera bubble.</li><li>Start the Loom recording (screen + cam).</li><li>Read naturally; the prompter is not in the recording.</li></ol>"
+    }
+  ]
+}

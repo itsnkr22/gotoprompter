@@ -1,0 +1,242 @@
+{
+  "script": "First we measure the boards twice.\nThen we cut them once.\nFinally we sand every edge smooth.",
+  "events": [
+    {
+      "transcript": "first"
+    },
+    {
+      "transcript": "first we"
+    },
+    {
+      "transcript": "first we measure"
+    },
+    {
+      "transcript": "first we measure the"
+    },
+    {
+      "transcript": "first we measure the boards"
+    },
+    {
+      "transcript": "first we measure the boards twice"
+    },
+    {
+      "transcript": ""
+    },
+    {
+      "transcript": "um"
+    },
+    {
+      "transcript": "then"
+    },
+    {
+      "transcript": "then we cut"
+    },
+    {
+      "transcript": "then we cut them once"
+    },
+    {
+      "transcript": "finally we sand"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "First",
+      "clean": "first",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "measure",
+      "clean": "measure",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "boards",
+      "clean": "boards",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "twice.",
+      "clean": "twice",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 5
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "Then",
+      "clean": "then",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "cut",
+      "clean": "cut",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "them",
+      "clean": "them",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "once.",
+      "clean": "once",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 11
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "Finally",
+      "clean": "finally",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "sand",
+      "clean": "sand",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "every",
+      "clean": "every",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "edge",
+      "clean": "edge",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "smooth.",
+      "clean": "smooth",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 18
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    7,
+    7,
+    8,
+    9,
+    10,
+    14
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "none",
+    "none",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

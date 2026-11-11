@@ -1,0 +1,23 @@
+{
+  "script": "Short script here.",
+  "events": [
+    {
+      "transcript": "short"
+    },
+    {
+      "transcript": "short script"
+    },
+    {
+      "transcript": "short script here"
+    },
+    {
+      "transcript": "more words after the end"
+    },
+    {
+      "tap": 0
+    },
+    {
+      "transcript": "script"
+    }
+  ]
+}

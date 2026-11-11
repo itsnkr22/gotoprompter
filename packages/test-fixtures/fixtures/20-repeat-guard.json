@@ -1,0 +1,94 @@
+{
+  "script": "the the the end and so on",
+  "events": [
+    {
+      "transcript": "the"
+    },
+    {
+      "transcript": "the the"
+    },
+    {
+      "transcript": "the the the"
+    },
+    {
+      "transcript": "the the the end"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "end",
+      "clean": "end",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "so",
+      "clean": "so",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "on",
+      "clean": "on",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

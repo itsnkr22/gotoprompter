@@ -1,0 +1,86 @@
+---
+interface Cta {
+  label: string;
+  href: string;
+  event: string;
+}
+interface Props {
+  eyebrow?: string;
+  badge?: string;
+  title: string;
+  sub: string;
+  primary: Cta;
+  secondary?: Cta;
+  trust?: string;
+  media?: boolean;
+}
+const { eyebrow, badge, title, sub, primary, secondary, trust, media = false } = Astro.props;
+---
+
+<section class="hero container">
+  <div class="copy">
+    {badge && <span class="pill badge">{badge}</span>}
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    <p class="sub">{sub}</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href={primary.href} data-umami-event={primary.event}>{primary.label}</a>
+      {
+        secondary && (
+          <a class="btn btn-secondary" href={secondary.href} data-umami-event={secondary.event}>
+            {secondary.label}
+          </a>
+        )
+      }
+    </div>
+    {trust && <p class="trust muted">{trust}</p>}
+  </div>
+  {
+    media && (
+      <div class="media">
+        <slot />
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3.5rem 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero:has(.media) {
+      grid-template-columns: 1.1fr 1fr;
+      padding-block: 5rem 3rem;
+    }
+  }
+  .copy {
+    max-width: 40rem;
+  }
+  .badge {
+    margin-bottom: 1rem;
+    color: var(--vp-color-accent);
+  }
+  .sub {
+    font-size: 1.25rem;
+    color: var(--vp-color-text-muted);
+    max-width: 36rem;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .trust {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+  .media :global(img) {
+    border-radius: var(--vp-radius-lg);
+    border: 1px solid var(--vp-color-border);
+  }
+</style>

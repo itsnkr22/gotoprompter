@@ -1,0 +1,149 @@
+{
+  "script": "Line one.\nLine two.\n\n\nLine three after blank lines.",
+  "options": {
+    "preserveFormatting": false,
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "line three after"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go back"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Line",
+      "clean": "line",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "one.",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 1
+    },
+    {
+      "raw": "🛑",
+      "clean": "",
+      "kind": "stop",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "Line",
+      "clean": "line",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "two.",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "🛑",
+      "clean": "",
+      "kind": "stop",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "Line",
+      "clean": "line",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "after",
+      "clean": "after",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "blank",
+      "clean": "blank",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "lines.",
+      "clean": "lines",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 10
+    }
+  ],
+  "expectIndexAfterEach": [
+    3,
+    3,
+    6,
+    7,
+    6,
+    6,
+    3
+  ],
+  "expectResults": [
+    "command:go next",
+    "none",
+    "command:go next",
+    "near",
+    "command:go back",
+    "none",
+    "command:go back"
+  ]
+}

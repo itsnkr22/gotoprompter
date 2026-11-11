@@ -1,0 +1,16 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<p class="trust container muted">{text}</p>
+
+<style>
+  .trust {
+    text-align: center;
+    font-size: 0.9375rem;
+    padding-block: 0.5rem 1.5rem;
+  }
+</style>

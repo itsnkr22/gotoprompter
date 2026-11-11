@@ -1,0 +1,50 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { APP_NAME, SUPPORT_EMAIL } from '../../../brand';
+import CheckoutSuccess from '../../../components/CheckoutSuccess';
+import Base from '../../../layouts/Base.astro';
+
+const planLabels: Record<string, string> = {};
+for (const p of pricing.plans as { id: string; name: string }[]) planLabels[p.id] = p.name;
+planLabels.pro_monthly = 'Pro (monthly)';
+---
+
+<Base title="Thanks for your purchase" description={`Your ${APP_NAME} purchase is being prepared.`} noindex>
+  <section class="container block success">
+    <CheckoutSuccess client:load appName={APP_NAME} supportEmail={SUPPORT_EMAIL} planLabels={planLabels} />
+  </section>
+</Base>
+
+<style is:global>
+  .success {
+    max-width: 44rem;
+  }
+  .checkout-state .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .checkout-state .steps {
+    padding-left: 1.4rem;
+  }
+  .checkout-state .steps li {
+    margin-bottom: 0.75rem;
+  }
+  .checkout-state .steps li div {
+    margin-top: 0.5rem;
+  }
+  .spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--vp-color-border);
+    border-top-color: var(--vp-color-accent);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin: 1rem 0;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

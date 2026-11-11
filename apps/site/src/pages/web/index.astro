@@ -1,0 +1,94 @@
+---
+import { APP_NAME, GITHUB_REPO_URL } from '../../brand';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import Hero from '../../components/Hero.astro';
+import InstallSteps from '../../components/InstallSteps.astro';
+import TrustLine from '../../components/TrustLine.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import videos from '../../data/videos.json';
+import Base from '../../layouts/Base.astro';
+import { breadcrumbs, softwareApp } from '../../lib/seo';
+
+const features = [
+  ['Follows your voice', 'Scrolls as you speak, pauses when you stop. No hands, no pedal, no remote.'],
+  ['Works offline, forever', 'Install it once as an app. After that it needs no internet at all.'],
+  ['Mirror mode built in', 'Using a beam-splitter rig? One toggle flips and rotates the text for the glass.'],
+  ['34 languages, auto-detected', 'Paste text in any supported language and the right recognizer is chosen for you.'],
+  ['Voice commands', 'Say "go back" or "go next" to move by paragraph, "go start" to restart, "go finish" to jump to the end.'],
+  ['Record while you read', 'Built-in camera recording with split or overlay layouts. Download the file when you stop.'],
+];
+const faqs = [
+  { id: 'browsers', q: 'Which browsers support voice scrolling?', a: "Chrome, Edge and Safari on desktop and mobile. Firefox doesn't ship the Web Speech API, so voice scrolling is unavailable there; sound and constant scrolling still work." },
+  { id: 'ipad', q: 'Does it work on iPad as a home-screen app?', a: 'Reading works. Apple blocks speech recognition inside home-screen web apps on iPad, so for voice scrolling open the site in Safari instead.' },
+  { id: 'open-source', q: 'Is it really open source?', a: 'Yes, under the MIT licence. The code is on GitHub and you can run your own copy.' },
+  { id: 'storage', q: 'Where are my scripts stored?', a: "In your browser's local storage on your device. Clearing site data removes them. Nothing is sent to us." },
+];
+const ld = [
+  softwareApp({ name: `${APP_NAME} Web`, os: 'Web', url: '/web/', offers: [{ name: 'Free', price: 0 }] }),
+  breadcrumbs([
+    { name: 'Home', url: '/' },
+    { name: 'Web app', url: '/web/' },
+  ]),
+];
+---
+
+<Base
+  title="Free web teleprompter that follows your voice"
+  description="A free, open-source teleprompter that runs in your browser, scrolls with your voice, works offline and never uploads your script."
+  jsonLd={ld}
+>
+  <Hero
+    eyebrow="Web app · Free forever"
+    title="A teleprompter that's always free, always private, always ready."
+    sub="Voice-controlled, works offline, runs entirely in your browser. No account, no download, no cost."
+    primary={{ label: 'Open the app →', href: '/app/', event: 'web-hero-open-app' }}
+    secondary={{ label: 'Install on your phone or desktop', href: '#install', event: 'web-hero-install' }}
+    media
+  >
+    <img src="/images/web-app-hero.png" alt={`${APP_NAME} web app showing a script with the active word highlighted`} width="1200" height="750" fetchpriority="high" />
+  </Hero>
+  <TrustLine text="Open source (MIT) · Nothing leaves your device · Works in Chrome, Edge and Safari" />
+
+  <section class="container block">
+    <h2>Built for people who record themselves</h2>
+    <div class="grid-3">
+      {
+        features.map(([t, d]) => (
+          <div class="card">
+            <h3>{t}</h3>
+            <p class="muted" style="margin:0">{d}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <VideoEmbed videoId={videos.web} title={`${APP_NAME} web app demo`} />
+
+  <section id="install" class="container block">
+    <h2>Install it like an app. Use it like one too.</h2>
+    <InstallSteps />
+  </section>
+
+  <section class="container block">
+    <div class="card limits">
+      <h3>What the web app can't do</h3>
+      <p class="muted">A browser tab can't float over other apps or hide from screen sharing. If you present on Zoom, Meet or Teams, that's what the Mac app is for.</p>
+      <a href="/mac/">See the Mac app →</a>
+    </div>
+  </section>
+
+  <FAQ items={faqs} initial={4} />
+  <CTASection
+    headline="Free as in freedom."
+    primary={{ label: 'Open the app', href: '/app/', event: 'web-footer-open-app' }}
+    secondary={{ label: 'Open source on GitHub ↗', href: GITHUB_REPO_URL, event: 'web-footer-github' }}
+  />
+</Base>
+
+<style>
+  .limits {
+    max-width: 44rem;
+  }
+</style>

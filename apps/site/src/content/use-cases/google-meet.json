@@ -1,0 +1,69 @@
+{
+  "slug": "google-meet",
+  "name": "Google Meet",
+  "platformName": "Google Meet",
+  "badgeText": "Works with Google Meet",
+  "metaTitle": "Teleprompter for Google Meet, hidden from participants",
+  "metaDescription": "A voice-following teleprompter window that floats over Google Meet in Chrome or Safari and stays invisible when you share your screen or tab.",
+  "eyebrow": "Google Meet",
+  "heroTitle": "The teleprompter for Google Meet",
+  "heroSubtitle": "Read your script naturally during Meet calls. Hidden from other participants, following your voice in real time.",
+  "heroVideoId": "",
+  "footerCtaHeadline": "Ready to feel great on Google Meet?",
+  "hideSections": [],
+  "audienceItems": [
+    {
+      "icon": "briefcase",
+      "title": "Sales reps",
+      "description": "running product demos with talking points always in view"
+    },
+    {
+      "icon": "users",
+      "title": "Remote teams",
+      "description": "presenting to clients or leadership on Meet"
+    },
+    {
+      "icon": "clipboard",
+      "title": "Recruiters and HR",
+      "description": "running structured interviews and reviews"
+    },
+    {
+      "icon": "book",
+      "title": "Educators",
+      "description": "hosting live lessons and webinars through Meet"
+    },
+    {
+      "icon": "globe",
+      "title": "Non-native speakers",
+      "description": "presenting confidently in another language"
+    },
+    {
+      "icon": "star",
+      "title": "Executives and managers",
+      "description": "giving polished briefings and all-hands"
+    }
+  ],
+  "faqOverrides": {
+    "screen-sharing": {
+      "q": "Will the teleprompter show up when I share my screen or tab in Google Meet?",
+      "a": "No. Whether you share a tab, a window or the whole screen, macOS excludes the prompter from the capture. Participants never see it."
+    }
+  },
+  "extraFaqs": [
+    {
+      "id": "meet-extension",
+      "q": "Do I need a Chrome extension?",
+      "a": "No. {{APP_NAME}} is a native Mac app and works with Meet in Chrome, Safari, Edge or Firefox without any extension."
+    },
+    {
+      "id": "meet-eyeline",
+      "q": "Can participants tell I'm reading?",
+      "a": "Not if you place the window right under your camera and keep the font large. Your eye line stays on the lens."
+    },
+    {
+      "id": "how-to",
+      "q": "How do I use a teleprompter with Google Meet?",
+      "a": "<ol><li>Launch {{APP_NAME}} and load your script from the clipboard.</li><li>Position the transparent window next to your webcam.</li><li>Join the Meet call; share your tab or screen if you need to.</li><li>Speak naturally and let the script follow you.</li></ol>"
+    }
+  ]
+}

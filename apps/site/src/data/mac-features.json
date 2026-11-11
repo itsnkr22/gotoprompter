@@ -1,0 +1,74 @@
+[
+  {
+    "id": "invisible",
+    "title": "Invisible to others",
+    "text": "Excluded from screen capture by macOS. Zoom, Teams, Meet, OBS and QuickTime never see it.",
+    "video": "01-invisible"
+  },
+  {
+    "id": "voice",
+    "title": "Voice scrolling",
+    "text": "Scrolls as you speak and pauses when you pause. No clicker, no pedal, no keyboard.",
+    "video": "02-scrolling"
+  },
+  {
+    "id": "on-top",
+    "title": "Always on top",
+    "text": "Floats above every window, including full-screen Keynote and Zoom.",
+    "video": "03-floating"
+  },
+  {
+    "id": "transparent",
+    "title": "Transparent window",
+    "text": "Dial the opacity so you can read the script without blocking what's behind it.",
+    "video": "04-transparent"
+  },
+  {
+    "id": "languages",
+    "title": "60+ languages",
+    "text": "Apple's on-device recognition, with the language detected from your script.",
+    "video": "05-languages"
+  },
+  {
+    "id": "scripts",
+    "title": "Script library",
+    "text": "Keep your last 100 scripts. Search, edit, copy and relaunch in a click.",
+    "video": "06-scripts"
+  },
+  {
+    "id": "notes",
+    "title": "Presenter notes",
+    "text": "Anything in [square brackets] is shown to you but skipped by voice tracking.",
+    "video": "07-notes"
+  },
+  {
+    "id": "follow",
+    "title": "Follows your cursor",
+    "text": "Snap the window to your pointer so the script is always where you're looking.",
+    "video": "08-follow"
+  },
+  {
+    "id": "menubar",
+    "title": "Menu bar quick access",
+    "text": "Start from clipboard, switch modes and tweak settings without opening a window.",
+    "video": "09-menu-bar"
+  },
+  {
+    "id": "customize",
+    "title": "Fully customisable",
+    "text": "Fonts, size, colours, margins, line spacing, active line position and scroll speed.",
+    "video": "10-settings"
+  },
+  {
+    "id": "audio",
+    "title": "Audio input selection",
+    "text": "Pick any microphone and watch the level meter to confirm it's hearing you.",
+    "video": "11-audio"
+  },
+  {
+    "id": "themes",
+    "title": "Dark & light",
+    "text": "Glass or solid background, dark or light, so it reads well on any desktop.",
+    "video": "12-dark-light"
+  }
+]

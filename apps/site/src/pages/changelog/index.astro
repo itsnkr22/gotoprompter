@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import { APP_NAME } from '../../brand';
+import ChangelogTabs from '../../components/ChangelogTabs.astro';
+import Base from '../../layouts/Base.astro';
+
+const [entry] = await getCollection('changelog');
+const markdown = entry?.body ?? '';
+---
+
+<Base title="What's new" description={`Release notes for the ${APP_NAME} Mac app and web app.`}>
+  <section class="container block changelog-page">
+    <h1>What's new</h1>
+    <ChangelogTabs markdown={markdown} />
+  </section>
+</Base>
+
+<style>
+  .changelog-page {
+    max-width: 48rem;
+  }
+</style>

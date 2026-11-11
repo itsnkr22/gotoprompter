@@ -1,0 +1,19 @@
+---
+import { APP_NAME, SUPPORT_EMAIL } from '../../brand';
+import Legal from '../../layouts/Legal.astro';
+const updated = 'November 5, 2026';
+---
+
+<Legal title="Terms of service" description={`The terms for using the ${APP_NAME} web app and the ${APP_NAME} Mac app, including the licence and payment terms.`}>
+  <h2>Web app</h2>
+  <p>The web app is free for personal and commercial use. Its source code is published under the MIT licence; the hosted service is provided as-is, may change, and may be discontinued. Don't abuse the service — for example by hammering the Google Docs proxy or using it for anything other than loading your own documents into the teleprompter.</p>
+  <h2>Mac app</h2>
+  <p>The Mac app is licensed, not sold. A license key is personal, works on up to 3 Macs at a time, may not be resold or shared, and the licensing mechanism may not be reverse engineered or circumvented. We may disable keys obtained fraudulently or through a chargeback. Pro renews yearly until cancelled from the billing portal. Lifetime covers all future versions of {APP_NAME} for Mac. The free tier is free for as long as we ship it.</p>
+  <h2>Payments</h2>
+  <p>Dodo Payments is the merchant of record: it sells you the licence, charges your payment method, and collects applicable taxes at checkout. Prices are shown in USD. Refunds follow our <a href="/refund-policy/">refund policy</a>.</p>
+  <h2>Liability</h2>
+  <p>Both apps are provided as-is, without warranty of any kind. To the extent the law allows, we are not liable for lost recordings, missed calls, lost scripts, or any indirect or consequential damage. Where liability cannot be excluded, it is limited to the amount you paid us in the preceding 12 months.</p>
+  <h2>Contact</h2>
+  <p>Questions about these terms: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
+  <p class="muted">Last updated: {updated}.</p>
+</Legal>

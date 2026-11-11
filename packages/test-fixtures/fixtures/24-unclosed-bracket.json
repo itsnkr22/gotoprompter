@@ -1,0 +1,111 @@
+{
+  "script": "[note that never closes and keeps going\nacross lines",
+  "events": [
+    {
+      "transcript": "note that never"
+    },
+    {
+      "transcript": "across lines"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "[note",
+      "clean": "note",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "that",
+      "clean": "that",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "never",
+      "clean": "never",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "closes",
+      "clean": "closes",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "keeps",
+      "clean": "keeps",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "going",
+      "clean": "going",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "across",
+      "clean": "across",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "lines",
+      "clean": "lines",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 9
+    }
+  ],
+  "expectIndexAfterEach": [
+    10,
+    10
+  ],
+  "expectResults": [
+    "finished",
+    "finished"
+  ]
+}

@@ -1,0 +1,49 @@
+---
+interface Props {
+  steps: { title: string; text: string }[];
+  heading?: string;
+  sub?: string;
+}
+const { steps, heading = 'How it works', sub = 'From pasted script to a clean take in under a minute.' } = Astro.props;
+---
+
+<section class="container block">
+  <div class="section-head">
+    <h2>{heading}</h2>
+    <p>{sub}</p>
+  </div>
+  <ol class="steps grid-3">
+    {
+      steps.map((s, i) => (
+        <li class="card">
+          <span class="num" aria-hidden="true">{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p class="muted">{s.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .num {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  p {
+    margin: 0;
+  }
+</style>

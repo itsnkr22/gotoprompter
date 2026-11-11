@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.turbo/
+.wrangler/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.xcuserstate
+xcuserdata/
+DerivedData/
+build/
+coverage/
+.astro/
+.dev.vars
+*.tsbuildinfo
+apps/mac/.build/
+apps/mac/PrompterCore/.build/
+apps/mac/PrompterCore/.swiftpm/
+
+# Playwright
+apps/web/test-results/
+apps/web/playwright-report/

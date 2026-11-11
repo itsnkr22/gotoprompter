@@ -1,0 +1,351 @@
+{
+  "script": "Thank you for joining us.\nThank you for your patience while we set up.\nAnd thank you for your questions at the end.",
+  "events": [
+    {
+      "transcript": "thank"
+    },
+    {
+      "transcript": "thank you"
+    },
+    {
+      "transcript": "thank you for"
+    },
+    {
+      "transcript": "thank you for joining"
+    },
+    {
+      "transcript": "thank you for joining us"
+    },
+    {
+      "transcript": "thank you for joining us thank"
+    },
+    {
+      "transcript": "thank you for joining us thank you"
+    },
+    {
+      "transcript": "thank you for joining us thank you for"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for your"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for your questions"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for your questions at"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for your questions at the"
+    },
+    {
+      "transcript": "thank you for joining us thank you for your patience while we set up and thank you for your questions at the end"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Thank",
+      "clean": "thank",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "you",
+      "clean": "you",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "for",
+      "clean": "for",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "joining",
+      "clean": "joining",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "us.",
+      "clean": "us",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "Thank",
+      "clean": "thank",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "you",
+      "clean": "you",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "for",
+      "clean": "for",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "your",
+      "clean": "your",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "patience",
+      "clean": "patience",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "while",
+      "clean": "while",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "set",
+      "clean": "set",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "up.",
+      "clean": "up",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 14
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "And",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "thank",
+      "clean": "thank",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "you",
+      "clean": "you",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "for",
+      "clean": "for",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "your",
+      "clean": "your",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "questions",
+      "clean": "questions",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "at",
+      "clean": "at",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 23
+    },
+    {
+      "raw": "end.",
+      "clean": "end",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 24
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

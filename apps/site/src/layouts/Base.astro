@@ -1,0 +1,356 @@
+---
+import '@gotoprompter/ui-tokens/tokens.css';
+import { APP_NAME } from '../brand';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { organization, website, type JsonLd as JsonLdType } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: JsonLdType | JsonLdType[];
+  noindex?: boolean;
+  theme?: 'dark' | 'light';
+  bodyClass?: string;
+  /** Home page: `{APP_NAME} — {title}` instead of `{title} · {APP_NAME}`. */
+  home?: boolean;
+}
+const {
+  title,
+  description,
+  canonical = Astro.url.pathname,
+  ogImage = '/images/og-default.png',
+  ogType = 'website',
+  jsonLd = [],
+  noindex = false,
+  theme = 'dark',
+  bodyClass = '',
+  home = false,
+} = Astro.props;
+const fullTitle = home ? `${APP_NAME} — ${title}` : `${title} · ${APP_NAME}`;
+const canonicalUrl = new URL(canonical, Astro.site).toString();
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
+const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC;
+const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const ld = [organization(), website(), ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])];
+---
+
+<!doctype html>
+<html lang="en" data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={`${APP_NAME} blog`} href="/rss.xml" />
+    <meta property="og:site_name" content={APP_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <JsonLd data={ld} />
+    {umamiSrc && umamiId && <script defer src={umamiSrc} data-website-id={umamiId} data-auto-track="true"></script>}
+  </head>
+  <body class={bodyClass}>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Inter-Variable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: Inter;
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('/fonts/Inter-Variable-Italic.woff2') format('woff2');
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--vp-color-bg);
+    color: var(--vp-color-text);
+    font-family: var(--vp-font-ui);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  a {
+    color: var(--vp-color-accent);
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5em;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  p {
+    margin: 0 0 1em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--vp-color-accent);
+    outline-offset: 2px;
+  }
+  .container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  section.block {
+    padding-block: 3.5rem;
+  }
+  .prose {
+    max-width: 42rem;
+    line-height: 1.65;
+    font-size: 1.0625rem;
+  }
+  .prose h2 {
+    font-size: 2rem;
+    margin-top: 2em;
+  }
+  .prose h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5em;
+  }
+  .prose h4 {
+    font-size: 1.25rem;
+  }
+  .prose a {
+    color: var(--vp-color-accent);
+  }
+  .prose code,
+  .prose pre {
+    background: var(--vp-color-surface);
+    border-radius: var(--vp-radius-sm);
+    font-family: var(--vp-font-mono);
+    font-size: 0.9em;
+  }
+  .prose code {
+    padding: 0.1em 0.35em;
+  }
+  .prose pre {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    padding: 0;
+    background: none;
+  }
+  .prose blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--vp-color-accent);
+    color: var(--vp-color-text-muted);
+  }
+  .prose img {
+    border-radius: var(--vp-radius-md);
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.4rem;
+  }
+  .prose li + li {
+    margin-top: 0.35em;
+  }
+  .prose table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .prose th,
+  .prose td {
+    border: 1px solid var(--vp-color-border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--vp-radius-pill);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.2;
+    transition:
+      background 0.15s,
+      transform 0.15s;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn[disabled],
+  .btn[aria-busy='true'] {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .btn-primary {
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+  }
+  .btn-primary:hover {
+    background: var(--vp-color-accent-strong);
+  }
+  .btn-secondary {
+    background: var(--vp-color-surface-raised);
+    color: var(--vp-color-text);
+    border-color: var(--vp-color-border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--vp-color-text-muted);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--vp-color-text);
+  }
+  .btn-ghost:hover {
+    background: var(--vp-color-surface);
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--vp-color-text-muted);
+    margin: 0 0 0.75rem;
+  }
+  .card {
+    background: var(--vp-color-surface);
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-lg);
+    padding: 1.25rem;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--vp-color-surface-raised);
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-pill);
+    padding: 0.35rem 0.85rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .muted {
+    color: var(--vp-color-text-muted);
+  }
+  .grid-2 {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  .grid-3 {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 768px) {
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .section-head {
+    max-width: 44rem;
+    margin-bottom: 2rem;
+  }
+  .section-head p {
+    color: var(--vp-color-text-muted);
+    font-size: 1.125rem;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+    padding: 0.5rem 1rem;
+    border-radius: var(--vp-radius-md);
+    z-index: 100;
+  }
+  .skip:focus {
+    top: 1rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>

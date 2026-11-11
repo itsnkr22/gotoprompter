@@ -1,0 +1,124 @@
+---
+import JsonLd from './JsonLd.astro';
+import { faqPage } from '../lib/seo';
+
+interface Item {
+  id?: string;
+  q: string;
+  a: string;
+}
+interface Props {
+  items: Item[];
+  initial?: number;
+  heading?: string;
+  id?: string;
+}
+const { items, initial = 6, heading = 'Frequently asked questions', id = 'faq' } = Astro.props;
+const hasExtra = items.length > initial;
+---
+
+<section id={id} class="faq container block">
+  <h2>{heading}</h2>
+  <div class="faq-list">
+    {
+      items.map((item, i) => (
+        <details id={item.id} class={i >= initial ? 'faq-extra' : undefined}>
+          <summary>{item.q}</summary>
+          <div class="answer" set:html={item.a} />
+        </details>
+      ))
+    }
+  </div>
+  {
+    hasExtra && (
+      <button type="button" class="btn btn-secondary faq-toggle" aria-expanded="false">
+        Show more FAQs
+      </button>
+    )
+  }
+  <JsonLd data={faqPage(items)} />
+</section>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('section.faq').forEach(function (section) {
+      var list = section.querySelector('.faq-list');
+      var btn = section.querySelector('.faq-toggle');
+      if (btn && list) {
+        btn.addEventListener('click', function () {
+          var expanded = list.classList.toggle('expanded');
+          btn.setAttribute('aria-expanded', String(expanded));
+          btn.textContent = expanded ? 'Show fewer FAQs' : 'Show more FAQs';
+          if (!expanded) section.scrollIntoView({ block: 'start' });
+        });
+      }
+    });
+    function openHash() {
+      var id = location.hash.slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (el && el.tagName === 'DETAILS') {
+        var list = el.closest('.faq-list');
+        if (list && el.classList.contains('faq-extra')) {
+          list.classList.add('expanded');
+          var btn = list.parentElement && list.parentElement.querySelector('.faq-toggle');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'true');
+            btn.textContent = 'Show fewer FAQs';
+          }
+        }
+        el.open = true;
+        el.scrollIntoView({ block: 'start' });
+      }
+    }
+    document.addEventListener('DOMContentLoaded', openHash);
+    window.addEventListener('hashchange', openHash);
+  })();
+</script>
+
+<style>
+  .faq-list {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 48rem;
+  }
+  details {
+    background: var(--vp-color-surface);
+    border: 1px solid var(--vp-color-border);
+    border-radius: var(--vp-radius-md);
+    padding: 0 1rem;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.9rem 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '+';
+    color: var(--vp-color-text-muted);
+    flex-shrink: 0;
+  }
+  details[open] summary::after {
+    content: '−';
+  }
+  .answer {
+    padding-bottom: 1rem;
+    color: var(--vp-color-text-muted);
+  }
+  .faq-extra {
+    display: none;
+  }
+  .faq-list.expanded .faq-extra {
+    display: block;
+  }
+  .faq-toggle {
+    margin-top: 1rem;
+  }
+</style>

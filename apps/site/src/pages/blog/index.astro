@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !(import.meta.env.PROD && data.draft))).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Guides and comparisons" description="Reading naturally on camera, teleprompter setups, and honest comparisons.">
+  <section class="container block">
+    <div class="section-head">
+      <h1>Guides and comparisons</h1>
+      <p>Reading naturally on camera, teleprompter setups, and honest comparisons.</p>
+    </div>
+    <div class="grid-3">
+      {posts.map((p) => <ArticleCard slug={p.id} title={p.data.title} description={p.data.description} date={p.data.date} image={p.data.image} imageAlt={p.data.imageAlt} keywords={p.data.keywords} />)}
+    </div>
+  </section>
+</Base>

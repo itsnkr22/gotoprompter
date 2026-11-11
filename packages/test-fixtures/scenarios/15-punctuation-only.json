@@ -1,0 +1,23 @@
+{
+  "script": "Wait — then ... breathe … and continue - slowly.",
+  "events": [
+    {
+      "transcript": "wait"
+    },
+    {
+      "transcript": "wait then"
+    },
+    {
+      "transcript": "wait then breathe"
+    },
+    {
+      "transcript": "wait then breathe and"
+    },
+    {
+      "transcript": "wait then breathe and continue"
+    },
+    {
+      "transcript": "wait then breathe and continue slowly"
+    }
+  ]
+}

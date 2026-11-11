@@ -1,0 +1,68 @@
+{
+  "script": "Short script here.",
+  "events": [
+    {
+      "transcript": "short"
+    },
+    {
+      "transcript": "short script"
+    },
+    {
+      "transcript": "short script here"
+    },
+    {
+      "transcript": "more words after the end"
+    },
+    {
+      "tap": 0
+    },
+    {
+      "transcript": "script"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Short",
+      "clean": "short",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "script",
+      "clean": "script",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "here.",
+      "clean": "here",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 2
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    3,
+    0,
+    2
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "finished",
+    "tap",
+    "near"
+  ]
+}

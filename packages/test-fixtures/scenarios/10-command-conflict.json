@@ -1,0 +1,32 @@
+{
+  "script": "When the meeting ends go back to the office and file the notes.\nThen go next door and return the projector.",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "when the meeting ends"
+    },
+    {
+      "transcript": "when the meeting ends go back"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "to the office and file"
+    },
+    {
+      "transcript": "then go next"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "tap": 14
+    },
+    {
+      "transcript": "go back"
+    }
+  ]
+}

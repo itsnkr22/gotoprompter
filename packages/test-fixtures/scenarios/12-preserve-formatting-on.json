@@ -1,0 +1,30 @@
+{
+  "script": "Line one.\nLine two.\n\n\nLine three after blank lines.",
+  "options": {
+    "preserveFormatting": true,
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "line three after"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go back"
+    }
+  ]
+}

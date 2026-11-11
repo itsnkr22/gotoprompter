@@ -1,0 +1,17 @@
+{
+  "script": "one two three four five six seven eight nine ten eleven twelve",
+  "options": {
+    "lookaheadWords": 10
+  },
+  "events": [
+    {
+      "transcript": "ten"
+    },
+    {
+      "transcript": "twelve"
+    },
+    {
+      "transcript": "eleven twelve"
+    }
+  ]
+}

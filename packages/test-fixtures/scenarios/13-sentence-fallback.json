@@ -1,0 +1,29 @@
+{
+  "script": "Sentence one is short. Sentence two is a little longer than one. Sentence three asks a question? Sentence four ends it all!",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    }
+  ]
+}

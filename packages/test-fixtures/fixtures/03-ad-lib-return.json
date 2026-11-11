@@ -1,0 +1,355 @@
+{
+  "script": "Welcome to the kitchen.\nToday's recipe is a simple tomato soup with basil and a slice of toasted bread.\nStart by heating the olive oil in a wide pan.",
+  "events": [
+    {
+      "transcript": "welcome"
+    },
+    {
+      "transcript": "welcome to"
+    },
+    {
+      "transcript": "welcome to the"
+    },
+    {
+      "transcript": "welcome to the kitchen"
+    },
+    {
+      "transcript": "welcome to the kitchen todays"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a simple"
+    },
+    {
+      "transcript": "welcome to the kitchen todays recipe is a simple tomato"
+    },
+    {
+      "transcript": "by the way my neighbour dropped by yesterday with a basket of apples from her garden which was lovely"
+    },
+    {
+      "transcript": "and she stayed for tea while we talked about the weather"
+    },
+    {
+      "transcript": "anyway start by heating the olive"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Welcome",
+      "clean": "welcome",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "to",
+      "clean": "to",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "kitchen.",
+      "clean": "kitchen",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "Today's",
+      "clean": "todays",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "recipe",
+      "clean": "recipe",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "simple",
+      "clean": "simple",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "tomato",
+      "clean": "tomato",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "soup",
+      "clean": "soup",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "with",
+      "clean": "with",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "basil",
+      "clean": "basil",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "slice",
+      "clean": "slice",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "of",
+      "clean": "of",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "toasted",
+      "clean": "toasted",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "bread.",
+      "clean": "bread",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 19
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "Start",
+      "clean": "start",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "by",
+      "clean": "by",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "heating",
+      "clean": "heating",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 23
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 24
+    },
+    {
+      "raw": "olive",
+      "clean": "olive",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 25
+    },
+    {
+      "raw": "oil",
+      "clean": "oil",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 26
+    },
+    {
+      "raw": "in",
+      "clean": "in",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 27
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 28
+    },
+    {
+      "raw": "wide",
+      "clean": "wide",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 29
+    },
+    {
+      "raw": "pan.",
+      "clean": "pan",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 30
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    11,
+    11,
+    26
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "none",
+    "none",
+    "jump"
+  ]
+}

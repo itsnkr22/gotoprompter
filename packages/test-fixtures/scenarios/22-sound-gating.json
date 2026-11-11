@@ -1,0 +1,86 @@
+{
+  "script": "Steady scrolling moves these thirty little words along at a fixed pace so the reader can follow the line without ever touching the keyboard or the mouse at all today.",
+  "options": {
+    "autoscroll": {
+      "mode": "sound",
+      "scrollSpeed": 3.5
+    }
+  },
+  "events": [
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    }
+  ]
+}

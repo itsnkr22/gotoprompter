@@ -1,0 +1,94 @@
+---
+import { APP_NAME, GITHUB_REPO_URL, SUPPORT_EMAIL } from '../brand';
+import nav from '../data/nav.json';
+import { MAC_AVAILABLE } from '../launch';
+
+const year = new Date().getFullYear();
+const macOnly = new Set(['/download/', '/license/']);
+const columns = nav.footer.map((col) => ({
+  ...col,
+  links: col.links.filter((l) => MAC_AVAILABLE || !macOnly.has(l.href)),
+}));
+const href = (h: string) => h.replace('{SUPPORT_EMAIL}', SUPPORT_EMAIL).replace('{GITHUB_REPO_URL}', GITHUB_REPO_URL);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      {
+        columns.map((col) => (
+          <div>
+            <h2>{col.title}</h2>
+            <ul>
+              {col.links.map((l) => (
+                <li>
+                  <a href={href(l.href)} rel={l.href.startsWith('http') || l.href.startsWith('{GITHUB') ? 'noopener' : undefined}>
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <div class="bottom">
+      <p>© {year} {APP_NAME}. Made for people who talk to cameras.</p>
+      <p>The web app and this website are open source (MIT) · Your scripts never leave your device.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--vp-color-border);
+    padding: 3rem 0 2rem;
+    margin-top: 4rem;
+    font-size: 0.9375rem;
+  }
+  .cols {
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 768px) {
+    .cols {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  h2 {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--vp-color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li + li {
+    margin-top: 0.4rem;
+  }
+  a {
+    color: var(--vp-color-text);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--vp-color-accent);
+  }
+  .bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--vp-color-border);
+    color: var(--vp-color-text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .bottom p {
+    margin: 0;
+  }
+</style>

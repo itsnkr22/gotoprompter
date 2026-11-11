@@ -1,0 +1,102 @@
+---
+import { supportMailto } from '../brand';
+import features from '../data/mac-features.json';
+
+interface Props {
+  initial?: number;
+}
+const { initial = 6 } = Astro.props;
+---
+
+<section class="container block showcase" id="features">
+  <div class="section-head">
+    <h2>See it work</h2>
+    <p>
+      Twelve things it does well. If something's missing, tell us.{' '}
+      <a href={supportMailto('Feature request')} data-umami-event="mac-feature-request">Request a feature</a>
+    </p>
+  </div>
+  <div class="grid-3 features">
+    {
+      features.map((f, i) => (
+        <article class={`card ${i >= initial ? 'feature-extra' : ''}`} id={`feature-${f.id}`}>
+          <video
+            class="feature-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster={`/videos/mac/posters/${f.video}.jpg`}
+            data-src={`/videos/mac/${f.video}.mp4`}
+            width="640"
+            height="400"
+            aria-label={f.title}
+          />
+          <h3>{f.title}</h3>
+          <p class="muted" style="margin:0">{f.text}</p>
+        </article>
+      ))
+    }
+  </div>
+  {
+    features.length > initial && (
+      <button type="button" class="btn btn-secondary features-toggle" aria-expanded="false">
+        Show more features
+      </button>
+    )
+  }
+</section>
+
+<script is:inline>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var videos = document.querySelectorAll('.feature-video');
+    if (!reduce && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            var v = e.target;
+            if (e.isIntersecting) {
+              if (!v.src) v.src = v.dataset.src;
+              v.play().catch(function () {});
+            } else if (v.src) v.pause();
+          });
+        },
+        { rootMargin: '200px' },
+      );
+      videos.forEach(function (v) {
+        io.observe(v);
+      });
+    }
+    var section = document.querySelector('.showcase');
+    var btn = section && section.querySelector('.features-toggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var grid = section.querySelector('.features');
+        var expanded = grid.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', String(expanded));
+        btn.textContent = expanded ? 'Show fewer features' : 'Show more features';
+        if (!expanded) section.scrollIntoView({ block: 'start' });
+      });
+    }
+  })();
+</script>
+
+<style>
+  .feature-video {
+    border-radius: var(--vp-radius-md);
+    margin-bottom: 0.9rem;
+    aspect-ratio: 16 / 10;
+    background: var(--vp-color-surface-raised);
+    width: 100%;
+  }
+  .feature-extra {
+    display: none;
+  }
+  .features.expanded .feature-extra {
+    display: block;
+  }
+  .features-toggle {
+    margin-top: 1.25rem;
+  }
+</style>

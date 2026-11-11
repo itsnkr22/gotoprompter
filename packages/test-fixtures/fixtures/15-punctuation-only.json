@@ -1,0 +1,131 @@
+{
+  "script": "Wait — then ... breathe … and continue - slowly.",
+  "events": [
+    {
+      "transcript": "wait"
+    },
+    {
+      "transcript": "wait then"
+    },
+    {
+      "transcript": "wait then breathe"
+    },
+    {
+      "transcript": "wait then breathe and"
+    },
+    {
+      "transcript": "wait then breathe and continue"
+    },
+    {
+      "transcript": "wait then breathe and continue slowly"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Wait",
+      "clean": "wait",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "—",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "then",
+      "clean": "then",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "...",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "breathe",
+      "clean": "breathe",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "…",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "continue",
+      "clean": "continue",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "-",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "slowly.",
+      "clean": "slowly",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 9
+    }
+  ],
+  "expectIndexAfterEach": [
+    2,
+    4,
+    6,
+    7,
+    9,
+    10
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

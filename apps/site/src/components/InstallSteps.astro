@@ -1,0 +1,42 @@
+---
+import { APP_DOMAIN } from '../brand';
+
+interface Props {
+  appUrl?: string;
+}
+const { appUrl = '/app/' } = Astro.props;
+const groups = [
+  { title: 'iPhone & iPad', steps: [`Open ${APP_DOMAIN}/app in Safari`, 'Tap the Share button', 'Tap "Add to Home Screen"'] },
+  { title: 'Android', steps: [`Open ${APP_DOMAIN}/app in Chrome`, 'Open the three-dot menu', 'Tap "Install app" (or "Add to Home screen")'] },
+  { title: 'Desktop', steps: [`Open ${APP_DOMAIN}/app in Chrome or Edge`, 'Click the install icon in the address bar', 'Click "Install"'] },
+];
+---
+
+<div class="grid-3">
+  {
+    groups.map((g) => (
+      <div class="card">
+        <h3>{g.title}</h3>
+        <ol>
+          {g.steps.map((s, i) => (
+            <li>{i === 0 ? <a href={appUrl}>{s}</a> : s}</li>
+          ))}
+        </ol>
+      </div>
+    ))
+  }
+</div>
+<p class="muted note">No app store, no permissions except your microphone (and camera if you record).</p>
+
+<style>
+  ol {
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+  li + li {
+    margin-top: 0.4rem;
+  }
+  .note {
+    margin-top: 1rem;
+  }
+</style>

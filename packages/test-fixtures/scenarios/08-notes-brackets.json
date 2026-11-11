@@ -1,0 +1,35 @@
+{
+  "script": "Hello everyone [smile] and welcome. [pause for two seconds] Let's begin with [check slide] the numbers. word[x] next",
+  "events": [
+    {
+      "transcript": "hello"
+    },
+    {
+      "transcript": "hello everyone"
+    },
+    {
+      "transcript": "hello everyone and"
+    },
+    {
+      "transcript": "hello everyone and welcome"
+    },
+    {
+      "transcript": "hello everyone and welcome lets"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the numbers"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the numbers next"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+---
+import { SUPPORT_EMAIL } from '../../../brand';
+import Base from '../../../layouts/Base.astro';
+import { API_BASE } from '../../../api';
+---
+
+<Base title="Opening your billing portal" description="Redirecting to the billing portal." noindex>
+  <section class="container block portal">
+    <h1>Opening your billing portal…</h1>
+    <p class="muted" id="portal-status" aria-live="polite">One moment.</p>
+    <p><a href="/license/">Back to License &amp; billing</a></p>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ API_BASE, SUPPORT_EMAIL }}>
+  (async function () {
+    var status = document.getElementById('portal-status');
+    var token = new URLSearchParams(location.search).get('token');
+    if (!token) {
+      status.textContent = 'This link is missing its token. Request a new one from the License & billing page.';
+      return;
+    }
+    try {
+      var res = await fetch(API_BASE + '/billing/portal/redeem', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ token: token }),
+      });
+      if (res.status === 404) {
+        status.textContent = 'This link has expired or was already used. Request a new one from the License & billing page.';
+        return;
+      }
+      if (!res.ok) throw new Error('http ' + res.status);
+      var data = await res.json();
+      window.location.assign(data.url);
+    } catch (e) {
+      status.textContent = 'We could not open the portal right now. Try again in a minute or email ' + SUPPORT_EMAIL + '.';
+    }
+  })();
+</script>
+
+<style>
+  .portal {
+    max-width: 40rem;
+  }
+</style>

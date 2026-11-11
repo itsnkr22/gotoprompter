@@ -1,0 +1,4 @@
+{
+  "$comment": "Launch switches shared by the site, the web app and scripts/launch-audit.mjs. macAvailable=false shows the Mac app as 'coming soon': no download, no checkout, no Mac offers in structured data. Flip to true once the Apple Developer ID signing in docs/RUNBOOK_RELEASE.md is set up and v1.0.0 is published.",
+  "macAvailable": false
+}

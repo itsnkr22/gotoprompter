@@ -1,0 +1,60 @@
+{
+  "header": [
+    { "label": "Web app", "href": "/web/" },
+    { "label": "Mac app", "href": "/mac/" },
+    { "label": "Pricing", "href": "/pricing/" },
+    { "label": "Blog", "href": "/blog/" },
+    { "label": "Support", "href": "/support/" }
+  ],
+  "footer": [
+    {
+      "title": "Product",
+      "links": [
+        { "label": "Web app", "href": "/web/" },
+        { "label": "Mac app", "href": "/mac/" },
+        { "label": "Pricing", "href": "/pricing/" },
+        { "label": "Open web app", "href": "/app/" }
+      ]
+    },
+    {
+      "title": "Integrations",
+      "links": [
+        { "label": "Zoom", "href": "/mac/zoom/" },
+        { "label": "Google Meet", "href": "/mac/google-meet/" },
+        { "label": "Microsoft Teams", "href": "/mac/microsoft-teams/" },
+        { "label": "Loom", "href": "/mac/loom/" },
+        { "label": "Riverside", "href": "/mac/riverside/" }
+      ]
+    },
+    {
+      "title": "Resources",
+      "links": [
+        { "label": "Blog", "href": "/blog/" },
+        { "label": "Best teleprompter for Mac", "href": "/blog/best-teleprompter-app-for-mac/" },
+        { "label": "Teleprompter on Zoom", "href": "/blog/how-to-use-a-teleprompter-on-zoom/" },
+        { "label": "Free web teleprompter", "href": "/blog/free-web-teleprompter-no-download/" },
+        { "label": "No-subscription options", "href": "/blog/teleprompter-without-subscription/" }
+      ]
+    },
+    {
+      "title": "Help",
+      "links": [
+        { "label": "Support", "href": "/support/" },
+        { "label": "Download", "href": "/download/" },
+        { "label": "License & billing", "href": "/license/" },
+        { "label": "Contact", "href": "mailto:{SUPPORT_EMAIL}" },
+        { "label": "Refund policy", "href": "/refund-policy/" }
+      ]
+    },
+    {
+      "title": "Project",
+      "links": [
+        { "label": "Changelog", "href": "/changelog/" },
+        { "label": "GitHub", "href": "{GITHUB_REPO_URL}" },
+        { "label": "About", "href": "/about/" },
+        { "label": "Privacy", "href": "/privacy/" },
+        { "label": "Terms", "href": "/terms/" }
+      ]
+    }
+  ]
+}

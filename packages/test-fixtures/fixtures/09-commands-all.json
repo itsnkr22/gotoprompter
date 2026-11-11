@@ -1,0 +1,290 @@
+{
+  "script": "Paragraph one has three words.\nParagraph two has four words.\nParagraph three has five words.\nParagraph four is the last one.",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "paragraph one"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "paragraph three has"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go finish"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go to start"
+    },
+    {
+      "transcript": "paragraph one has three"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Paragraph",
+      "clean": "paragraph",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "one",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "has",
+      "clean": "has",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "words.",
+      "clean": "words",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "Paragraph",
+      "clean": "paragraph",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "has",
+      "clean": "has",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "words.",
+      "clean": "words",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 10
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "Paragraph",
+      "clean": "paragraph",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "three",
+      "clean": "three",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "has",
+      "clean": "has",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "five",
+      "clean": "five",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "words.",
+      "clean": "words",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 16
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "Paragraph",
+      "clean": "paragraph",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "four",
+      "clean": "four",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "is",
+      "clean": "is",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "last",
+      "clean": "last",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "one.",
+      "clean": "one",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 23
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    6,
+    6,
+    7,
+    6,
+    6,
+    0,
+    0,
+    23,
+    23,
+    0,
+    1
+  ],
+  "expectResults": [
+    "near",
+    "command:go next",
+    "none",
+    "near",
+    "command:go back",
+    "none",
+    "command:go back",
+    "none",
+    "command:go finish",
+    "none",
+    "command:go start",
+    "near"
+  ]
+}

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="That page went off-script." noindex>
+  <section class="container block nf">
+    <h1>That page went off-script.</h1>
+    <p class="muted">Try the links below.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="/">Home</a>
+      <a class="btn btn-secondary" href="/app/">Open web app</a>
+      <a class="btn btn-secondary" href="/support/">Support</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    text-align: center;
+    padding-block: 6rem;
+  }
+  .ctas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+import { icon } from './icons';
+
+interface Item {
+  icon: string;
+  title: string;
+  description: string;
+}
+interface Props {
+  items: Item[];
+  heading?: string;
+  sub?: string;
+}
+const { items, heading = 'Who is this for?', sub } = Astro.props;
+---
+
+<section class="container block">
+  <div class="section-head">
+    <h2>{heading}</h2>
+    {sub && <p>{sub}</p>}
+  </div>
+  <div class="audience grid-3">
+    {
+      items.map((i) => (
+        <div class="card">
+          <span class="ico" set:html={icon(i.icon)} />
+          <h3>{i.title}</h3>
+          <p class="muted" style="margin:0">{i.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .audience {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 640px) {
+    .audience {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .ico {
+    display: inline-flex;
+    color: var(--vp-color-accent);
+    margin-bottom: 0.75rem;
+  }
+</style>

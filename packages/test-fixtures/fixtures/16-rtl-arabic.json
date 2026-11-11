@@ -1,0 +1,140 @@
+{
+  "script": "مرحبا بكم في القناة. اليوم نتحدث عن الطبخ المنزلي.",
+  "options": {
+    "locale": "ar-SA"
+  },
+  "events": [
+    {
+      "transcript": "مرحبا"
+    },
+    {
+      "transcript": "مرحبا بكم"
+    },
+    {
+      "transcript": "مرحبا بكم في"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة اليوم"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة اليوم نتحدث"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة اليوم نتحدث عن"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة اليوم نتحدث عن الطبخ"
+    },
+    {
+      "transcript": "مرحبا بكم في القناة اليوم نتحدث عن الطبخ المنزلي"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "مرحبا",
+      "clean": "مرحبا",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "بكم",
+      "clean": "بكم",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "في",
+      "clean": "في",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "القناة.",
+      "clean": "القناة",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "اليوم",
+      "clean": "اليوم",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "نتحدث",
+      "clean": "نتحدث",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "عن",
+      "clean": "عن",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "الطبخ",
+      "clean": "الطبخ",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "المنزلي.",
+      "clean": "المنزلي",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 8
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

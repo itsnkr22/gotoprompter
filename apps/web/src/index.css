@@ -1,0 +1,271 @@
+@import 'tailwindcss';
+@import '@gotoprompter/ui-tokens/tokens.css';
+
+@custom-variant short-landscape (@media (orientation: landscape) and (max-height: 500px));
+
+@theme inline {
+  --color-accent: var(--vp-color-accent);
+  --color-accent-strong: var(--vp-color-accent-strong);
+  --color-accent-contrast: var(--vp-color-accent-contrast);
+  --color-bg: var(--vp-color-bg);
+  --color-surface: var(--vp-color-surface);
+  --color-raised: var(--vp-color-surface-raised);
+  --color-line: var(--vp-color-border);
+  --color-fg: var(--vp-color-text);
+  --color-muted: var(--vp-color-text-muted);
+  --color-danger: var(--vp-color-danger);
+  --font-ui: var(--vp-font-ui);
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+html,
+body {
+  background: var(--vp-color-bg);
+  color: var(--vp-color-text);
+  font-family: var(--vp-font-ui);
+}
+
+/* ── Prompter tokens (spec §6.2) ─────────────────────────────────────── */
+.vp-word {
+  display: inline-block;
+  margin-right: 0.6em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition:
+    opacity 0.3s,
+    color 0.1s;
+}
+.vp-word-future {
+  opacity: 0.8;
+}
+.vp-word-past {
+  opacity: 0.5;
+}
+.vp-word-current {
+  opacity: 1;
+}
+.vp-highlight .vp-word-current {
+  color: var(--vp-color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--vp-color-accent);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.12em;
+}
+.vp-note {
+  font-style: italic;
+  opacity: 0.5;
+  cursor: default;
+}
+.vp-stop {
+  display: none;
+  color: var(--vp-color-danger);
+  font-style: normal;
+  opacity: 0.9;
+  cursor: default;
+}
+.vp-show-stops .vp-stop {
+  display: inline-block;
+}
+.vp-break {
+  display: block;
+  width: 100%;
+  height: var(--paragraph-spacing, 1em);
+}
+.vp-smooth .vp-word-current {
+  transition: none;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--vp-color-accent) 50%,
+    var(--base-color, #fff) 50%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: vp-wipe 0.25s linear forwards;
+}
+@keyframes vp-wipe {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+.vp-no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.vp-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vp-smooth .vp-word-current {
+    animation: none;
+    color: var(--vp-color-accent);
+    background: none;
+  }
+}
+
+/* ── Mirror & rotation (spec §10) ────────────────────────────────────── */
+#scrollContainer.vp-mirror-v {
+  transform: scaleX(-1) rotate(180deg);
+}
+#scrollContainer.vp-mirror-h {
+  transform: scaleX(-1);
+}
+#scrollContainer.vp-mirror-v.vp-mirror-h {
+  transform: rotate(180deg);
+}
+body.vp-rotated #appRoot {
+  transform: rotate(90deg);
+  transform-origin: center center;
+  width: 100vh;
+  height: 100vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -50vh;
+  margin-top: -50vw;
+  overflow: auto;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────── */
+#mainControlsDock button,
+#setupScreen button {
+  touch-action: manipulation;
+}
+.vp-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--vp-color-border);
+  cursor: pointer;
+}
+.vp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--vp-color-accent);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.vp-range::-moz-range-thumb {
+  height: 24px;
+  width: 24px;
+  border: none;
+  border-radius: 50%;
+  background: var(--vp-color-accent);
+  cursor: pointer;
+}
+.vp-toggle .vp-toggle-track {
+  position: relative;
+  display: inline-block;
+}
+.vp-toggle input:checked + .vp-toggle-track .vp-toggle-thumb {
+  transform: translateX(20px);
+}
+.vp-spin-border {
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    var(--vp-color-accent) 0%,
+    var(--vp-color-accent) 40%,
+    transparent 70%,
+    var(--vp-color-accent) 100%
+  );
+  animation: vp-spin 12s linear infinite;
+}
+@keyframes vp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vp-spin-border {
+    animation: none;
+  }
+}
+
+/* ── Video mode (spec §11.3) ─────────────────────────────────────────── */
+.video-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#videoContainer {
+  touch-action: none;
+}
+.vp-video-split {
+  display: flex !important;
+  flex-direction: column;
+}
+.vp-video-split #scrollWrapper {
+  flex: 1;
+  height: auto !important;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+.vp-video-split #videoContainer {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+.vp-video-overlay #videoContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.vp-video-overlay #scrollWrapper {
+  position: relative;
+  z-index: 1;
+  height: 50% !important;
+  background: rgba(0, 0, 0, 0.65) !important;
+  backdrop-filter: blur(2px);
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .vp-video-split {
+    flex-direction: row;
+  }
+  .vp-video-split #scrollWrapper {
+    width: 50%;
+  }
+  .vp-video-split #videoContainer {
+    width: 50%;
+    border-top: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+  }
+}
+@keyframes vp-pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+.vp-recording-pulse {
+  animation: vp-pulse-red 2s infinite;
+}

@@ -1,0 +1,23 @@
+{
+  "script": "Chapter one is about planning your route.\nChapter two covers packing light for the trail.\nChapter three explains water filters and purification.\nChapter four is all about camp cooking.",
+  "events": [
+    {
+      "transcript": "chapter"
+    },
+    {
+      "transcript": "chapter one"
+    },
+    {
+      "transcript": "chapter one is"
+    },
+    {
+      "transcript": "explains water filters"
+    },
+    {
+      "transcript": "explains water filters and purification"
+    },
+    {
+      "transcript": "chapter four is all"
+    }
+  ]
+}

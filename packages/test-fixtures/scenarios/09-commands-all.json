@@ -1,0 +1,44 @@
+{
+  "script": "Paragraph one has three words.\nParagraph two has four words.\nParagraph three has five words.\nParagraph four is the last one.",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "paragraph one"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "paragraph three has"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go back"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go finish"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go to start"
+    },
+    {
+      "transcript": "paragraph one has three"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+---
+import pricing from '@gotoprompter/config/pricing';
+import { APP_NAME } from '../../brand';
+import CTASection from '../../components/CTASection.astro';
+import FAQ from '../../components/FAQ.astro';
+import Hero from '../../components/Hero.astro';
+import PricingTable from '../../components/PricingTable.astro';
+import Base from '../../layouts/Base.astro';
+import { softwareApp } from '../../lib/seo';
+import { MAC_AVAILABLE, MAC_NOTIFY_HREF, MAC_NOTIFY_LABEL } from '../../launch';
+
+const offers = (pricing.plans as { name: string; price: number }[]).map((p) => ({ name: p.name, price: p.price }));
+const rows: [string, string, string, string][] = [
+  ['Custom scripts', '3', 'Unlimited', 'Unlimited'],
+  ['Demo script', '✓', '✓', '✓'],
+  ['Voice/sound/constant scrolling', '✓', '✓', '✓'],
+  ['Invisible on screen share', '✓', '✓', '✓'],
+  ['60+ languages', '✓', '✓', '✓'],
+  ['Presets & stats', '✓', '✓', '✓'],
+  ['Updates', '✓', 'while subscribed', 'forever'],
+  ['Macs per licence', '—', '3', '3'],
+  ['Money-back', '—', '14 days', '14 days'],
+];
+const faqs = [
+  { id: 'delivery', q: 'How is the licence delivered?', a: 'By email, right after checkout, from our payment partner Dodo Payments. Paste it into Settings → License in the app.' },
+  { id: 'macs', q: 'Can I use it on more than one Mac?', a: 'Yes, up to three at a time. Deactivate a Mac in Settings → License to free a slot.' },
+  { id: 'ends', q: 'What happens when my Pro subscription ends?', a: 'The app keeps working with the free tier: your existing scripts stay readable, and you can keep three custom scripts. Buy Lifetime any time.' },
+  { id: 'refunds', q: 'Do you offer refunds?', a: 'Yes, 14 days, no questions. See the <a href="/refund-policy/">refund policy</a>.' },
+  { id: 'payment', q: 'Which payment methods are accepted?', a: 'Cards, Apple Pay and Google Pay, plus local methods depending on your country. Taxes are calculated at checkout.' },
+  { id: 'discount', q: 'Is there a student or team discount?', a: 'Not yet. Email us and tell us what you need.' },
+];
+---
+
+<Base title="Pricing" description="Free for 3 scripts. Pro for $3.34 a month billed yearly, or Lifetime for $99.99 once. No account, 14-day money-back guarantee." jsonLd={softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url: '/pricing/', offers })}>
+  {
+    MAC_AVAILABLE ? (
+      <Hero eyebrow="Mac app pricing" title="Pay yearly, pay once, or don't pay at all." sub="The web app is free forever. The Mac app is free for three scripts and unlocks unlimited scripts with Pro or Lifetime." primary={{ label: 'Download for Mac', href: '/download/', event: 'pricing-hero-download' }} secondary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} />
+    ) : (
+      <Hero eyebrow="Pricing" badge="Mac app coming soon" title="The web app is free. The Mac app is on its way." sub="The web app is free forever, with no account. The Mac app isn't available yet; below is the pricing we plan to launch with. Nothing is for sale today." primary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} secondary={{ label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: 'pricing-hero-notify' }} />
+    )
+  }
+  <section class="container block" id="plans">
+    <h2 class={MAC_AVAILABLE ? 'visually-hidden' : ''}>{MAC_AVAILABLE ? 'Plans' : 'Planned Mac app pricing'}</h2>
+    <PricingTable autoSelect />
+  </section>
+  <section class="container block">
+    <h2>Compare</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Pro</th><th scope="col">Lifetime</th></tr></thead>
+        <tbody>
+          {rows.map((r) => <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <FAQ items={faqs} initial={6} />
+  {
+    MAC_AVAILABLE ? (
+      <CTASection headline="Try it free first" primary={{ label: 'Download for Mac', href: '/download/', event: 'pricing-download' }} />
+    ) : (
+      <CTASection headline="Start free in your browser" primary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-footer-web' }} secondary={{ label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: 'pricing-footer-notify' }} />
+    )
+  }
+</Base>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 48rem;
+  }
+  th,
+  td {
+    border: 1px solid var(--vp-color-border);
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+  }
+  thead th {
+    background: var(--vp-color-surface);
+  }
+</style>

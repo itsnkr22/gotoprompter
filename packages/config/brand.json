@@ -1,0 +1,7 @@
+{
+  "APP_NAME": "gotoprompter",
+  "APP_DOMAIN": "gotoprompter.app",
+  "SUPPORT_EMAIL": "support@gotoprompter.app",
+  "MAC_BUNDLE_ID": "app.gotoprompter.mac",
+  "GITHUB_REPO_URL": "https://github.com/itsnkr22/gotoprompter"
+}

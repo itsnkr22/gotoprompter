@@ -1,0 +1,223 @@
+{
+  "script": "Hello everyone [smile] and welcome. [pause for two seconds] Let's begin with [check slide] the numbers. word[x] next",
+  "events": [
+    {
+      "transcript": "hello"
+    },
+    {
+      "transcript": "hello everyone"
+    },
+    {
+      "transcript": "hello everyone and"
+    },
+    {
+      "transcript": "hello everyone and welcome"
+    },
+    {
+      "transcript": "hello everyone and welcome lets"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the numbers"
+    },
+    {
+      "transcript": "hello everyone and welcome lets begin with the numbers next"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Hello",
+      "clean": "hello",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "everyone",
+      "clean": "everyone",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "[smile]",
+      "clean": "smile",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "welcome.",
+      "clean": "welcome",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "[pause",
+      "clean": "pause",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "for",
+      "clean": "for",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "two",
+      "clean": "two",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "seconds]",
+      "clean": "seconds",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "Let's",
+      "clean": "lets",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "begin",
+      "clean": "begin",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "with",
+      "clean": "with",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "[check",
+      "clean": "check",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "slide]",
+      "clean": "slide",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "numbers.",
+      "clean": "numbers",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 15
+    },
+    {
+      "raw": "word[x]",
+      "clean": "wordx",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "next",
+      "clean": "next",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    3,
+    4,
+    9,
+    10,
+    11,
+    14,
+    15,
+    17,
+    18
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

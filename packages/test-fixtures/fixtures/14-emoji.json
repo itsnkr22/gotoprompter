@@ -1,0 +1,206 @@
+{
+  "script": "Big news 🎉 today. We hit the goal 🚀 early and the team 🙌 celebrated.",
+  "events": [
+    {
+      "transcript": "big"
+    },
+    {
+      "transcript": "big news"
+    },
+    {
+      "transcript": "big news today"
+    },
+    {
+      "transcript": "big news today we"
+    },
+    {
+      "transcript": "big news today we hit"
+    },
+    {
+      "transcript": "big news today we hit the"
+    },
+    {
+      "transcript": "big news today we hit the goal"
+    },
+    {
+      "transcript": "big news today we hit the goal early"
+    },
+    {
+      "transcript": "big news today we hit the goal early and"
+    },
+    {
+      "transcript": "big news today we hit the goal early and the"
+    },
+    {
+      "transcript": "big news today we hit the goal early and the team"
+    },
+    {
+      "transcript": "big news today we hit the goal early and the team celebrated"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Big",
+      "clean": "big",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "news",
+      "clean": "news",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "🎉",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "today.",
+      "clean": "today",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "We",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "hit",
+      "clean": "hit",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "goal",
+      "clean": "goal",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "🚀",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "early",
+      "clean": "early",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "team",
+      "clean": "team",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "🙌",
+      "clean": "",
+      "kind": "word",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "celebrated.",
+      "clean": "celebrated",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 14
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

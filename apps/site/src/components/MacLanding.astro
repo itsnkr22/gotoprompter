@@ -1,0 +1,101 @@
+---
+// Shared body for /mac/ and /mac/<integration>/ (docs/spec/03-site.md §3.3, §4.3).
+import { APP_NAME } from '../brand';
+import { MAC_AVAILABLE, MAC_NOTIFY_HREF, MAC_NOTIFY_LABEL } from '../launch';
+import AudienceGrid from './AudienceGrid.astro';
+import CTASection from './CTASection.astro';
+import FAQ from './FAQ.astro';
+import FeatureShowcase from './FeatureShowcase.astro';
+import Hero from './Hero.astro';
+import LogoMarquee from './LogoMarquee.astro';
+import PricingTable from './PricingTable.astro';
+import ReviewsWall from './ReviewsWall.astro';
+import ThreeWaysToScroll from './ThreeWaysToScroll.astro';
+import VideoEmbed from './VideoEmbed.astro';
+
+interface Props {
+  eyebrow: string;
+  badge?: string;
+  title: string;
+  sub: string;
+  trust?: string;
+  downloadEvent: string;
+  pricingEvent: string;
+  videoId?: string;
+  audience: { icon: string; title: string; description: string }[];
+  faqs: { id?: string; q: string; a: string }[];
+  footerHeadline: string;
+  footerPrimaryEvent: string;
+  footerSecondaryEvent: string;
+  hide?: ('reviews' | 'pricing' | 'threeWays' | 'marquee')[];
+  howTo?: { name: string; steps: string[] };
+}
+const { eyebrow, badge, title, sub, trust, downloadEvent, pricingEvent, videoId = '', audience, faqs, footerHeadline, footerPrimaryEvent, footerSecondaryEvent, hide = [], howTo } = Astro.props;
+// While the Mac app is "coming soon" there is no download and no checkout: the CTAs point to the
+// free web app and a pre-filled launch email, and the pricing section is hidden.
+const heroPrimary = MAC_AVAILABLE
+  ? { label: 'Download for Mac', href: '/download/', event: downloadEvent }
+  : { label: 'Use the free web app today', href: '/app/', event: `${downloadEvent}-soon-web` };
+const heroSecondary = MAC_AVAILABLE
+  ? { label: 'See pricing', href: '#pricing', event: pricingEvent }
+  : { label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: `${pricingEvent}-soon-notify` };
+const footerPrimary = MAC_AVAILABLE
+  ? { label: 'Download for Mac', href: '/download/', event: footerPrimaryEvent }
+  : { label: 'Use the free web app', href: '/app/', event: `${footerPrimaryEvent}-soon-web` };
+const footerSecondary = MAC_AVAILABLE
+  ? { label: 'Try the free web app', href: '/app/', event: footerSecondaryEvent }
+  : { label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: `${footerSecondaryEvent}-soon-notify` };
+const heroBadge = MAC_AVAILABLE ? badge : 'Coming soon';
+const heroTrust = MAC_AVAILABLE ? trust : 'Coming soon for macOS 14+ · The web app is free to use today';
+const hidden = MAC_AVAILABLE ? hide : [...hide, 'pricing'];
+---
+
+<Hero eyebrow={eyebrow} badge={heroBadge} title={title} sub={sub} primary={heroPrimary} secondary={heroSecondary} trust={heroTrust} media>
+  <img src="/images/mac-overlay-hero.png" alt={`${APP_NAME} floating over a video call, visible only to the presenter`} width="1200" height="750" fetchpriority="high" />
+</Hero>
+{!hidden.includes('marquee') && <LogoMarquee />}
+<VideoEmbed videoId={videoId} title={title} />
+<AudienceGrid items={audience} />
+<FeatureShowcase />
+{!hidden.includes('threeWays') && <ThreeWaysToScroll />}
+{!hidden.includes('reviews') && <ReviewsWall filter="mac" />}
+{
+  !hidden.includes('pricing') && (
+    <section id="pricing" class="container block">
+      <div class="section-head">
+        <h2>Simple pricing</h2>
+        <p>One licence, up to three Macs.</p>
+      </div>
+      <PricingTable compact />
+    </section>
+  )
+}
+{
+  howTo && (
+    <section class="container block howto">
+      <h2>{howTo.name}</h2>
+      <ol class="card">
+        {howTo.steps.map((s) => (
+          <li>{s}</li>
+        ))}
+      </ol>
+    </section>
+  )
+}
+<FAQ items={faqs} />
+<CTASection headline={footerHeadline} primary={footerPrimary} secondary={footerSecondary} />
+<p class="container platforms muted">Mac — you're here · <a href="/web/">Free web app →</a></p>
+
+<style>
+  .howto ol {
+    padding-left: 2.5rem;
+    max-width: 44rem;
+  }
+  .howto li + li {
+    margin-top: 0.5rem;
+  }
+  .platforms {
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+</style>

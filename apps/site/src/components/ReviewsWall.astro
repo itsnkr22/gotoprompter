@@ -1,0 +1,136 @@
+---
+import { APP_NAME, supportMailto } from '../brand';
+import data from '../data/reviews.json';
+
+interface Review {
+  id: string;
+  name: string;
+  source: 'web' | 'mac' | 'email';
+  rating?: number;
+  title?: string;
+  text: string;
+  date: string;
+  lang?: string;
+  original?: string;
+}
+interface Props {
+  filter?: 'web' | 'mac' | 'all';
+  initial?: number;
+}
+const { filter = 'all', initial = 8 } = Astro.props;
+const reviews = (data.reviews as Review[]).filter((r) => filter === 'all' || r.source === filter);
+---
+
+<section class="reviews container block">
+  <h2>What people say</h2>
+  {
+    reviews.length === 0 ? (
+      <div class="card empty">
+        <h3>Be the first to review</h3>
+        <p class="muted">We just launched. If {APP_NAME} saved you a take, tell us in one line and we'll put it here.</p>
+        <a class="btn btn-secondary" href={supportMailto('Review')}>Send a review</a>
+      </div>
+    ) : (
+      <>
+        <div class="wall">
+          {reviews.map((r, i) => (
+            <article class={`card ${i >= initial ? 'review-extra' : ''}`}>
+              <header>
+                <span class="avatar" aria-hidden="true">{r.name.charAt(0)}</span>
+                <div>
+                  <strong>{r.name}</strong>
+                  {r.rating && (
+                    <span class="stars" aria-label={`${r.rating} out of 5 stars`}>
+                      {'★'.repeat(r.rating)}
+                    </span>
+                  )}
+                </div>
+              </header>
+              {r.title && <p class="title">{r.title}</p>}
+              <p>“{r.text}”</p>
+              {r.original && (
+                <details>
+                  <summary>Translated from {r.lang} · Show original</summary>
+                  <p class="muted">{r.original}</p>
+                </details>
+              )}
+            </article>
+          ))}
+        </div>
+        {reviews.length > initial && (
+          <button type="button" class="btn btn-secondary reviews-toggle">
+            Show more reviews
+          </button>
+        )}
+      </>
+    )
+  }
+</section>
+
+<script is:inline>
+  document.querySelectorAll('.reviews-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var wall = btn.parentElement.querySelector('.wall');
+      wall.classList.add('expanded');
+      btn.remove();
+    });
+  });
+</script>
+
+<style>
+  .wall {
+    columns: 1;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .wall {
+      columns: 2;
+    }
+  }
+  @media (min-width: 1024px) {
+    .wall {
+      columns: 3;
+    }
+  }
+  .wall article {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  .review-extra {
+    display: none;
+  }
+  .wall.expanded .review-extra {
+    display: block;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--vp-color-accent);
+    color: var(--vp-color-accent-contrast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .stars {
+    display: block;
+    color: var(--vp-color-accent);
+    font-size: 0.875rem;
+  }
+  .title {
+    font-weight: 700;
+  }
+  .empty {
+    max-width: 32rem;
+  }
+  .reviews-toggle {
+    margin-top: 1rem;
+  }
+</style>

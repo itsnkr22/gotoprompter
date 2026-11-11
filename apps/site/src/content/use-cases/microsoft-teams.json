@@ -1,0 +1,64 @@
+{
+  "slug": "microsoft-teams",
+  "name": "Microsoft Teams",
+  "platformName": "Microsoft Teams",
+  "badgeText": "Works with Teams",
+  "metaTitle": "Teleprompter for Microsoft Teams, invisible on screen share",
+  "metaDescription": "Read your script naturally in Teams meetings. A voice-following floating window that stays hidden during screen sharing and Teams recordings.",
+  "eyebrow": "Microsoft Teams",
+  "heroTitle": "The teleprompter for Microsoft Teams",
+  "heroSubtitle": "Keep your talking points in front of you during Teams calls. Follows your voice, hidden from everyone else.",
+  "heroVideoId": "",
+  "footerCtaHeadline": "Ready for your next Teams meeting?",
+  "hideSections": [],
+  "audienceItems": [
+    {
+      "icon": "briefcase",
+      "title": "Account managers",
+      "description": "running quarterly reviews with every number at hand"
+    },
+    {
+      "icon": "users",
+      "title": "Team leads",
+      "description": "presenting plans and updates in stand-ups and town halls"
+    },
+    {
+      "icon": "clipboard",
+      "title": "Trainers",
+      "description": "delivering scripted onboarding sessions"
+    },
+    {
+      "icon": "book",
+      "title": "Consultants",
+      "description": "walking clients through findings without reading from slides"
+    },
+    {
+      "icon": "globe",
+      "title": "Non-native speakers",
+      "description": "presenting in English with confidence"
+    },
+    {
+      "icon": "star",
+      "title": "Executives",
+      "description": "delivering all-hands announcements word for word"
+    }
+  ],
+  "faqOverrides": {
+    "screen-sharing": {
+      "q": "Will the teleprompter appear in a Teams screen share or recording?",
+      "a": "No. macOS excludes the window from capture, so Teams screen sharing and Teams recordings never include it."
+    }
+  },
+  "extraFaqs": [
+    {
+      "id": "teams-new",
+      "q": "Does it work with the new Teams app and Teams in the browser?",
+      "a": "Yes. The exclusion happens at the operating-system level, so it applies to the desktop app and to Teams in any browser."
+    },
+    {
+      "id": "how-to",
+      "q": "How do I use a teleprompter with Microsoft Teams?",
+      "a": "<ol><li>Open {{APP_NAME}} from the menu bar and start your script from the clipboard.</li><li>Place the window near your camera and set the opacity you like.</li><li>Join the Teams meeting and share your screen when needed.</li><li>Speak; the script keeps pace with you.</li></ol>"
+    }
+  ]
+}

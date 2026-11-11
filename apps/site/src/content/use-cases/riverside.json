@@ -1,0 +1,64 @@
+{
+  "slug": "riverside",
+  "name": "Riverside",
+  "platformName": "Riverside",
+  "badgeText": "Works with Riverside",
+  "metaTitle": "Teleprompter for Riverside podcast and video recording",
+  "metaDescription": "Read scripted intros, ad reads and interview questions on Riverside with a floating teleprompter that follows your voice and stays out of the recording.",
+  "eyebrow": "Riverside",
+  "heroTitle": "The teleprompter for Riverside sessions",
+  "heroSubtitle": "Scripted intros, ad reads and question lists, right next to your camera. Follows your voice, invisible to the recording.",
+  "heroVideoId": "",
+  "footerCtaHeadline": "Ready for a cleaner episode?",
+  "hideSections": ["marquee"],
+  "audienceItems": [
+    {
+      "icon": "mic",
+      "title": "Podcast hosts",
+      "description": "reading intros, outros and sponsor reads at a natural pace"
+    },
+    {
+      "icon": "users",
+      "title": "Interviewers",
+      "description": "keeping the question list in view without looking down"
+    },
+    {
+      "icon": "video",
+      "title": "Video podcasters",
+      "description": "keeping eye contact with the lens"
+    },
+    {
+      "icon": "briefcase",
+      "title": "Marketing teams",
+      "description": "recording branded series consistently"
+    },
+    {
+      "icon": "globe",
+      "title": "Multilingual shows",
+      "description": "recording segments in more than one language"
+    },
+    {
+      "icon": "book",
+      "title": "Educators",
+      "description": "recording course modules in Riverside's studio"
+    }
+  ],
+  "faqOverrides": {
+    "screen-sharing": {
+      "q": "Will the prompter be visible in my Riverside recording?",
+      "a": "No. Riverside records your camera feed and, if you share it, your screen through macOS — the prompter is excluded from screen capture and is never part of the camera image."
+    }
+  },
+  "extraFaqs": [
+    {
+      "id": "riverside-audio",
+      "q": "Will my microphone pick up anything from the app?",
+      "a": "No. The app only listens; it never plays audio. Use the same mic for Riverside and for voice scrolling, or pick a different input in Settings → Audio."
+    },
+    {
+      "id": "how-to",
+      "q": "How do I use a teleprompter with Riverside?",
+      "a": "<ol><li>Load your intro or question list into {{APP_NAME}} from the clipboard.</li><li>Place the window right under your camera.</li><li>Join your Riverside studio and start recording.</li><li>Read naturally; backtrack or skip and it follows.</li></ol>"
+    }
+  ]
+}

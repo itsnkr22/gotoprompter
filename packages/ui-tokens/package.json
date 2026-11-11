@@ -1,0 +1,31 @@
+{
+  "name": "@gotoprompter/ui-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Colour and typography tokens shared by apps/web and apps/site (JSON -> CSS custom properties).",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./tokens.json": "./src/tokens.json"
+  },
+  "files": [
+    "dist",
+    "src/tokens.json"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@gotoprompter/config": "workspace:*",
+    "typescript": "~6.0.3",
+    "vitest": "^5.1.0"
+  }
+}

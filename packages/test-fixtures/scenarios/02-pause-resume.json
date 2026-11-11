@@ -1,0 +1,41 @@
+{
+  "script": "First we measure the boards twice.\nThen we cut them once.\nFinally we sand every edge smooth.",
+  "events": [
+    {
+      "transcript": "first"
+    },
+    {
+      "transcript": "first we"
+    },
+    {
+      "transcript": "first we measure"
+    },
+    {
+      "transcript": "first we measure the"
+    },
+    {
+      "transcript": "first we measure the boards"
+    },
+    {
+      "transcript": "first we measure the boards twice"
+    },
+    {
+      "transcript": ""
+    },
+    {
+      "transcript": "um"
+    },
+    {
+      "transcript": "then"
+    },
+    {
+      "transcript": "then we cut"
+    },
+    {
+      "transcript": "then we cut them once"
+    },
+    {
+      "transcript": "finally we sand"
+    }
+  ]
+}

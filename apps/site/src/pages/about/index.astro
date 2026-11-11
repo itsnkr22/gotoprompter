@@ -1,0 +1,27 @@
+---
+import { APP_NAME, GITHUB_REPO_URL, SUPPORT_EMAIL } from '../../brand';
+import about from '../../data/about.json';
+import Legal from '../../layouts/Legal.astro';
+---
+
+<Legal title="About" description={`Why ${APP_NAME} exists, what's free and what isn't, and who makes it.`} wide>
+  <h1 slot="heading">Why {APP_NAME} exists</h1>
+  <p>Most teleprompters make you keep up with a motor. We wanted one that keeps up with us — and one that stays out of the screen share. So we built the engine that matches your speech against the whole script, put it in a free web app for everyone, and wrapped it in a Mac app for people who present through their screen.</p>
+  <h2>What's free and what isn't</h2>
+  <ul>
+    <li><strong>The web app</strong> is free and open source under the MIT licence. Use it, fork it, run your own copy.</li>
+    <li><strong>The Mac app</strong> is free for three custom scripts plus a demo script.</li>
+    <li><strong>Pro</strong> (yearly) and <strong>Lifetime</strong> (one-time) remove the script limit. Same engine, same features.</li>
+  </ul>
+  <h2>Privacy by design</h2>
+  <ul>
+    <li>No accounts, anywhere.</li>
+    <li>Scripts stay on your device; speech recognition runs in your browser or on your Mac.</li>
+    <li>The Mac app talks to the internet only to check your license and look for updates.</li>
+    <li>Site analytics are cookie-less and anonymous.</li>
+  </ul>
+  <h2>Who makes it</h2>
+  <p>{APP_NAME} is built by {about.OWNER_NAME}. The web app's code is on <a href={GITHUB_REPO_URL} rel="noopener">GitHub</a>; bug reports and pull requests are welcome.</p>
+  <h2>Say hello</h2>
+  <p>Questions, ideas, or a story about a take it saved: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
+</Legal>

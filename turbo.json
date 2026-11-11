@@ -1,0 +1,33 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".astro/**"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "@gotoprompter/site#test": {
+      "dependsOn": ["build"]
+    },
+    "@gotoprompter/site#build": {
+      "dependsOn": ["@gotoprompter/web#build", "^build"],
+      "outputs": ["dist/**", ".astro/**"],
+      "env": ["PUBLIC_API_BASE", "PUBLIC_UMAMI_SRC", "PUBLIC_UMAMI_WEBSITE_ID"]
+    },
+    "@gotoprompter/web#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "env": ["VITE_API_BASE", "VITE_E2E", "VITE_UMAMI_SRC", "VITE_UMAMI_WEBSITE_ID"]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "voice-scrolling",
+    "q": "How does voice scrolling work?",
+    "a": "{{APP_NAME}} uses Apple's on-device speech recognition to hear what you say and match it against your script in real time. {{FAQ_OFFLINE_OR_PRIVACY}}"
+  },
+  {
+    "id": "screen-sharing",
+    "q": "Will the window show up during screen sharing or recordings?",
+    "a": "No. The window is excluded from screen capture by macOS, so it stays invisible in {{PLATFORM_NAME}} and every other conferencing or recording app, including QuickTime, OBS and Loom. This is a system-level exclusion, not a trick that can break mid-call. We still recommend a 10-second test before an important session."
+  },
+  {
+    "id": "apps-support",
+    "q": "Which apps does it work with?",
+    "a": "All of them. {{APP_NAME}} runs alongside {{PLATFORM_NAME}} and any other app on your Mac — conferencing, screen recorders, presentation tools, streaming software. It needs no plug-ins and no account authorisation."
+  },
+  {
+    "id": "script-storage",
+    "q": "Where do I write my scripts?",
+    "a": "Wherever you already write — Google Docs, Apple Notes, Notion, Obsidian. Copy the text, click Start from clipboard in the menu bar, and the window opens with the script loaded. The app also keeps your last 100 scripts."
+  },
+  {
+    "id": "stage-directions",
+    "q": "Can I add notes I don't want to read out loud?",
+    "a": "Yes. Put them in square brackets — [pause], [smile], [switch slide]. They're displayed in a different style and skipped by voice tracking."
+  },
+  {
+    "id": "foreign-languages",
+    "q": "What if my script mixes languages?",
+    "a": "Put the foreign words in square brackets and recognition skips them, so the sync holds while you keep speaking your main language. For a whole script in another language, the app detects it and switches recognizers automatically."
+  },
+  {
+    "id": "jump-scrolling",
+    "q": "Can I jump to a specific part of the script?",
+    "a": "Yes. Click any word and the prompter continues from exactly there. Voice commands (go back, go next, go start, go finish) do the same hands-free."
+  },
+  {
+    "id": "loud-environments",
+    "q": "Does background noise break it?",
+    "a": "Normal office noise, keyboard sounds and other people on the call are fine. Very loud environments can confuse any speech recognizer; a headset or a directional mic fixes it, and Sound or Constant scrolling are there as fallbacks."
+  },
+  {
+    "id": "multiple-screens",
+    "q": "Does it work with multiple displays?",
+    "a": "Yes. Put the window on any display. With extended displays it appears only on the one you place it on. With mirrored displays it appears on both — so for calls where you share a screen, use extend mode."
+  },
+  {
+    "id": "data-privacy",
+    "q": "Is my data private?",
+    "a": "Yes. Scripts and audio never leave your Mac. The app contacts the internet only to validate your license and check for updates."
+  },
+  {
+    "id": "supported-models",
+    "q": "Which Macs are supported?",
+    "a": "Any Mac running macOS 14 Sonoma or later, Apple silicon or Intel."
+  },
+  {
+    "id": "pricing",
+    "q": "Is the app free?",
+    "a": "It's free to use with up to 3 custom scripts, each with unlimited words and sessions, plus a demo script. If you need more scripts, upgrade to Pro (yearly) or buy Lifetime once."
+  },
+  {
+    "id": "read-naturally",
+    "q": "How do I read naturally on a video call?",
+    "a": "Put the window as close to your webcam as possible, make the font big enough to read at a glance, set the opacity so the call stays visible behind it, and let voice scrolling do the work so your hands and eyes stay still."
+  },
+  {
+    "id": "account",
+    "q": "Do I need an account or a plug-in for {{PLATFORM_NAME}}?",
+    "a": "No. {{APP_NAME}} is a standalone Mac app. There is nothing to connect, authorise or install inside {{PLATFORM_NAME}}."
+  }
+]

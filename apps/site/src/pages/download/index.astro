@@ -1,0 +1,79 @@
+---
+import { APP_NAME } from '../../brand';
+import DownloadCard from '../../components/DownloadCard.astro';
+import Base from '../../layouts/Base.astro';
+import { MAC_AVAILABLE, MAC_NOTIFY_HREF, MAC_NOTIFY_LABEL } from '../../launch';
+---
+
+{
+  !MAC_AVAILABLE && (
+    <Base title="Mac app coming soon" description={`${APP_NAME} for Mac is coming soon. The free web app works in any browser today.`} noindex>
+      <section class="container block soon">
+        <p class="eyebrow">{APP_NAME} for macOS</p>
+        <h1>The Mac app is coming soon</h1>
+        <p class="muted">There's nothing to download yet. The free web app scrolls with your voice in any browser today, and you can install it like an app.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="/app/" data-umami-event="download-soon-web">Open the free web app</a>
+          <a class="btn btn-secondary" href={MAC_NOTIFY_HREF} data-umami-event="download-soon-notify">{MAC_NOTIFY_LABEL}</a>
+        </div>
+        <p><a href="/mac/">See what the Mac app will do →</a></p>
+      </section>
+    </Base>
+  )
+}
+{
+  MAC_AVAILABLE && (
+
+<Base title="Download for Mac" description={`Download ${APP_NAME} for macOS 14 or later. Notarised, auto-updating, free for three scripts.`}>
+  <section class="container block">
+    <p class="eyebrow">{APP_NAME} for macOS</p>
+    <h1>Download for Mac</h1>
+    <DownloadCard />
+  </section>
+  <section class="container block info">
+    <div class="grid-2">
+      <div class="card">
+        <h2>Install</h2>
+        <ol>
+          <li>Open the downloaded .dmg</li>
+          <li>Drag {APP_NAME} into Applications</li>
+          <li>Launch it from the menu bar — look for the icon at the top right of your screen.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h2>First run</h2>
+        <p class="muted">On first launch macOS asks for Microphone and Speech Recognition access. Both run on your device; nothing is uploaded.</p>
+      </div>
+      <div class="card">
+        <h2>Having trouble opening it?</h2>
+        <p class="muted">{APP_NAME} is signed with an Apple Developer ID and notarised by Apple, so it opens without warnings. If you see "cannot be opened", the download was interrupted — download it again. We never ask you to bypass Gatekeeper.</p>
+      </div>
+      <div class="card">
+        <h2>Requirements</h2>
+        <p class="muted">macOS 14 Sonoma or later · Apple silicon or Intel · about 10 MB on disk · microphone</p>
+        <h2>Updates</h2>
+        <p class="muted">The app checks for updates once a day and installs them with one click. You can also check from the menu bar.</p>
+      </div>
+    </div>
+    <p><a href="/changelog/">Release history →</a></p>
+    <p class="muted">Prefer not to install anything? <a href="/app/">Use the free web app.</a></p>
+  </section>
+</Base>
+  )
+}
+
+<style>
+  .info h2 {
+    font-size: 1.25rem;
+  }
+  .soon .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .info ol {
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,125 @@
+{
+  "script": "今日は晴れです。[間]明日も晴れるでしょう。",
+  "options": {
+    "locale": "ja-JP",
+    "segmenterDependent": true
+  },
+  "events": [
+    {
+      "transcript": "今日 は"
+    },
+    {
+      "transcript": "今日 は 晴れ です"
+    },
+    {
+      "transcript": "明日 も 晴れる"
+    },
+    {
+      "transcript": "明日 も 晴れる でしょう"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "今日",
+      "clean": "今日",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "は",
+      "clean": "は",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "晴れ",
+      "clean": "晴れ",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "です。",
+      "clean": "です",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 3
+    },
+    {
+      "raw": "[間]",
+      "clean": "間",
+      "kind": "word",
+      "skip": true,
+      "isNote": true,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "明日",
+      "clean": "明日",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "も",
+      "clean": "も",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "晴れる",
+      "clean": "晴れる",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "で",
+      "clean": "で",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "しょう。",
+      "clean": "しょう",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 9
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    6,
+    7
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near"
+  ]
+}

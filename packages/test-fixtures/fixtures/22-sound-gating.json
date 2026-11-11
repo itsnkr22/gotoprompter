@@ -1,0 +1,402 @@
+{
+  "script": "Steady scrolling moves these thirty little words along at a fixed pace so the reader can follow the line without ever touching the keyboard or the mouse at all today.",
+  "options": {
+    "autoscroll": {
+      "mode": "sound",
+      "scrollSpeed": 3.5
+    }
+  },
+  "events": [
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    },
+    {
+      "tick": 100,
+      "sound": true
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Steady",
+      "clean": "steady",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "scrolling",
+      "clean": "scrolling",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "moves",
+      "clean": "moves",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "these",
+      "clean": "these",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "thirty",
+      "clean": "thirty",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "little",
+      "clean": "little",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "words",
+      "clean": "words",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "along",
+      "clean": "along",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "at",
+      "clean": "at",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "fixed",
+      "clean": "fixed",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "pace",
+      "clean": "pace",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "so",
+      "clean": "so",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "reader",
+      "clean": "reader",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "can",
+      "clean": "can",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "follow",
+      "clean": "follow",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "line",
+      "clean": "line",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "without",
+      "clean": "without",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "ever",
+      "clean": "ever",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "touching",
+      "clean": "touching",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "keyboard",
+      "clean": "keyboard",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 23
+    },
+    {
+      "raw": "or",
+      "clean": "or",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 24
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 25
+    },
+    {
+      "raw": "mouse",
+      "clean": "mouse",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 26
+    },
+    {
+      "raw": "at",
+      "clean": "at",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 27
+    },
+    {
+      "raw": "all",
+      "clean": "all",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 28
+    },
+    {
+      "raw": "today.",
+      "clean": "today",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 29
+    }
+  ],
+  "expectIndexAfterEach": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4
+  ],
+  "expectResults": [
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:advanced",
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:advanced",
+    "tick:held",
+    "tick:held",
+    "tick:advanced",
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:held",
+    "tick:advanced",
+    "tick:held",
+    "tick:held"
+  ]
+}

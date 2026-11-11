@@ -1,0 +1,20 @@
+{
+  "script": "one two three four five six",
+  "options": {
+    "lookaheadWords": 1
+  },
+  "events": [
+    {
+      "transcript": "three"
+    },
+    {
+      "transcript": "one"
+    },
+    {
+      "transcript": "one three"
+    },
+    {
+      "transcript": "one three two"
+    }
+  ]
+}

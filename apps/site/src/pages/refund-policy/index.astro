@@ -1,0 +1,13 @@
+---
+import { APP_NAME, SUPPORT_EMAIL } from '../../brand';
+import Legal from '../../layouts/Legal.astro';
+const updated = 'November 5, 2026';
+---
+
+<Legal title="Refund policy" description={`14-day money-back guarantee on ${APP_NAME} Pro and Lifetime. How refunds work and who processes them.`}>
+  <p><strong>14-day money-back guarantee.</strong> If {APP_NAME} Pro or Lifetime isn't right for you, email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> within 14 days of purchase with the email address you used at checkout. We'll refund you in full, no questions asked. Refunds are processed by our merchant of record, Dodo Payments, and usually appear within 5–10 business days depending on your bank.</p>
+  <p><strong>Subscriptions.</strong> Cancel any time from the billing portal; you keep access until the end of the paid period. Renewals are refundable within 14 days of the renewal charge.</p>
+  <p><strong>After a refund</strong> the license key is disabled and the app returns to the free tier. Your scripts stay on your Mac.</p>
+  <p><strong>The web app</strong> is free, so nothing to refund there.</p>
+  <p class="muted">Last updated: {updated}.</p>
+</Legal>

@@ -1,0 +1,366 @@
+{
+  "script": "Good morning and welcome back to the channel. Today we are building a small bookshelf from scrap wood. Grab a coffee and let's get started.",
+  "events": [
+    {
+      "transcript": "good"
+    },
+    {
+      "transcript": "good morning"
+    },
+    {
+      "transcript": "good morning and"
+    },
+    {
+      "transcript": "good morning and welcome"
+    },
+    {
+      "transcript": "good morning and welcome back"
+    },
+    {
+      "transcript": "good morning and welcome back to"
+    },
+    {
+      "transcript": "good morning and welcome back to the"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a coffee"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a coffee and"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a coffee and lets"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a coffee and lets get"
+    },
+    {
+      "transcript": "good morning and welcome back to the channel today we are building a small bookshelf from scrap wood grab a coffee and lets get started"
+    },
+    {
+      "transcript": "anything else"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Good",
+      "clean": "good",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "morning",
+      "clean": "morning",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "welcome",
+      "clean": "welcome",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "back",
+      "clean": "back",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 4
+    },
+    {
+      "raw": "to",
+      "clean": "to",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "channel.",
+      "clean": "channel",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 7
+    },
+    {
+      "raw": "Today",
+      "clean": "today",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "are",
+      "clean": "are",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 10
+    },
+    {
+      "raw": "building",
+      "clean": "building",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "small",
+      "clean": "small",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "bookshelf",
+      "clean": "bookshelf",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "from",
+      "clean": "from",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "scrap",
+      "clean": "scrap",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "wood.",
+      "clean": "wood",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 17
+    },
+    {
+      "raw": "Grab",
+      "clean": "grab",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 18
+    },
+    {
+      "raw": "a",
+      "clean": "a",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "coffee",
+      "clean": "coffee",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "and",
+      "clean": "and",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "let's",
+      "clean": "lets",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "get",
+      "clean": "get",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 23
+    },
+    {
+      "raw": "started.",
+      "clean": "started",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 24
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    25
+  ],
+  "expectResults": [
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "near",
+    "finished"
+  ]
+}

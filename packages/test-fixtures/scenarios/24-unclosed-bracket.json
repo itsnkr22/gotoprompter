@@ -1,0 +1,11 @@
+{
+  "script": "[note that never closes and keeps going\nacross lines",
+  "events": [
+    {
+      "transcript": "note that never"
+    },
+    {
+      "transcript": "across lines"
+    }
+  ]
+}
