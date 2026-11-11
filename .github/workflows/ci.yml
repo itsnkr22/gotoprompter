@@ -33,6 +33,10 @@ jobs:
     name: Web app e2e (Playwright)
     runs-on: ubuntu-latest
     needs: js
+    # Microsoft's Playwright image ships WebKit/Chromium with every system library they need, so the
+    # job does not depend on the Ubuntu apt mirrors. Keep the tag in step with apps/web's @playwright/test.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
@@ -42,7 +46,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @gotoprompter/prompter-core build && pnpm --filter @gotoprompter/ui-tokens build
-      - run: pnpm --filter @gotoprompter/web exec playwright install --with-deps chromium webkit
       - run: pnpm --filter @gotoprompter/web e2e
       - name: Print Playwright page snapshots for failed tests
         if: failure()
@@ -73,7 +76,12 @@ jobs:
         env:
           PUBLIC_API_BASE: http://localhost:8788
           VITE_API_BASE: http://localhost:8788
-      - run: pnpm --filter @gotoprompter/site exec playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        # The apt step behind --with-deps sometimes cannot reach the Ubuntu mirrors and hangs;
+        # the runner image already ships most browser libraries, so fall back to the browsers alone.
+        run: |
+          timeout 600 pnpm --filter @gotoprompter/site exec playwright install --with-deps chromium \
+            || pnpm --filter @gotoprompter/site exec playwright install chromium
       - run: pnpm --filter @gotoprompter/site test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()
