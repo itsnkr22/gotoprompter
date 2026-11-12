@@ -36,6 +36,9 @@ const ROUTES = [
   '/404.html',
   '/rss.xml',
   '/llms.txt',
+  '/llms-full.txt',
+  '/ai.txt',
+  '/index.md',
   '/robots.txt',
   '/sitemap-index.xml',
 ];
@@ -183,3 +186,65 @@ test(
     assert.doesNotMatch(read('llms.txt'), /\/download\//);
   },
 );
+
+test('AI files: every public page has a Markdown version, listed in llms.txt and llms-full.txt', () => {
+  const llms = read('llms.txt');
+  const full = read('llms-full.txt');
+  const ai = read('ai.txt');
+  const paths = [...read('sitemap-0.xml').matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map((m) => new URL(m[1]).pathname)
+    .filter((p) => p !== '/app/');
+  assert.ok(paths.length >= 20);
+  for (const p of paths) {
+    const md = p === '/' ? 'index.md' : `${p.slice(1, -1)}.md`;
+    const mdUrl = `https://gotoprompter.app/${md}`;
+    assert.ok(existsSync(`${dist}${md}`), `missing ${md}`);
+    const text = read(md);
+    assert.match(text, /^# \S/, `${md} starts with a title`);
+    assert.ok(text.includes(`Canonical: https://gotoprompter.app${p}\n`), `${md} canonical`);
+    assert.doesNotMatch(
+      text,
+      /<\/?(div|span|section|details|summary|button|svg)\b|undefined|\[object /,
+      `${md} is clean`,
+    );
+    assert.ok(llms.includes(`(${mdUrl})`), `llms.txt lists ${md}`);
+    assert.ok(
+      full.includes(`<!-- source: https://gotoprompter.app${p} -->`),
+      `llms-full.txt has ${p}`,
+    );
+    assert.ok(
+      page(p).includes(`<link rel="alternate" type="text/markdown" href="${mdUrl}">`),
+      `${p} links its Markdown version`,
+    );
+  }
+  assert.match(llms, /^# gotoprompter\n\n> /);
+  for (const h of [
+    'Core pages',
+    'Support answers',
+    'Articles',
+    'Machine-readable',
+    'Guidance for AI assistants',
+    'Optional',
+  ])
+    assert.match(llms, new RegExp(`^## ${h}$`, 'm'), `llms.txt has ${h}`);
+  assert.match(llms, /\(https:\/\/gotoprompter\.app\/support\/#activate-license\)/);
+  for (const s of [
+    '[identity]',
+    '[permissions]',
+    '[restrictions]',
+    '[attribution]',
+    '[scope]',
+    '[training]',
+    '[contact]',
+    '[metadata]',
+  ])
+    assert.ok(ai.includes(`\n${s}\n`), `ai.txt has ${s}`);
+  assert.match(read('robots.txt'), /llms\.txt/);
+  for (const p of ['/checkout/success/', '/license/portal/'])
+    assert.ok(!llms.includes(`https://gotoprompter.app${p}`), `llms.txt leaves out ${p}`);
+});
+
+test('changelog entries render as lists', () => {
+  for (const [, after] of page('/changelog/').matchAll(/<\/h3>\s*(<\w+)/g))
+    assert.equal(after, '<ul');
+});

@@ -18,7 +18,7 @@ const tabs = parts.map((part) => {
   const nl = part.indexOf('\n');
   const title = part.slice(0, nl).trim();
   const id = idFor(title);
-  const body = part.slice(nl + 1).replace(/^### (.+)$/gm, (_m, h: string) => `<h3 id="${id}-${slug(h.split(' — ')[0] ?? h)}">${h}</h3>`);
+  const body = part.slice(nl + 1).replace(/^### (.+)$/gm, (_m, h: string) => `<h3 id="${id}-${slug(h.split(' — ')[0] ?? h)}">${h}</h3>\n`);
   return { id, title, html: marked.parse(body) as string };
 });
 ---

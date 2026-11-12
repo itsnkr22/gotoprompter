@@ -27,6 +27,7 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !page.includes('/checkout/success/') &&
+        !page.includes('/license/portal/') && // noindex
         !page.includes('/404') &&
         !macOnly.some((p) => new URL(page).pathname.startsWith(p)),
       changefreq: 'weekly',

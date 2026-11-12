@@ -1,3 +1,9 @@
+# robots.txt for https://gotoprompter.app
+# Keep in sync with https://gotoprompter.app/llms.txt and https://gotoprompter.app/ai.txt.
+# Site map for language models: https://gotoprompter.app/llms.txt
+# AI usage policy: https://gotoprompter.app/ai.txt
+# Markdown versions of public pages: append .md to any page URL without the trailing slash, e.g. https://gotoprompter.app/pricing.md
+
 User-agent: *
 Allow: /
 Disallow: /checkout/
