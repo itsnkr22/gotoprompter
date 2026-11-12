@@ -6,11 +6,17 @@ import CTASection from '../components/CTASection.astro';
 import FAQ from '../components/FAQ.astro';
 import Hero from '../components/Hero.astro';
 import HowItWorks from '../components/HowItWorks.astro';
+import IntegrationLinks from '../components/IntegrationLinks.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import { getCollection } from 'astro:content';
 import ReviewsWall from '../components/ReviewsWall.astro';
 import homeFaqs from '../data/home-faqs.json';
 import Base from '../layouts/Base.astro';
 import { softwareApp } from '../lib/seo';
 
+const posts = (await getCollection('blog', ({ data }) => !(import.meta.env.PROD && data.draft))).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 const faqs = homeFaqs.map((f) => ({ id: f.id, q: fillBrand(f.q), a: fillBrand(f.a) }));
 const offers = (pricing.plans as { name: string; price: number }[]).map((p) => ({ name: p.name, price: p.price }));
 const ld = [
@@ -42,11 +48,12 @@ const macBullets = [
   home
   title="Teleprompter that follows your voice"
   aiSummary={`Home page of ${APP_NAME}, a voice-following teleprompter. The free, open-source web app scrolls as you speak; the Mac app ${MAC_AVAILABLE ? 'floats' : '(coming soon, not yet available) will float'} over every app and ${MAC_AVAILABLE ? 'stays' : 'stay'} hidden from screen sharing and recordings.`}
-  description="A teleprompter that scrolls as you speak. Free open-source web app, plus a Mac app that floats over every app and stays invisible in Zoom, Meet, Teams and recordings."
+  description={`A teleprompter that scrolls as you speak. Free, open-source web app, plus a Mac app${MAC_AVAILABLE ? '' : ' (coming soon)'} that stays hidden on Zoom, Meet and Teams.`}
   jsonLd={ld}
 >
   <Hero
     eyebrow="Voice-following teleprompter"
+    eyebrowInTitle
     title="Read your script. Keep your eyes on the lens."
     sub={`${APP_NAME} listens as you speak and scrolls to where you are — pause, ad-lib, skip ahead or go back, it follows. Free in your browser. Invisible on Mac screen shares.`}
     primary={{ label: 'Open the free web app', href: '/app/', event: 'home-hero-open-app' }}
@@ -76,6 +83,7 @@ const macBullets = [
         <div class="links">
           <a class="btn btn-primary" href="/mac/" data-umami-event="home-cta-mac-app">See the Mac app →</a>
           {MAC_AVAILABLE ? <a href="/download/">Download</a> : <a href={MAC_NOTIFY_HREF}>{MAC_NOTIFY_LABEL}</a>}
+          <a href="/pricing/">Pricing</a>
         </div>
       </div>
     </div>
@@ -88,8 +96,13 @@ const macBullets = [
       { title: 'Talk', text: 'The script follows your words. Look at the camera, not the screen.' },
     ]}
   />
+  <IntegrationLinks />
   <ReviewsWall filter="all" />
   <FAQ items={faqs} />
+  <div class="container guides">
+    <RelatedArticles posts={posts.slice(0, 3)} heading="Teleprompter guides" />
+    <p><a href="/blog/">All guides and comparisons →</a></p>
+  </div>
   <CTASection
     headline="Stop memorising. Start recording."
     primary={{ label: 'Open the web app', href: '/app/', event: 'home-footer-open-app' }}
@@ -114,6 +127,9 @@ const macBullets = [
   }
   .product li + li {
     margin-top: 0.35rem;
+  }
+  .guides {
+    padding-block: 1rem 2rem;
   }
   .links {
     display: flex;

@@ -3,14 +3,15 @@ import { formatDate } from '../lib/format';
 
 interface Props {
   posts: { id: string; data: { title: string; description: string; date: Date } }[];
+  heading?: string;
 }
-const { posts } = Astro.props;
+const { posts, heading = 'Related articles' } = Astro.props;
 ---
 
 {
   posts.length > 0 && (
     <section class="related">
-      <h2>Related articles</h2>
+      <h2>{heading}</h2>
       <ul>
         {posts.map((p) => (
           <li class="card">

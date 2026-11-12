@@ -7,7 +7,7 @@
 //   • llms-full.txt    — every public page's Markdown in one document
 //   • ai.txt           — the AI usage policy: permissions, restrictions, attribution
 // Public pages are the ones in the sitemap, so the scope here matches robots.txt and
-// sitemap-index.xml. noindex and non-sitemap pages get no Markdown version at all. Each public page
+// sitemap.xml. noindex and non-sitemap pages get no Markdown version at all. Each public page
 // also gets <link rel="alternate" type="text/markdown">.
 // Usage: node scripts/ai-files.mjs dist
 import {
@@ -91,7 +91,14 @@ for (const file of htmlFiles) {
   // The page's h1 is its title, except on the homepage whose h1 is a slogan: use <title> there.
   const h1 = main.querySelector('h1');
   const docTitle = doc.querySelector('title').text.trim();
-  const title = path === '/' || !h1 ? docTitle : h1.text.replace(/\s+/g, ' ').trim();
+  // A hero kicker inside the h1 (Hero eyebrowInTitle) reads as "Kicker: Headline".
+  const kicker = h1?.querySelector('.kicker');
+  const h1Text = (
+    kicker ? `${kicker.text.trim()}: ${h1.text.replace(kicker.text, '')}` : (h1?.text ?? '')
+  )
+    .replace(/\s+/g, ' ')
+    .trim();
+  const title = path === '/' || !h1 ? docTitle : h1Text;
   if (h1 && path === '/') h1.tagName = 'p';
   else h1?.remove();
   // A lede that repeats the meta description is already in the header quote.
@@ -282,7 +289,7 @@ const more = section(
 const machine = section('Machine-readable', [
   `- [Full content](${origin}/llms-full.txt): every public page above as one Markdown document`,
   `- [Markdown catalog](${origin}/api/md/_catalog/): every page that has a Markdown version, with its canonical URL`,
-  `- [Sitemap](${origin}/sitemap-index.xml): canonical HTML URLs`,
+  `- [Sitemap](${origin}/sitemap.xml): canonical HTML URLs`,
   `- [AI usage policy](${origin}/ai.txt): permissions, restrictions and attribution`,
   `- [Pricing data](${origin}/pricing.json): ${MAC ? 'Mac app plans' : 'planned Mac app plans (not on sale yet)'}, prices, features, activation limit and refund window as JSON`,
   `- [Blog feed](${origin}/rss.xml): RSS of published articles`,
@@ -348,7 +355,7 @@ const full = [
   `Generated: ${today}`,
   `Canonical HTML pages are the source of truth; cite them, not this file. ${MAC ? 'Prices and versions change, so re-check live pages before quoting them.' : 'The Mac app is coming soon and is not available yet; its prices are planned, not current offers.'}`,
   '',
-  `- Pages: all ${fullOrder.length} public pages from ${origin}/sitemap-index.xml, in the order of ${origin}/llms.txt: core pages, Mac app platform pages, help, articles, company and legal pages.`,
+  `- Pages: all ${fullOrder.length} public pages from ${origin}/sitemap.xml, in the order of ${origin}/llms.txt: core pages, Mac app platform pages, help, articles, company and legal pages.`,
   `- The web app at ${origin}/app/ is a client-side app and is described by the Web app page rather than included.`,
   '',
   ...fullOrder.flatMap((p) => [
@@ -452,7 +459,7 @@ applies_to: ${origin}/* public pages
 excludes: ${excluded.join(', ')}, /_md/, form submissions, checkout and licence actions, and the API at https://api.${APP_DOMAIN}.
 markdown: ${origin}/{path}.md for every public page (${origin}/index.md for the homepage), the same with Accept: text/markdown on the page URL, or ${origin}/api/md/{path}/; catalog at ${origin}/api/md/_catalog/. The public Markdown endpoint /api/md/ is allowed; the raw files under /_md/ are not.
 crawlers: ${origin}/robots.txt explicitly allows AI search, user-fetch and training crawlers on public pages.
-related_files: ${origin}/llms.txt, ${origin}/llms-full.txt, ${origin}/ai.txt, ${origin}/rss.xml, ${origin}/pricing.json, ${origin}/robots.txt, ${origin}/sitemap-index.xml
+related_files: ${origin}/llms.txt, ${origin}/llms-full.txt, ${origin}/ai.txt, ${origin}/rss.xml, ${origin}/pricing.json, ${origin}/robots.txt, ${origin}/sitemap.xml
 
 [training]
 ai_training: permitted for public pages, subject to this policy and robots.txt.

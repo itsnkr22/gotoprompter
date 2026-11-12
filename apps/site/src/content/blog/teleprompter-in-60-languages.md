@@ -1,6 +1,7 @@
 ---
 title: "A teleprompter in 60+ languages: how detection and recognition work"
-description: How a voice-following teleprompter detects your script's language, where recognition runs, how to handle mixed-language scripts, and when Sound mode is the better choice.
+metaTitle: "Teleprompter in 60+ languages: how it works"
+description: "How a voice-following teleprompter detects your script's language, where recognition runs, mixed-language scripts, and when Sound mode is the better choice."
 keywords: [multilingual teleprompter, teleprompter languages, speech recognition]
 date: 2026-10-29
 image: /images/blog/teleprompter-in-60-languages.jpg

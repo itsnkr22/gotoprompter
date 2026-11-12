@@ -13,15 +13,25 @@ interface Props {
   secondary?: Cta;
   trust?: string;
   media?: boolean;
+  /** Render the eyebrow inside the <h1> (same look) so the heading carries the page's keyword. */
+  eyebrowInTitle?: boolean;
 }
-const { eyebrow, badge, title, sub, primary, secondary, trust, media = false } = Astro.props;
+const { eyebrow, badge, title, sub, primary, secondary, trust, media = false, eyebrowInTitle = false } = Astro.props;
 ---
 
 <section class="hero container">
   <div class="copy">
     {badge && <span class="pill badge">{badge}</span>}
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h1>{title}</h1>
+    {eyebrow && !eyebrowInTitle && <p class="eyebrow">{eyebrow}</p>}
+    {
+      eyebrow && eyebrowInTitle ? (
+        <h1>
+          <span class="eyebrow kicker">{eyebrow}</span> {title}
+        </h1>
+      ) : (
+        <h1>{title}</h1>
+      )
+    }
     <p class="sub">{sub}</p>
     <div class="ctas">
       <a class="btn btn-primary" href={primary.href} data-umami-event={primary.event}>{primary.label}</a>
@@ -45,6 +55,12 @@ const { eyebrow, badge, title, sub, primary, secondary, trust, media = false } =
 </section>
 
 <style>
+  .kicker {
+    display: block;
+    font-family: inherit;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+  }
   .hero {
     display: grid;
     gap: 2rem;

@@ -13,6 +13,19 @@ export const organization = (): JsonLd => ({
   sameAs: [GITHUB_REPO_URL],
 });
 
+export const aboutPage = (founder: string): JsonLd => ({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: siteUrl('/about/'),
+  mainEntity: {
+    '@type': 'Organization',
+    name: APP_NAME,
+    url: siteUrl('/'),
+    founder: { '@type': 'Person', name: founder },
+    sameAs: [GITHUB_REPO_URL],
+  },
+});
+
 export const website = (): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',

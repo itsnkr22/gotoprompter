@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import JsonLd from '../components/JsonLd.astro';
+import IntegrationLinks from '../components/IntegrationLinks.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import TOC from '../components/TOC.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
@@ -17,7 +18,7 @@ interface Props {
   related: CollectionEntry<'blog'>[];
 }
 const { post, headings, tldr, faqs, related } = Astro.props;
-const { title, description, date, updated, image, imageAlt, video } = post.data;
+const { title, metaTitle, description, date, updated, image, imageAlt, video } = post.data;
 const url = `/blog/${post.id}/`;
 const ld = [
   article({ title, description, image, datePublished: isoDay(date), dateModified: updated ? isoDay(updated) : undefined, url }),
@@ -29,7 +30,7 @@ const ld = [
 ];
 ---
 
-<Base title={title} description={description} ogType="article" ogImage={`/og/blog/${post.id}.png`} jsonLd={ld}>
+<Base title={metaTitle ?? title} description={description} ogImageAlt={imageAlt} ogType="article" ogImage={`/og/blog/${post.id}.png`} jsonLd={ld}>
   <div class="container article-layout">
     <div class="main">
       <nav class="crumbs" aria-label="Breadcrumb">
@@ -56,6 +57,7 @@ const ld = [
       </div>
       {faqs.length > 0 && <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }} />}
       <RelatedArticles posts={related} />
+      <IntegrationLinks compact heading="Teleprompter setups by app" />
       <aside class="card try">
         <p>{MAC_AVAILABLE ? 'Try it: the web app is free; the Mac app is free for three scripts.' : 'Try it: the web app is free. The Mac app is coming soon.'}</p>
         <div class="ctas">

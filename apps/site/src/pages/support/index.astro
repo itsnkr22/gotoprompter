@@ -3,15 +3,16 @@ import { getCollection } from 'astro:content';
 import { APP_NAME, SUPPORT_EMAIL, fillBrand } from '../../brand';
 import SupportCenter from '../../components/SupportCenter';
 import Base from '../../layouts/Base.astro';
+import { faqPage } from '../../lib/seo';
 import type { SupportArticle } from '../../lib/support-search';
 
 const entries = await getCollection('support');
 const articles: SupportArticle[] = entries.map((e) => ({ ...e.data, question: fillBrand(e.data.question), answerHtml: fillBrand(e.data.answerHtml) }));
 ---
 
-<Base title="Support & tutorials" description="Answers about setup, voice scrolling, recording, licences and billing.">
+<Base title="Teleprompter help, support and tutorials" description={`Answers to common ${APP_NAME} questions: setting up voice scrolling, using the web and Mac apps, recording, languages, licences and billing.`} jsonLd={faqPage(articles.map((a) => ({ q: a.question, a: a.answerHtml })))}>
   <section class="container block support-page">
-    <h1>Get to know {APP_NAME} better</h1>
+    <h1>{APP_NAME} help and tutorials</h1>
     <p class="muted lede">Answers about setup, voice scrolling, recording, licences and billing.</p>
     <SupportCenter client:load articles={articles} appName={APP_NAME} supportEmail={SUPPORT_EMAIL} />
     <noscript>

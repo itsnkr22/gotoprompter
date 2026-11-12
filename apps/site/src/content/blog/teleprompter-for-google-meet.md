@@ -1,5 +1,6 @@
 ---
 title: "Teleprompter for Google Meet: a setup that stays hidden"
+metaTitle: "How to use a teleprompter on Google Meet"
 description: How to read a script on Google Meet in Chrome or Safari without participants seeing it, whether you share a tab, a window or your whole screen.
 keywords: [teleprompter google meet, screen share, read naturally on camera]
 date: 2026-11-03

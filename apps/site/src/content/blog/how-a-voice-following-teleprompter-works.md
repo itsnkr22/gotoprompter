@@ -1,5 +1,6 @@
 ---
 title: How a voice-following teleprompter actually works
+metaTitle: "How a voice-following teleprompter works"
 description: Word tracking, sound activation and fixed speed are not the same thing. What happens under the hood, why whole-script matching matters, and a one-minute test.
 keywords: [teleprompter, voice scrolling, speech recognition]
 date: 2026-11-05

@@ -34,15 +34,17 @@ const faqs = [
   { id: 'refunds', q: 'Do you offer refunds?', a: 'Yes, 14 days, no questions. See the <a href="/refund-policy/">refund policy</a>.' },
   { id: 'payment', q: 'Which payment methods are accepted?', a: 'Cards, Apple Pay and Google Pay, plus local methods depending on your country. Taxes are calculated at checkout.' },
   { id: 'discount', q: 'Is there a student or team discount?', a: 'Not yet. Email us and tell us what you need.' },
+  { id: 'web-free', q: 'Is the web teleprompter really free?', a: 'Yes. The <a href="/web/">web app</a> is free and open source, with no account and no script limit. Paid plans only apply to the <a href="/mac/">Mac app</a>.' },
+  { id: 'web-vs-mac', q: 'What does the Mac app add over the web app?', a: 'The Mac app floats over every other app and is hidden from screen sharing and recordings, for example on <a href="/mac/zoom/">Zoom</a> or <a href="/mac/google-meet/">Google Meet</a>. The web app runs in a browser tab, so it cannot do either.' },
 ];
 ---
 
-<Base title="Pricing" description="Free for 3 scripts. Pro for $3.34 a month billed yearly, or Lifetime for $99.99 once. No account, 14-day money-back guarantee." aiSummary={aiSummary} jsonLd={softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url: '/pricing/', offers })}>
+<Base title="Teleprompter pricing: free web app, Mac plans" description={MAC_AVAILABLE ? 'The web teleprompter is free. The Mac app is free for 3 scripts, then Pro at $3.34 a month billed yearly or Lifetime at $99.99 once. 14-day refund.' : 'The web teleprompter is free forever, with no account. See the planned Mac app pricing: free for 3 scripts, then Pro yearly or a one-time Lifetime licence.'} aiSummary={aiSummary} jsonLd={softwareApp({ name: `${APP_NAME} for Mac`, os: 'macOS', url: '/pricing/', offers })}>
   {
     MAC_AVAILABLE ? (
-      <Hero eyebrow="Mac app pricing" title="Pay yearly, pay once, or don't pay at all." sub="The web app is free forever. The Mac app is free for three scripts and unlocks unlimited scripts with Pro or Lifetime." primary={{ label: 'Download for Mac', href: '/download/', event: 'pricing-hero-download' }} secondary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} />
+      <Hero eyebrow="Mac teleprompter pricing" eyebrowInTitle title="Pay yearly, pay once, or don't pay at all." sub="The web app is free forever. The Mac app is free for three scripts and unlocks unlimited scripts with Pro or Lifetime." primary={{ label: 'Download for Mac', href: '/download/', event: 'pricing-hero-download' }} secondary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} />
     ) : (
-      <Hero eyebrow="Pricing" badge="Mac app coming soon" title="The web app is free. The Mac app is on its way." sub="The web app is free forever, with no account. The Mac app isn't available yet; below is the pricing we plan to launch with. Nothing is for sale today." primary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} secondary={{ label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: 'pricing-hero-notify' }} />
+      <Hero eyebrow="Teleprompter pricing" eyebrowInTitle badge="Mac app coming soon" title="The web app is free. The Mac app is on its way." sub="The web app is free forever, with no account. The Mac app isn't available yet; below is the pricing we plan to launch with. Nothing is for sale today." primary={{ label: 'Open the free web app', href: '/app/', event: 'pricing-hero-web' }} secondary={{ label: MAC_NOTIFY_LABEL, href: MAC_NOTIFY_HREF, event: 'pricing-hero-notify' }} />
     )
   }
   <section class="container block" id="plans">
@@ -50,7 +52,7 @@ const faqs = [
     <PricingTable autoSelect />
   </section>
   <section class="container block">
-    <h2>Compare</h2>
+    <h2>Compare Free, Pro and Lifetime</h2>
     <div class="table-wrap">
       <table>
         <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Pro</th><th scope="col">Lifetime</th></tr></thead>

@@ -1,5 +1,6 @@
 ---
 title: How to use a teleprompter on Zoom without anyone seeing it
+metaTitle: "How to use a teleprompter on Zoom"
 description: A step-by-step Zoom setup on Mac, where to put the window, what font size works, how to test the screen share, and what recordings do and do not capture.
 keywords: [teleprompter zoom, zoom notes, screen share]
 date: 2026-11-04

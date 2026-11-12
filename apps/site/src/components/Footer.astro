@@ -14,11 +14,11 @@ const href = (h: string) => h.replace('{SUPPORT_EMAIL}', SUPPORT_EMAIL).replace(
 
 <footer class="site-footer">
   <div class="container">
-    <div class="cols">
+    <nav class="cols" aria-label="Footer">
       {
         columns.map((col) => (
           <div>
-            <h2>{col.title}</h2>
+            <p class="col-title">{col.title}</p>
             <ul>
               {col.links.map((l) => (
                 <li>
@@ -31,7 +31,7 @@ const href = (h: string) => h.replace('{SUPPORT_EMAIL}', SUPPORT_EMAIL).replace(
           </div>
         ))
       }
-    </div>
+    </nav>
     <div class="bottom">
       <p>© {year} {APP_NAME}. Made for people who talk to cameras.</p>
       <p>The web app and this website are open source (MIT) · Your scripts never leave your device.</p>
@@ -56,7 +56,8 @@ const href = (h: string) => h.replace('{SUPPORT_EMAIL}', SUPPORT_EMAIL).replace(
       grid-template-columns: repeat(5, 1fr);
     }
   }
-  h2 {
+  .col-title {
+    font-weight: 700;
     font-size: 0.8125rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;

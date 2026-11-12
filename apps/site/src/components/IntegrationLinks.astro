@@ -1,0 +1,81 @@
+---
+// Internal links to the per-app landing pages (/mac/<integration>/), so each one is reachable
+// from body content and not only from the footer.
+import { getCollection } from 'astro:content';
+
+interface Props {
+  /** Slug of the page this renders on; it is left out of the list. */
+  current?: string;
+  heading?: string;
+  intro?: string;
+  compact?: boolean;
+}
+const {
+  current,
+  heading = 'Set it up for your call or recording app',
+  intro = 'Step-by-step setup and answers for the apps people present and record in.',
+  compact = false,
+} = Astro.props;
+const cases = (await getCollection('useCases'))
+  .map((c) => c.data)
+  .filter((c) => c.slug !== current)
+  .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<section class:list={['integrations', compact ? 'compact' : 'container block']} aria-labelledby="integrations-heading">
+  <h2 id="integrations-heading">{heading}</h2>
+  {!compact && <p class="muted">{intro}</p>}
+  <ul>
+    {
+      cases.map((c) => (
+        <li>
+          <a class="card" href={`/mac/${c.slug}/`}>
+            <strong>Teleprompter for {c.name}</strong>
+            {!compact && <span class="muted">{c.heroSubtitle.split('. ')[0]}.</span>}
+          </a>
+        </li>
+      ))
+    }
+    {
+      current !== undefined && (
+        <li>
+          <a class="card" href="/mac/">
+            <strong>Mac teleprompter overview</strong>
+            {!compact && <span class="muted">Everything the Mac app does, in one page.</span>}
+          </a>
+        </li>
+      )
+    }
+  </ul>
+</section>
+
+<style>
+  .integrations.compact {
+    margin-top: 3rem;
+  }
+  ul {
+    list-style: none;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  .compact ul {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  }
+  a.card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    color: var(--vp-color-text);
+    text-decoration: none;
+  }
+  a.card:hover {
+    border-color: var(--vp-color-text-muted);
+  }
+  a.card span {
+    font-size: 0.9375rem;
+  }
+</style>

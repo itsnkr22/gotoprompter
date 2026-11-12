@@ -2,9 +2,10 @@
 import { APP_NAME, SUPPORT_EMAIL } from '../../brand';
 import LicenseForms from '../../components/LicenseForms';
 import Base from '../../layouts/Base.astro';
+import { MAC_AVAILABLE } from '../../launch';
 ---
 
-<Base title="License & billing" description={`Recover a lost license key, manage your subscription, or move ${APP_NAME} to another Mac.`}>
+<Base title="Manage your license and billing" description={`Recover a lost ${APP_NAME} license key, manage or cancel your Pro subscription, or move your license to another Mac. No account needed.`} noindex={!MAC_AVAILABLE}>
   <section class="container block license">
     <h1>License &amp; billing</h1>
     <LicenseForms client:visible supportEmail={SUPPORT_EMAIL} />

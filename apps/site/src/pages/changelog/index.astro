@@ -8,9 +8,13 @@ const [entry] = await getCollection('changelog');
 const markdown = entry?.body ?? '';
 ---
 
-<Base title="What's new" description={`Release notes for the ${APP_NAME} Mac app and web app.`}>
+<Base title={`Changelog: what's new in ${APP_NAME}`} description={`Release notes for the ${APP_NAME} web app and Mac app: new features, fixes and improvements to voice scrolling, languages and recording, newest first.`}>
   <section class="container block changelog-page">
-    <h1>What's new</h1>
+    <h1>What's new in {APP_NAME}</h1>
+    <p class="muted lede">
+      Every release of the <a href="/web/">free web teleprompter</a> and the <a href="/mac/">Mac app</a>, newest first. Questions about
+      a change? <a href="/support/">Support</a> has answers, and the <a href="/blog/">blog</a> covers how features work.
+    </p>
     <ChangelogTabs markdown={markdown} />
   </section>
 </Base>
@@ -18,5 +22,8 @@ const markdown = entry?.body ?? '';
 <style>
   .changelog-page {
     max-width: 48rem;
+  }
+  .lede {
+    font-size: 1.0625rem;
   }
 </style>

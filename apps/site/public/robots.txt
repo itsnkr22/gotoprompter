@@ -46,4 +46,4 @@ Disallow: /checkout/
 Disallow: /_md/
 Allow: /
 
-Sitemap: https://gotoprompter.app/sitemap-index.xml
+Sitemap: https://gotoprompter.app/sitemap.xml

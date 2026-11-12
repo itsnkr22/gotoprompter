@@ -1,6 +1,7 @@
 ---
 title: "Choosing a teleprompter app for Mac: what actually matters"
-description: A criteria-based guide to picking a Mac teleprompter, covering voice tracking, capture exclusion, start friction, languages and pricing, with our own bias stated plainly.
+metaTitle: "Best teleprompter app for Mac: what matters"
+description: "A criteria-based guide to picking a Mac teleprompter: voice tracking, capture exclusion, start friction, languages and pricing, with our bias stated plainly."
 keywords: [best teleprompter mac, teleprompter app macos, voice scrolling]
 date: 2026-10-31
 image: /images/blog/best-teleprompter-app-for-mac.jpg

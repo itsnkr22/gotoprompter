@@ -3,7 +3,7 @@
   "name": "Google Meet",
   "platformName": "Google Meet",
   "badgeText": "Works with Google Meet",
-  "metaTitle": "Teleprompter for Google Meet, hidden from participants",
+  "metaTitle": "Teleprompter for Google Meet, hidden on share",
   "metaDescription": "A voice-following teleprompter window that floats over Google Meet in Chrome or Safari and stays invisible when you share your screen or tab.",
   "eyebrow": "Google Meet",
   "heroTitle": "The teleprompter for Google Meet",

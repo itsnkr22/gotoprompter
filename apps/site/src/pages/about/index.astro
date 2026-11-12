@@ -2,26 +2,29 @@
 import { APP_NAME, GITHUB_REPO_URL, SUPPORT_EMAIL } from '../../brand';
 import about from '../../data/about.json';
 import Legal from '../../layouts/Legal.astro';
+import { aboutPage } from '../../lib/seo';
+import { MAC_AVAILABLE } from '../../launch';
+const ld = aboutPage(about.OWNER_NAME);
 ---
 
-<Legal title="About" description={`Why ${APP_NAME} exists, what's free and what isn't, and who makes it.`} wide>
+<Legal title={`About ${APP_NAME}, the voice-following teleprompter`} description={`Why ${APP_NAME} exists, what is free and what is not, how it protects your privacy, and who builds the open-source voice-following teleprompter.`} jsonLd={ld} wide>
   <h1 slot="heading">Why {APP_NAME} exists</h1>
-  <p>Most teleprompters make you keep up with a motor. We wanted one that keeps up with us — and one that stays out of the screen share. So we built the engine that matches your speech against the whole script, put it in a free web app for everyone, and wrapped it in a Mac app for people who present through their screen.</p>
+  <p>Most teleprompters make you keep up with a motor. We wanted one that keeps up with us — and one that stays out of the screen share. So we built the engine that matches your speech against the whole script, put it in a <a href="/web/">free web teleprompter</a> for everyone, and wrapped it in a <a href="/mac/">Mac app</a>{MAC_AVAILABLE ? '' : ' (coming soon)'} for people who present through their screen. If you are curious how the matching works, read <a href="/blog/how-a-voice-following-teleprompter-works/">how a voice-following teleprompter works</a>.</p>
   <h2>What's free and what isn't</h2>
   <ul>
     <li><strong>The web app</strong> is free and open source under the MIT licence. Use it, fork it, run your own copy.</li>
     <li><strong>The Mac app</strong> is free for three custom scripts plus a demo script.</li>
-    <li><strong>Pro</strong> (yearly) and <strong>Lifetime</strong> (one-time) remove the script limit. Same engine, same features.</li>
+    <li><strong>Pro</strong> (yearly) and <strong>Lifetime</strong> (one-time) remove the script limit. Same engine, same features. See <a href="/pricing/">pricing</a>.</li>
   </ul>
   <h2>Privacy by design</h2>
   <ul>
     <li>No accounts, anywhere.</li>
     <li>Scripts stay on your device; speech recognition runs in your browser or on your Mac.</li>
     <li>The Mac app talks to the internet only to check your license and look for updates.</li>
-    <li>Site analytics are cookie-less and anonymous.</li>
+    <li>Site analytics are cookie-less and anonymous. The details are in the <a href="/privacy/">privacy policy</a>.</li>
   </ul>
   <h2>Who makes it</h2>
-  <p>{APP_NAME} is built by {about.OWNER_NAME}. The web app's code is on <a href={GITHUB_REPO_URL} rel="noopener">GitHub</a>; bug reports and pull requests are welcome.</p>
+  <p>{APP_NAME} is built by {about.OWNER_NAME}. The web app's code is on <a href={GITHUB_REPO_URL} rel="noopener">GitHub</a>; bug reports and pull requests are welcome. Every release is listed in the <a href="/changelog/">changelog</a>.</p>
   <h2>Say hello</h2>
-  <p>Questions, ideas, or a story about a take it saved: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
+  <p>Looking for setup help? Start with <a href="/support/">support and tutorials</a>. Questions, ideas, or a story about a take it saved: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
 </Legal>

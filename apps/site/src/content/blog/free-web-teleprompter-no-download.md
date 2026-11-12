@@ -1,5 +1,6 @@
 ---
 title: A free web teleprompter you don't have to download
+metaTitle: "Free web teleprompter, no download needed"
 description: What a browser-based teleprompter can do today, how to install the web app on a phone or desktop so it works offline, and the two things it honestly cannot do.
 keywords: [free teleprompter, online teleprompter, no download, voice scrolling]
 date: 2026-11-02

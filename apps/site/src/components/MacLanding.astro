@@ -7,7 +7,9 @@ import CTASection from './CTASection.astro';
 import FAQ from './FAQ.astro';
 import FeatureShowcase from './FeatureShowcase.astro';
 import Hero from './Hero.astro';
+import IntegrationLinks from './IntegrationLinks.astro';
 import LogoMarquee from './LogoMarquee.astro';
+import RelatedArticles from './RelatedArticles.astro';
 import PricingTable from './PricingTable.astro';
 import ReviewsWall from './ReviewsWall.astro';
 import ThreeWaysToScroll from './ThreeWaysToScroll.astro';
@@ -29,8 +31,12 @@ interface Props {
   footerSecondaryEvent: string;
   hide?: ('reviews' | 'pricing' | 'threeWays' | 'marquee')[];
   howTo?: { name: string; steps: string[] };
+  eyebrowInTitle?: boolean;
+  /** Slug of the integration page (/mac/<slug>/); undefined on /mac/ itself. */
+  slug?: string;
+  guides?: { id: string; data: { title: string; description: string; date: Date } }[];
 }
-const { eyebrow, badge, title, sub, trust, downloadEvent, pricingEvent, videoId = '', audience, faqs, footerHeadline, footerPrimaryEvent, footerSecondaryEvent, hide = [], howTo } = Astro.props;
+const { eyebrow, badge, title, sub, trust, downloadEvent, pricingEvent, videoId = '', audience, faqs, footerHeadline, footerPrimaryEvent, footerSecondaryEvent, hide = [], howTo, eyebrowInTitle = false, slug, guides = [] } = Astro.props;
 // While the Mac app is "coming soon" there is no download and no checkout: the CTAs point to the
 // free web app and a pre-filled launch email, and the pricing section is hidden.
 const heroPrimary = MAC_AVAILABLE
@@ -50,7 +56,7 @@ const heroTrust = MAC_AVAILABLE ? trust : 'Coming soon for macOS 14+ · The web 
 const hidden = MAC_AVAILABLE ? hide : [...hide, 'pricing'];
 ---
 
-<Hero eyebrow={eyebrow} badge={heroBadge} title={title} sub={sub} primary={heroPrimary} secondary={heroSecondary} trust={heroTrust} media>
+<Hero eyebrow={eyebrow} badge={heroBadge} title={title} sub={sub} primary={heroPrimary} secondary={heroSecondary} trust={heroTrust} eyebrowInTitle={eyebrowInTitle} media>
   <img src="/images/mac-overlay-hero.png" alt={`${APP_NAME} floating over a video call, visible only to the presenter`} width="1200" height="750" fetchpriority="high" />
 </Hero>
 {!hidden.includes('marquee') && <LogoMarquee />}
@@ -83,6 +89,14 @@ const hidden = MAC_AVAILABLE ? hide : [...hide, 'pricing'];
   )
 }
 <FAQ items={faqs} />
+<IntegrationLinks current={slug} heading={slug ? 'Use it with other apps' : undefined} />
+{
+  guides.length > 0 && (
+    <div class="container">
+      <RelatedArticles posts={guides} heading="Guides" />
+    </div>
+  )
+}
 <CTASection headline={footerHeadline} primary={footerPrimary} secondary={footerSecondary} />
 <p class="container platforms muted">Mac — you're here · <a href="/web/">Free web app →</a></p>
 

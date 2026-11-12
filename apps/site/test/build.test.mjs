@@ -43,6 +43,7 @@ const ROUTES = [
   '/_md/_catalog.md',
   '/robots.txt',
   '/sitemap-index.xml',
+  '/sitemap.xml',
 ];
 
 test('every route exists in dist', () => {
@@ -119,7 +120,13 @@ test('head metadata: canonical, OG, robots, title suffix', () => {
   const web = page('/web/');
   assert.match(web, /<title>Free web teleprompter that follows your voice · gotoprompter<\/title>/);
   assert.match(web, /rel="canonical" href="https:\/\/gotoprompter\.app\/web\/"/);
-  assert.match(page('/checkout/success/'), /name="robots" content="noindex,nofollow"/);
+  assert.match(page('/checkout/success/'), /name="robots" content="noindex,follow"/);
+  assert.doesNotMatch(
+    page('/checkout/success/'),
+    /rel="canonical"/,
+    'noindex pages carry no canonical',
+  );
+  assert.match(home, /name="robots" content="index,follow,max-image-preview:large/);
   assert.match(page('/404.html'.replace('.html', '.html')), /off-script/);
   for (const r of ROUTES.filter((x) => x.endsWith('/')))
     assert.equal((page(r).match(/<h1[\s>]/g) ?? []).length, 1, `one h1 on ${r}`);
@@ -182,7 +189,8 @@ test(
     assert.match(page('/pricing/'), /aria-disabled="true"[^>]*>\s*Coming soon/);
     const download = page('/download/');
     assert.match(download, /The Mac app is coming soon/);
-    assert.match(download, /name="robots" content="noindex,nofollow"/);
+    assert.match(download, /name="robots" content="noindex,follow"/);
+    assert.match(page('/license/'), /name="robots" content="noindex,follow"/);
     assert.doesNotMatch(read('sitemap-0.xml'), /\/download\/|\/license\//);
     assert.match(read('llms.txt'), /coming soon/);
     assert.doesNotMatch(read('llms.txt'), /\/download\//);
@@ -303,7 +311,7 @@ test('robots.txt explicitly allows AI crawlers with the same rules as everyone e
     assert.ok(g.includes('Allow: /'), `group ${g[0]} allows /`);
     assert.ok(g.includes('Disallow: /checkout/'), `group ${g[0]} disallows /checkout/`);
   }
-  assert.match(read('robots.txt'), /^Sitemap: https:\/\/gotoprompter\.app\/sitemap-index\.xml$/m);
+  assert.match(read('robots.txt'), /^Sitemap: https:\/\/gotoprompter\.app\/sitemap\.xml$/m);
 });
 
 test('vercel.json: Link describedby header on pages, raw Markdown files noindex', () => {
@@ -329,5 +337,104 @@ test('advertised /api/md/ URLs have the trailing slash (slashless ones redirect)
     const urls = read(f).match(/https:\/\/gotoprompter\.app\/api\/md\/[^\s)`;,]*/g) ?? [];
     for (const u of urls) assert.match(u, /\/$|\/\.$/, `${f}: ${u}`);
     if (f !== 'llms-full.txt') assert.ok(urls.length > 0, `${f} mentions /api/md/`);
+  }
+});
+
+// On-page SEO guard rails for every page in the sitemap (titles, descriptions, headings, canonicals, links).
+const sitemapPages = () =>
+  [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map((m) => new URL(m[1]).pathname)
+    .filter((p) => p !== '/app/');
+
+test('sitemap.xml: same URLs as sitemap-0.xml, blog posts carry lastmod', () => {
+  assert.equal(read('sitemap.xml'), read('sitemap-0.xml'));
+  assert.match(read('sitemap.xml'), /^<\?xml[^>]*\?><urlset /);
+  const blog = [
+    ...read('sitemap.xml').matchAll(/<url><loc>([^<]+\/blog\/[^<]+\/)<\/loc>(.*?)<\/url>/g),
+  ];
+  assert.ok(blog.length >= 8);
+  for (const [, loc, rest] of blog)
+    assert.match(rest, /<lastmod>\d{4}-\d{2}-\d{2}/, `lastmod for ${loc}`);
+});
+
+test('on-page SEO: title, description, canonical, robots, one h1, h2s, social tags', () => {
+  const decode = (t) =>
+    t
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"');
+  const titles = new Map();
+  const descriptions = new Map();
+  for (const p of sitemapPages()) {
+    const html = page(p);
+    const title = decode(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '');
+    const desc = decode(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '');
+    assert.ok(
+      title.length >= 20 && title.length <= 60,
+      `${p}: title ${title.length} chars: ${title}`,
+    );
+    assert.ok(desc.length >= 110 && desc.length <= 160, `${p}: description ${desc.length} chars`);
+    assert.equal((title.match(/gotoprompter/g) ?? []).length, 1, `${p}: brand once in title`);
+    assert.ok(!titles.has(title), `${p}: title duplicates ${titles.get(title)}`);
+    assert.ok(!descriptions.has(desc), `${p}: description duplicates ${descriptions.get(desc)}`);
+    titles.set(title, p);
+    descriptions.set(desc, p);
+    assert.match(
+      html,
+      new RegExp(`<link rel="canonical" href="https://gotoprompter\\.app${p}"`),
+      `${p}: canonical`,
+    );
+    assert.match(html, /<meta name="robots" content="index,follow/, `${p}: indexable`);
+    assert.equal((html.match(/<h1[\s>]/g) ?? []).length, 1, `${p}: one h1`);
+    const main = html.split('<main')[1].split('</main>')[0];
+    // Short single-topic pages (refund policy, changelog entries rendered as h3) may skip h2.
+    if (!['/changelog/', '/refund-policy/'].includes(p))
+      assert.ok((main.match(/<h2[\s>]/g) ?? []).length >= 1, `${p}: has h2 sections`);
+    for (const tag of [
+      'og:title',
+      'og:description',
+      'og:url',
+      'og:image',
+      'og:image:alt',
+      'og:locale',
+    ])
+      assert.match(html, new RegExp(`property="${tag}"`), `${p}: ${tag}`);
+    assert.match(html, /name="twitter:card" content="summary_large_image"/, `${p}: twitter card`);
+  }
+  // Header and footer chrome add no headings: the outline belongs to the page.
+  assert.doesNotMatch(page('/').split('</main>')[1], /<h[1-6][\s>]/);
+});
+
+test('internal linking: every sitemap page is linked from another page body', () => {
+  const inbound = new Map();
+  for (const p of sitemapPages()) {
+    const main = page(p).split('<main')[1].split('</main>')[0];
+    for (const [, href] of main.matchAll(/href="(\/[^"#?]*)"/g))
+      if (href !== p) inbound.set(href, (inbound.get(href) ?? 0) + 1);
+  }
+  const exempt = new Set(['/', '/terms/', '/about/']); // home: logo; legal/about: footer
+  for (const p of sitemapPages())
+    if (!exempt.has(p))
+      assert.ok((inbound.get(p) ?? 0) >= 1, `${p} has no in-content inbound link`);
+  for (const slug of ['zoom', 'google-meet', 'microsoft-teams', 'loom', 'riverside'])
+    assert.ok((inbound.get(`/mac/${slug}/`) ?? 0) >= 5, `/mac/${slug}/ linked from several pages`);
+});
+
+test('FAQ sections have FAQPage JSON-LD on the pages that show them', () => {
+  for (const p of [
+    '/',
+    '/web/',
+    '/mac/',
+    '/mac/zoom/',
+    '/pricing/',
+    '/support/',
+    '/blog/how-to-use-a-teleprompter-on-zoom/',
+  ]) {
+    const html = page(p);
+    const ld = [
+      ...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g),
+    ].flatMap((b) => [JSON.parse(b[1])].flat());
+    const faq = ld.find((x) => x['@type'] === 'FAQPage');
+    assert.ok(faq && faq.mainEntity.length >= 3, `${p}: FAQPage`);
   }
 });

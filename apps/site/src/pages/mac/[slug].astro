@@ -6,6 +6,7 @@ import MacLanding from '../../components/MacLanding.astro';
 import defaultFaqs from '../../data/default-faqs.json';
 import Base from '../../layouts/Base.astro';
 import { breadcrumbs, howTo as howToLd, softwareApp } from '../../lib/seo';
+import { postsAbout } from '../../lib/related';
 import { howToSteps, mergeFaqs } from '../../lib/use-cases';
 
 export async function getStaticPaths() {
@@ -13,6 +14,8 @@ export async function getStaticPaths() {
   return cases.map((c) => ({ params: { slug: c.data.slug }, props: { entry: c.data } }));
 }
 const { entry } = Astro.props;
+const posts = await getCollection('blog', ({ data }) => !(import.meta.env.PROD && data.draft));
+const guides = postsAbout(entry.name, posts);
 const faqs = mergeFaqs(defaultFaqs, entry.faqOverrides, entry.extraFaqs, entry.platformName);
 const howToFaq = faqs.find((f) => f.id === 'how-to');
 const steps = howToFaq ? howToSteps(howToFaq.a) : [];
@@ -50,6 +53,8 @@ const ld = [
     footerSecondaryEvent={`usecase-${entry.slug}-footer-web`}
     hide={entry.hideSections}
     howTo={howTo}
+    slug={entry.slug}
+    guides={guides}
   />
 </Base>
 

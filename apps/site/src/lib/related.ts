@@ -21,3 +21,19 @@ export function relatedPosts<T extends PostLike>(current: T, all: T[], max = 3):
   }
   return picked;
 }
+
+/** Posts whose title or keywords mention `term` (e.g. "Zoom"), topped up with the newest posts. */
+export function postsAbout<T extends PostLike & { data: { title: string } }>(
+  term: string,
+  all: T[],
+  max = 3,
+): T[] {
+  const t = term.toLowerCase();
+  const newest = [...all].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const matching = newest.filter(
+    (p) =>
+      p.data.title.toLowerCase().includes(t) ||
+      p.data.keywords.some((k) => k.toLowerCase().includes(t)),
+  );
+  return [...matching, ...newest.filter((p) => !matching.includes(p))].slice(0, max);
+}
