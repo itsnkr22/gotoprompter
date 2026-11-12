@@ -9,7 +9,7 @@ If you jump to a different line, just tap any word and the prompter follows you 
 You can also steer with your voice: say "go next" or "go back" to move by paragraph, "go start" to begin again, and "go finish" to jump to the end.
 Anything you put in square brackets is shown but never counted [like this reminder to smile].
 Open the settings to change the font, the size, the colours, the margins and the speed.
-Your text stays on this device. Nothing is uploaded anywhere.
+Your text stays on this device and is never uploaded.
 Install the app on your home screen and it keeps working without an internet connection.
 
 That is all you need. Paste your own script and start talking.`;

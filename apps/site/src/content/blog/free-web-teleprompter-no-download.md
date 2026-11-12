@@ -30,7 +30,7 @@ Around that core:
 - **Display settings.** Font, size, colours, margins, line position and speed, all remembered between sessions.
 - **Presenter notes.** Anything in square brackets is shown but never counted as spoken.
 
-Your scripts live in the browser's local storage. Nothing is uploaded, there is no account, and the only network request the app makes on your behalf is the Google Docs import you ask for.
+Your scripts live in the browser's local storage. They are never uploaded, there is no account, and the only network request the app makes on your behalf is the Google Docs import you ask for.
 
 ## Install as an app
 
