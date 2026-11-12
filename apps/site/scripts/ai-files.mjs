@@ -414,6 +414,7 @@ legal: Use /privacy/, /terms/ and /refund-policy/ for privacy, terms and refunds
 applies_to: ${origin}/* public pages
 excludes: ${excluded.join(', ')}, form submissions, checkout and licence actions, and the API at https://api.${APP_DOMAIN}.
 markdown: ${origin}/{path}.md for every public page (${origin}/index.md for the homepage)
+crawlers: ${origin}/robots.txt explicitly allows AI search, user-fetch and training crawlers on public pages.
 related_files: ${origin}/llms.txt, ${origin}/llms-full.txt, ${origin}/ai.txt, ${origin}/rss.xml, ${origin}/pricing.json, ${origin}/robots.txt, ${origin}/sitemap-index.xml
 
 [training]

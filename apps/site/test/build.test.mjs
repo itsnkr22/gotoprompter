@@ -248,3 +248,31 @@ test('changelog entries render as lists', () => {
   for (const [, after] of page('/changelog/').matchAll(/<\/h3>\s*(<\w+)/g))
     assert.equal(after, '<ul');
 });
+
+test('robots.txt explicitly allows AI crawlers with the same rules as everyone else', () => {
+  const groups = read('robots.txt')
+    .split(/\n\s*\n/)
+    .map((g) => g.split('\n').filter((l) => l && !l.startsWith('#')))
+    .filter((g) => g.some((l) => /^user-agent:/i.test(l)));
+  assert.ok(groups.length >= 3);
+  const agents = groups.flatMap((g) =>
+    g.filter((l) => /^user-agent:/i.test(l)).map((l) => l.split(':')[1].trim()),
+  );
+  for (const a of [
+    '*',
+    'GPTBot',
+    'OAI-SearchBot',
+    'ChatGPT-User',
+    'ClaudeBot',
+    'Claude-User',
+    'PerplexityBot',
+    'Google-Extended',
+    'CCBot',
+  ])
+    assert.ok(agents.includes(a), `robots.txt names ${a}`);
+  for (const g of groups) {
+    assert.ok(g.includes('Allow: /'), `group ${g[0]} allows /`);
+    assert.ok(g.includes('Disallow: /checkout/'), `group ${g[0]} disallows /checkout/`);
+  }
+  assert.match(read('robots.txt'), /^Sitemap: https:\/\/gotoprompter\.app\/sitemap-index\.xml$/m);
+});
