@@ -4,13 +4,14 @@ metaTitle: "How a voice-following teleprompter works"
 description: Word tracking, sound activation and fixed speed are not the same thing. What happens under the hood, why whole-script matching matters, and a one-minute test.
 keywords: [teleprompter, voice scrolling, speech recognition]
 date: 2026-11-05
+updated: 2026-11-13
 image: /images/blog/how-a-voice-following-teleprompter-works.jpg
 imageAlt: Diagram of spoken words being matched against a script
 ---
 
 > Most "voice-activated" prompters only listen for noise. A true voice-following prompter transcribes what you say and finds those words in the whole script, so it can wait, skip and go back with you. You can tell the two apart in about sixty seconds.
 
-## What "voice-activated" usually means
+## One label, three different machines
 
 The phrase gets used for three different mechanisms, and the difference decides whether a teleprompter helps you or fights you.
 
@@ -63,7 +64,7 @@ A sound-activated prompter passes the first test and fails the other three. A ne
 
 ## Frequently asked questions
 
-**Does word tracking need an internet connection?** It depends on where the recognizer runs. Our Mac app uses Apple's on-device recognition and works offline. The web app uses the browser's speech engine; Safari and recent Chrome versions process most languages on the device, while some browsers may send audio to the vendor's service.
+**Does word tracking need an internet connection?** It depends on where the recognizer runs. Our Mac app uses Apple's on-device recognition and works offline. The web app uses the browser's speech engine; Safari can recognise many languages on the device, while Chrome and Edge normally send the audio to their vendor's speech service, which needs a connection.
 
 **Why does the highlight sometimes lag by a word or two?** Recognizers wait for a little more audio before committing to a word, so there is always a short delay. A good prompter compensates by keeping the active line slightly above the centre so the next words are already visible.
 

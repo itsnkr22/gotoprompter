@@ -1,9 +1,10 @@
 ---
-title: How to read a script without looking like you're reading
-metaTitle: "How to read a script naturally on camera"
+title: Six habits that stop a script from sounding read
+metaTitle: "Sound natural on a teleprompter: 6 habits"
 description: Six practical techniques for reading from a teleprompter naturally on camera, from writing for speech to where the active line sits relative to the lens.
 keywords: [read naturally on camera, teleprompter tips, presenting on video]
 date: 2026-10-30
+updated: 2026-11-13
 image: /images/blog/how-to-read-a-script-without-looking-like-youre-reading.jpg
 imageAlt: A presenter looking straight into a camera lens
 ---

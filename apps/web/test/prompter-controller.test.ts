@@ -1,6 +1,6 @@
 import { tokenize } from '@gotoprompter/prompter-core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { PrompterController } from '../src/prompter/prompter-controller';
+import { COMMAND_CONFIRM_MS, PrompterController } from '../src/prompter/prompter-controller';
 import { DEFAULT_SETTINGS } from '../src/state/settings';
 import type { Settings } from '../src/state/settings';
 
@@ -12,14 +12,16 @@ function setup(script: string, overrides: Partial<Settings> = {}) {
   document.body.appendChild(scrollEl);
   const settings = { ...DEFAULT_SETTINGS, ...overrides };
   const onIndexChange = vi.fn();
+  const onCommand = vi.fn();
   const c = new PrompterController({
     container,
     scrollEl,
     getSettings: () => settings,
     onIndexChange,
+    onCommand,
   });
   c.load(tokenize(script, { preserveFormatting: true }));
-  return { c, container, scrollEl, settings, onIndexChange };
+  return { c, container, scrollEl, settings, onIndexChange, onCommand };
 }
 
 describe('PrompterController', () => {
@@ -83,7 +85,7 @@ describe('PrompterController', () => {
     const { c, settings } = setup('one two three.\nfour five six.');
     expect(c.feedTranscript('one')).toEqual({ type: 'near', index: 1 });
     settings.voiceCommandsEnabled = true;
-    expect(c.feedTranscript('go next')).toEqual({ command: 'go next' });
+    expect(c.feedTranscript('go next', true)).toEqual({ command: 'go next' });
     expect(c.index).toBe(4);
     c.navigateParagraph(-1);
     expect(c.index).toBe(0);
@@ -91,6 +93,88 @@ describe('PrompterController', () => {
     expect(c.index).toBe(1);
     c.restart();
     expect(c.index).toBe(0);
+  });
+
+  describe('voice commands', () => {
+    const SCRIPT = 'alpha beta gamma.\ndelta epsilon the zeta.\neta theta iota.';
+    // alpha0 beta1 gamma.2 br3 delta4 epsilon5 the6 zeta.7 br8 eta9 theta10 iota.11
+    const on = { voiceCommandsEnabled: true };
+
+    it('holds an interim command, then runs it once the pause confirms it', () => {
+      vi.useFakeTimers();
+      try {
+        const { c, onCommand } = setup(SCRIPT, on);
+        expect(c.feedTranscript('go forward')).toEqual({ type: 'pending' });
+        expect(c.index).toBe(0);
+        vi.advanceTimersByTime(COMMAND_CONFIRM_MS - 1);
+        expect(c.index).toBe(0);
+        vi.advanceTimersByTime(1);
+        expect(c.index).toBe(4);
+        expect(onCommand).toHaveBeenCalledExactlyOnceWith('go next');
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('a final result confirms at once, and repeats of the same phrase never fire twice', () => {
+      vi.useFakeTimers();
+      try {
+        const { c, onCommand } = setup(SCRIPT, on);
+        expect(c.feedTranscript('go forward')).toEqual({ type: 'pending' });
+        expect(c.feedTranscript('go forward')).toEqual({ type: 'pending' });
+        expect(c.feedTranscript('go forward', true)).toEqual({ command: 'go next' });
+        expect(c.feedTranscript('go forward', true)).toEqual({ type: 'none' });
+        vi.advanceTimersByTime(COMMAND_CONFIRM_MS * 2);
+        expect(c.index).toBe(4);
+        expect(onCommand).toHaveBeenCalledTimes(1);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('drops the command when more words follow: it was speech', () => {
+      vi.useFakeTimers();
+      try {
+        const { c, onCommand } = setup(SCRIPT, on);
+        expect(c.feedTranscript('we should go back')).toEqual({ type: 'pending' });
+        c.feedTranscript('we should go back to basics');
+        vi.advanceTimersByTime(COMMAND_CONFIRM_MS * 2);
+        expect(onCommand).not.toHaveBeenCalled();
+        expect(c.index).toBe(0);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('words spoken before a command never move the script after it', () => {
+      const { c } = setup(SCRIPT, on);
+      c.setIndex(9);
+      // "the" was said before the command; the paragraph we jump back to contains "the".
+      expect(c.feedTranscript('eta the theta go back', true)).toEqual({ command: 'go back' });
+      expect(c.index).toBe(4);
+      expect(c.feedTranscript('eta the theta go back')).toEqual({ type: 'none' });
+      expect(c.index).toBe(4);
+      // The utterance continues: only the new words are matched.
+      expect(c.feedTranscript('eta the theta go back delta')).toEqual({ type: 'near', index: 5 });
+      // A new utterance is matched in full again.
+      expect(c.feedTranscript('epsilon')).toEqual({ type: 'near', index: 6 });
+    });
+
+    it('cancelPendingCommand drops a held command; disabled commands are plain text', () => {
+      vi.useFakeTimers();
+      try {
+        const { c, settings, onCommand } = setup(SCRIPT, on);
+        c.feedTranscript('go to the end');
+        c.cancelPendingCommand();
+        vi.advanceTimersByTime(COMMAND_CONFIRM_MS * 2);
+        expect(c.index).toBe(0);
+        settings.voiceCommandsEnabled = false;
+        expect(c.feedTranscript('go to the end', true)).toEqual({ type: 'none' });
+        expect(onCommand).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+      }
+    });
   });
 
   it('configureMatcher keeps the index and destroy clears the DOM', () => {

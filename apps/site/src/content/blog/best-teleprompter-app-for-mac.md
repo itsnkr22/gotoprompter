@@ -1,16 +1,17 @@
 ---
-title: "Choosing a teleprompter app for Mac: what actually matters"
-metaTitle: "Best teleprompter app for Mac: what matters"
+title: "A five-point checklist for choosing a Mac teleprompter"
+metaTitle: "Mac teleprompter checklist: 5 things to test"
 description: "A criteria-based guide to picking a Mac teleprompter: voice tracking, capture exclusion, start friction, languages and pricing, with our bias stated plainly."
 keywords: [best teleprompter mac, teleprompter app macos, voice scrolling]
 date: 2026-10-31
+updated: 2026-11-13
 image: /images/blog/best-teleprompter-app-for-mac.jpg
 imageAlt: A checklist next to a Mac laptop
 ---
 
 > Judge a Mac teleprompter on five things: whether it tracks your words or just runs a motor, whether it hides from screen capture, how many clicks it takes to start, which languages it recognizes, and whether the price model fits how often you record. We make gotoprompter, so read our pick with that in mind.
 
-## What matters
+## The five checks
 
 "Best" lists for teleprompters tend to rank features that look good on a comparison grid, such as the number of fonts, and skip the ones that decide whether you look natural on camera. After building one and using many, we think five criteria cover almost every real decision. We have put them in the order they matter to us.
 

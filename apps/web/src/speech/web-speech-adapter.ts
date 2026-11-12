@@ -55,12 +55,16 @@ export function getSpeechRecognitionCtor(): SRConstructor | undefined {
   return window.SpeechRecognition ?? window.webkitSpeechRecognition;
 }
 
+/** How long stop() may take before the instance is aborted and treated as ended. */
+export const STOP_TIMEOUT_MS = 1500;
+
 export class WebSpeechAdapter extends SpeechEmitter implements SpeechAdapter {
   readonly supported: boolean;
   private readonly Ctor: SRConstructor | undefined;
   private recognition: SRInstance | null = null;
   private locale = 'en-US';
   private restartTimer: ReturnType<typeof setTimeout> | null = null;
+  private stopTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(ctor: SRConstructor | undefined = getSpeechRecognitionCtor()) {
     super();
@@ -73,6 +77,7 @@ export class WebSpeechAdapter extends SpeechEmitter implements SpeechAdapter {
   }
 
   setLanguage(locale: string): void {
+    if (locale === this.locale) return;
     this.locale = locale;
     if (this.recognition) {
       this.stop();
@@ -97,17 +102,22 @@ export class WebSpeechAdapter extends SpeechEmitter implements SpeechAdapter {
     r.interimResults = true;
     r.maxAlternatives = 1;
     r.lang = this.locale;
+    // Every handler ignores events from an instance that is no longer the current one.
     r.onresult = (e) => {
+      if (this.recognition !== r) return;
       let text = '';
       for (let i = e.resultIndex; i < e.results.length; i++)
         text += e.results[i]?.[0]?.transcript ?? '';
       const last = e.results[e.results.length - 1];
       this.emitTranscript({ text, isFinal: !!last?.isFinal });
     };
-    r.onerror = (e) => this.emitError(ERROR_MAP[e.error] ?? 'unknown', e);
+    r.onerror = (e) => {
+      if (this.recognition !== r) return;
+      this.emitError(ERROR_MAP[e.error] ?? 'unknown', e);
+    };
     r.onend = () => {
-      this.recognition = null;
-      this.emitEnd();
+      if (this.recognition !== r) return;
+      this.finish(r);
     };
     this.recognition = r;
     try {
@@ -126,5 +136,29 @@ export class WebSpeechAdapter extends SpeechEmitter implements SpeechAdapter {
     } catch {
       /* ignore */
     }
+    // Some engines never fire `end` after stop(); abort and report the end ourselves.
+    if (this.stopTimer) clearTimeout(this.stopTimer);
+    this.stopTimer = setTimeout(() => {
+      this.stopTimer = null;
+      if (this.recognition !== r) return;
+      try {
+        r.abort();
+      } catch {
+        /* ignore */
+      }
+      this.finish(r);
+    }, STOP_TIMEOUT_MS);
+  }
+
+  private finish(r: SRInstance): void {
+    if (this.stopTimer) {
+      clearTimeout(this.stopTimer);
+      this.stopTimer = null;
+    }
+    r.onresult = null;
+    r.onerror = null;
+    r.onend = null;
+    this.recognition = null;
+    this.emitEnd();
   }
 }

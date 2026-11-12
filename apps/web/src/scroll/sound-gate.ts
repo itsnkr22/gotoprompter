@@ -41,6 +41,8 @@ export class SoundGate {
       window.AudioContext ??
       (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     this.ctx = new Ctx();
+    // Safari creates the context suspended; without this the analyser only ever hears silence.
+    if (this.ctx.state === 'suspended') void this.ctx.resume().catch(() => {});
     this.analyser = this.ctx.createAnalyser();
     this.analyser.fftSize = 256;
     this.data = new Uint8Array(this.analyser.frequencyBinCount);

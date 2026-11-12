@@ -37,7 +37,7 @@
   {
     "id": "privacy",
     "q": "Is my script private?",
-    "a": "Yes. Scripts stay on your device and there is no account. On Mac, speech recognition runs on-device. In the web app your browser does it: Safari and recent versions of Chrome recognise most languages on the device, and some browsers use their vendor's speech service. The only network calls the Mac app makes are license checks and update checks."
+    "a": "Yes. Scripts stay on your device and there is no account. On Mac, speech recognition runs on-device. In the web app your browser does it: Safari can recognise many languages on the device, while Chrome and Edge normally send the audio to their vendor's speech service, which needs a connection. The only network calls the Mac app makes are license checks and update checks."
   },
   {
     "id": "account",
@@ -47,7 +47,7 @@
   {
     "id": "languages",
     "q": "How many languages are supported?",
-    "a": "The web app supports 34 languages with automatic detection. The Mac app supports every language Apple's on-device speech recognition offers — more than 60."
+    "a": "The web app supports 65 languages, 51 of them detected automatically from your script and the rest picked from the menu. The Mac app supports every language Apple's on-device speech recognition offers — more than 60."
   },
   {
     "id": "notes",
@@ -57,6 +57,6 @@
   {
     "id": "jump",
     "q": "Can I jump to a specific part of my script?",
-    "a": "Yes. Click or tap any word and the prompter continues from there. Voice commands 'go back', 'go next', 'go start' and 'go finish' also move you around hands-free."
+    "a": "Yes. Click or tap any word and the prompter continues from there. Voice commands such as 'go back', 'go forward', 'go restart' and 'go to the end' also move you around hands-free."
   }
 ]

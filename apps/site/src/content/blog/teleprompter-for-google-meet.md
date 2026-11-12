@@ -1,9 +1,10 @@
 ---
-title: "Teleprompter for Google Meet: a setup that stays hidden"
-metaTitle: "How to use a teleprompter on Google Meet"
+title: "Google Meet and a hidden script: tab, window or whole screen"
+metaTitle: "Google Meet teleprompter: what gets shared"
 description: How to read a script on Google Meet in Chrome or Safari without participants seeing it, whether you share a tab, a window or your whole screen.
 keywords: [teleprompter google meet, screen share, read naturally on camera]
 date: 2026-11-03
+updated: 2026-11-13
 image: /images/blog/teleprompter-for-google-meet.jpg
 imageAlt: Google Meet call with a hidden prompter window positioned under the camera
 ---

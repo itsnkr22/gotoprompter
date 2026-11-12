@@ -33,16 +33,20 @@ describe('SettingsPanel', () => {
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(container.querySelector('#scrollSpeedContainer')).toHaveClass('hidden');
     expect(container.querySelector('#soundSensitivityContainer')).toHaveClass('hidden');
-    expect(container.querySelector('#hMirrorRow')).toHaveClass('hidden');
+    // Both mirror axes are available to everyone: different glass rigs need different flips.
+    expect(container.querySelector('#hMirrorRow')).not.toHaveClass('hidden');
+    expect(container.querySelector('#dirAutoBtn')).toHaveAttribute('aria-pressed', 'true');
     expect(container.querySelector('#refreshGoogleDocContainer')).toBeNull();
   });
 
-  it('shows the beta mirror row and the Google Doc section when applicable', () => {
-    useFlagsStore.getState().set({ betaHMirror: true });
+  it('toggles both mirror axes and shows the Google Doc section when applicable', () => {
     useRuntimeStore.getState().setGoogleDocUrl('https://docs.google.com/document/d/x');
     const { container } = render(<SettingsPanel />);
-    expect(container.querySelector('#hMirrorRow')).not.toHaveClass('hidden');
-    expect(container.querySelector('#mirrorModeLabel')).toHaveTextContent('Mirror Mode (vertical)');
+    expect(container.querySelector('#mirrorModeLabel')).toHaveTextContent('Mirror Mode');
+    fireEvent.click(container.querySelector('#mirrorToggle')!);
+    fireEvent.click(container.querySelector('#hMirrorToggle')!);
+    expect(useSettingsStore.getState().mirrorVertical).toBe(true);
+    expect(useSettingsStore.getState().mirrorHorizontal).toBe(true);
     expect(container.querySelector('#refreshGoogleDocContainer')).not.toBeNull();
   });
 

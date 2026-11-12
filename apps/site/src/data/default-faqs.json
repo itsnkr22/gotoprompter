@@ -32,7 +32,7 @@
   {
     "id": "jump-scrolling",
     "q": "Can I jump to a specific part of the script?",
-    "a": "Yes. Click any word and the prompter continues from exactly there. Voice commands (go back, go next, go start, go finish) do the same hands-free."
+    "a": "Yes. Click any word and the prompter continues from exactly there. Voice commands (go back, go forward, go restart, go to the end) do the same hands-free."
   },
   {
     "id": "loud-environments",

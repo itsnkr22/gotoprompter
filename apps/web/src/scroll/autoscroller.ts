@@ -13,6 +13,8 @@ export interface AutoScrollerDeps {
 }
 
 export const TICK_MS = 100;
+/** A background tab fires timers rarely; never credit more than this to one tick. */
+export const MAX_TICK_ELAPSED_MS = 1000;
 
 export class AutoScroller {
   private sessionId = 0;
@@ -94,7 +96,7 @@ export class AutoScroller {
       this.lastSoundSeen = this.gate.lastSoundTime;
       core.noteSound(this.gate.lastSoundTime);
     }
-    core.tick(now, now - this.lastTickAt);
+    core.tick(now, Math.min(now - this.lastTickAt, MAX_TICK_ELAPSED_MS));
     this.lastTickAt = now;
     if (controller.finished) {
       this.stop();

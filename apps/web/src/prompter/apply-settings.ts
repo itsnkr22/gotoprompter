@@ -1,4 +1,5 @@
 // Applies display settings to the prompter DOM (spec §3 "Theme").
+import { isRtlLanguage } from '../languages';
 import type { Settings } from '../state/settings';
 
 export const FONT_STACKS: Record<Settings['fontFamily'], string> = {
@@ -15,6 +16,20 @@ export interface PrompterElements {
   scrollContainer: HTMLElement | null;
   scriptContent: HTMLElement | null;
   overlayVideo?: boolean;
+  /** Recognition locale of the loaded script; decides the direction when it is 'auto'. */
+  language?: string;
+}
+
+/** Direction and alignment actually applied: 'auto' follows the script's language. */
+export function effectiveTextLayout(
+  s: Pick<Settings, 'textDirection' | 'textAlign'>,
+  language: string | undefined,
+): { direction: 'ltr' | 'rtl'; textAlign: Settings['textAlign'] } {
+  if (s.textDirection !== 'auto') return { direction: s.textDirection, textAlign: s.textAlign };
+  const rtl = !!language && isRtlLanguage(language);
+  // In an automatically right-to-left script, the default "left" means "where lines start".
+  const textAlign = rtl && s.textAlign === 'left' ? 'right' : s.textAlign;
+  return { direction: rtl ? 'rtl' : 'ltr', textAlign };
 }
 
 export function applySettingsToDom(s: Settings, els: PrompterElements): void {
@@ -30,8 +45,9 @@ export function applySettingsToDom(s: Settings, els: PrompterElements): void {
     c.style.color = s.textColor;
     c.style.fontSize = `${s.fontSize}px`;
     c.style.lineHeight = String(s.lineHeight);
-    c.style.textAlign = s.textAlign;
-    c.style.direction = s.textDirection;
+    const layout = effectiveTextLayout(s, els.language);
+    c.style.textAlign = layout.textAlign;
+    c.style.direction = layout.direction;
     c.style.fontFamily = FONT_STACKS[s.fontFamily];
     c.style.paddingLeft = `${s.margin}%`;
     c.style.paddingRight = `${s.margin}%`;

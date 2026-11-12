@@ -5,9 +5,11 @@ import {
   createCommandState,
   detectCommand,
   firstSpeakable,
+  matchCommandPhrase,
   navigateParagraph,
   nextSpeakable,
   prevSpeakable,
+  splitSpoken,
 } from '@gotoprompter/prompter-core';
 import type {
   CommandName,
@@ -25,7 +27,18 @@ export interface ControllerOptions {
   getSettings: () => Settings;
   onIndexChange: (index: number) => void;
   onTap?: (index: number) => void;
+  /** A voice command was executed (after confirmation). */
+  onCommand?: (command: CommandName) => void;
 }
+
+/**
+ * A command heard in an interim result is held this long before it runs. If more words follow
+ * ("go back to the drawing board") it was speech, not a command, and is dropped. A final result
+ * confirms it at once.
+ */
+export const COMMAND_CONFIRM_MS = 450;
+
+export type FeedResult = { command: CommandName } | { type: 'pending' } | MatchResult;
 
 export interface MatcherConfig {
   locale?: string;
@@ -39,6 +52,13 @@ export class PrompterController {
   private prevIndex = 0;
   private raf = 0;
   private locale: string | undefined;
+  /** Command waiting for confirmation, with the spoken words up to and including it. */
+  private pending: { command: CommandName; timer: ReturnType<typeof setTimeout> } | null = null;
+  /**
+   * After a command ran: the spoken words up to and including it. While later updates of the
+   * same utterance still start with them, only the words that follow are matched.
+   */
+  private consumed: string[] | null = null;
   private readonly uninstallTap: () => void;
 
   constructor(private readonly opts: ControllerOptions) {
@@ -89,6 +109,8 @@ export class PrompterController {
     });
     this.matcher.setIndex(index);
     this.cmdState = createCommandState();
+    this.cancelPendingCommand();
+    this.consumed = null;
   }
 
   setIndex(i: number, opts: { animate?: boolean } = {}): void {
@@ -123,21 +145,69 @@ export class PrompterController {
   }
 
   /**
-   * Feed a recognition update. Returns the command executed or the match result.
+   * Feed a recognition update. Returns the command executed, `pending` while a command waits
+   * for confirmation, or the match result.
    * Voice commands are only detected when enabled in settings (spec §7.3).
    */
-  feedTranscript(text: string): { command: CommandName } | MatchResult {
+  feedTranscript(text: string, isFinal = false): FeedResult {
     if (!this.matcher) return { type: 'none' };
+    let words: string[] | null = null;
     if (this.opts.getSettings().voiceCommandsEnabled) {
+      words = splitSpoken(text, this.locale);
       const cmd = detectCommand(text, this.cmdState, this.tokensValue, this.index, this.locale);
       if (cmd) {
-        this.applyCommand(cmd.command);
-        return cmd;
+        this.cancelPendingCommand();
+        if (isFinal) return this.runCommand(cmd.command, words);
+        const spoken = words;
+        this.pending = {
+          command: cmd.command,
+          timer: setTimeout(() => {
+            if (this.pending) this.runCommand(this.pending.command, spoken);
+          }, COMMAND_CONFIRM_MS),
+        };
+        return { type: 'pending' };
+      }
+      if (this.pending) {
+        if (matchCommandPhrase(words)?.command === this.pending.command) {
+          // Same phrase again (a repeated interim, or its final): still a command.
+          return isFinal ? this.runCommand(this.pending.command, words) : { type: 'pending' };
+        }
+        this.cancelPendingCommand(); // more words followed: it was speech
+      }
+    } else if (this.pending) {
+      this.cancelPendingCommand();
+    }
+
+    let toMatch = text;
+    if (this.consumed) {
+      words ??= splitSpoken(text, this.locale);
+      const c = this.consumed;
+      if (words.length >= c.length && c.every((w, i) => words![i] === w)) {
+        const rest = words.slice(c.length);
+        if (rest.length === 0) return { type: 'none' };
+        toMatch = rest.join(' ');
+      } else {
+        this.consumed = null; // a new utterance
       }
     }
-    const result = this.matcher.feedTranscript(text);
+    const result = this.matcher.feedTranscript(toMatch);
     if (result.type === 'near' || result.type === 'jump') this.afterIndexChange({});
     return result;
+  }
+
+  private runCommand(command: CommandName, spoken: string[]): { command: CommandName } {
+    this.cancelPendingCommand();
+    this.consumed = spoken;
+    this.applyCommand(command);
+    this.opts.onCommand?.(command);
+    return { command };
+  }
+
+  /** Drop a command that is waiting for confirmation (listening stopped, script changed). */
+  cancelPendingCommand(): void {
+    if (!this.pending) return;
+    clearTimeout(this.pending.timer);
+    this.pending = null;
   }
 
   /** Used by the autoscroller: set the index without clearing anything else. */
@@ -211,6 +281,7 @@ export class PrompterController {
   }
 
   destroy(): void {
+    this.cancelPendingCommand();
     this.cancelAnimation();
     this.uninstallTap();
     this.opts.container.replaceChildren();

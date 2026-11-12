@@ -1,9 +1,10 @@
 ---
-title: "Teleprompters without a subscription: your real options"
-metaTitle: "Teleprompter without a subscription: options"
+title: "Free, pay-once or monthly: how teleprompter pricing really works"
+metaTitle: "Teleprompter pricing: free, once or monthly"
 description: Free, pay-once and subscription teleprompters compared on what you actually get, plus what a "lifetime" licence should mean before you pay for one.
 keywords: [teleprompter no subscription, lifetime licence, free teleprompter]
 date: 2026-11-01
+updated: 2026-11-13
 image: /images/blog/teleprompter-without-subscription.jpg
 imageAlt: Three price tags labelled free, once and monthly
 ---

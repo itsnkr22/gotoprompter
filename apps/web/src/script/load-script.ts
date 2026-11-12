@@ -7,6 +7,7 @@ import { services } from '../services';
 import { useHistoryStore } from '../state/history';
 import { useRuntimeStore } from '../state/runtime';
 import { useSettingsStore } from '../state/settings';
+import { exitVideoMode } from '../video/video-mode';
 
 export interface LoadOptions {
   restoreIndex?: number;
@@ -78,9 +79,25 @@ export function resetApp(): void {
   runtime.setIsStarting(false);
   runtime.setListening(false);
   runtime.setAutoscrollRunning(false);
-  if (runtime.videoMode) runtime.exitVideo();
+  // Stops the camera and saves a recording in progress; must run before the screen unmounts.
+  exitVideoMode();
   runtime.toggleSettings(false);
   runtime.setPhase('setup');
+}
+
+/**
+ * The full language detector finished loading: if the script on screen was detected with the
+ * light one and the better answer differs, switch to it (keeps the reading position).
+ */
+export function redetectLanguage(): void {
+  const runtime = useRuntimeStore.getState();
+  if (useSettingsStore.getState().languageSetting !== 'auto') return;
+  const text = runtime.scriptText.trim();
+  if (!text || runtime.detectedLanguage === null) return;
+  const { locale } = detectLanguage(text);
+  if (locale === runtime.selectedLanguage) return;
+  if (runtime.phase === 'prompter' && services.controller) reloadCurrentScript();
+  else runtime.setLanguages({ detected: locale, selected: locale });
 }
 
 /** Restart from the first word (spec §5.4). Does not stop listening. */

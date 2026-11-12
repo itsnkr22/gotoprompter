@@ -1,5 +1,7 @@
 // App boot sequence (spec §4.8, §10.3, §15, §14): runs once before the first render.
 import { installAnalytics } from './analytics';
+import { onFullDetectorReady } from './languages';
+import { redetectLanguage } from './script/load-script';
 import { env } from './env';
 import { DEMO_SCRIPT } from './script/demo-script';
 import { AutoScroller } from './scroll/autoscroller';
@@ -51,6 +53,7 @@ export function boot(): void {
     },
   });
 
+  onFullDetectorReady(redetectLanguage);
   installAnalytics();
   installTestHooks(fake);
 }

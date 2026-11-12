@@ -1,0 +1,29 @@
+{
+  "script": "Welcome to the weekly update.\nFirst we cover the numbers.\nThen we move forward with the plan.\nFinally we take questions.",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    { "transcript": "welcome to the weekly" },
+    { "transcript": "go forward" },
+    { "transcript": "first we cover" },
+    { "transcript": "go to the end" },
+    { "transcript": "ok" },
+    { "transcript": "go previous" },
+    { "transcript": "ok" },
+    { "transcript": "go restart" },
+    { "transcript": "welcome to" },
+    { "transcript": "go to the next" },
+    { "transcript": "ok" },
+    { "transcript": "go next" },
+    { "transcript": "then we move" },
+    { "transcript": "then we move forward" },
+    { "transcript": "we go forward" },
+    { "transcript": "ok" },
+    { "transcript": "go to beginning" },
+    { "transcript": "let us go" },
+    { "transcript": "go bottom" },
+    { "transcript": "ok" },
+    { "transcript": "go top" }
+  ]
+}

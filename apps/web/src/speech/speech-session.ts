@@ -1,5 +1,4 @@
 // Owns start/stop, auto-restart, silent-fail detection and routing of transcripts (spec §7.3).
-import { track } from '../analytics';
 import { COPY } from '../modals/copy';
 import { isIPad, isStandalone } from '../platform';
 import type { PrompterController } from '../prompter/prompter-controller';
@@ -14,26 +13,31 @@ export interface SpeechSessionDeps {
   onListeningChange: (listening: boolean) => void;
   /** Injected for tests. */
   now?: () => number;
+  /** Injected for tests; defaults to navigator.onLine. */
+  isOnline?: () => boolean;
 }
-
-/** Error codes on the first start that do NOT mean the browser lacks support. */
-const LEGIT_FIRST_ERRORS: ReadonlySet<SpeechErrorCode> = new Set([
-  'not-allowed',
-  'service-not-allowed',
-  'audio-capture',
-  'aborted',
-]);
 
 export const RESTART_LIMIT = 5;
 export const RESTART_WINDOW_MS = 10_000;
+/** A first start that ends sooner than this with no result and no error is a silent failure. */
+export const SILENT_FAIL_MS = 3000;
+/** Delay before retrying a start() that threw, and before a throttled quiet restart. */
+export const RETRY_MS = 300;
+export const QUIET_RESTART_MS = 1000;
+export const START_RETRIES = 3;
 
 export class SpeechSession {
   private wantListening = false;
-  private isFirstStart = true;
-  private gotResultOnFirstStart = false;
+  /** False until the engine has proved it works here (a result, or a plain "no speech"). */
+  private verified = false;
   private blocked = false;
   private restartTimes: number[] = [];
+  private startedAt = 0;
+  /** Error reported since the last start, if any: decides how the following `end` is handled. */
+  private lastError: SpeechErrorCode | null = null;
+  private retryTimer: ReturnType<typeof setTimeout> | null = null;
   private readonly now: () => number;
+  private readonly isOnline: () => boolean;
   private readonly unsubscribe: Array<() => void> = [];
 
   constructor(
@@ -41,6 +45,8 @@ export class SpeechSession {
     private readonly deps: SpeechSessionDeps,
   ) {
     this.now = deps.now ?? (() => Date.now());
+    this.isOnline =
+      deps.isOnline ?? (() => typeof navigator === 'undefined' || navigator.onLine !== false);
     this.unsubscribe.push(
       adapter.onTranscript((u) => this.onTranscript(u)),
       adapter.onError((code) => this.onError(code)),
@@ -63,13 +69,10 @@ export class SpeechSession {
     if (this.wantListening) return;
     this.wantListening = true;
     this.blocked = false;
-    try {
-      this.adapter.start();
-      this.deps.onListeningChange(true);
-    } catch {
-      this.wantListening = false;
-      this.deps.onListeningChange(false);
-    }
+    this.restartTimes = [];
+    this.deps.onListeningChange(true);
+    // If the previous session is still winding down, start() throws; startAdapter retries.
+    this.startAdapter(0);
   }
 
   stop(): void {
@@ -81,79 +84,115 @@ export class SpeechSession {
   }
 
   destroy(): void {
+    this.clearRetry();
     for (const u of this.unsubscribe) u();
     if (typeof document !== 'undefined')
       document.removeEventListener('visibilitychange', this.onVisibility);
   }
 
+  private clearRetry(): void {
+    if (this.retryTimer) clearTimeout(this.retryTimer);
+    this.retryTimer = null;
+  }
+
   private stopInternal(): void {
     this.wantListening = false;
+    this.clearRetry();
     this.adapter.stop();
+    this.deps.controller()?.cancelPendingCommand();
     this.deps.onListeningChange(false);
   }
 
+  /** start() can throw while the engine is still shutting down: retry a few times, then give up. */
+  private startAdapter(attempt: number): void {
+    this.clearRetry();
+    if (!this.wantListening) return;
+    try {
+      this.adapter.start();
+      this.startedAt = this.now();
+      this.lastError = null;
+    } catch {
+      if (attempt >= START_RETRIES) {
+        this.deps.runtime().showToast('generic', COPY.recognitionUnstable, 6000);
+        this.stopInternal();
+        return;
+      }
+      this.retryTimer = setTimeout(() => {
+        this.retryTimer = null;
+        this.startAdapter(attempt + 1);
+      }, RETRY_MS);
+    }
+  }
+
   private onTranscript(u: TranscriptUpdate): void {
-    if (this.isFirstStart) this.gotResultOnFirstStart = true;
+    this.verified = true;
     this.restartTimes = []; // real speech arrived: reset the restart throttle
+    if (!this.wantListening) return; // a late result after stop must not move the script
     const controller = this.deps.controller();
     if (!controller) return;
-    const r = controller.feedTranscript(u.text);
-    if ('command' in r) track('voice-command', { command: r.command });
+    controller.feedTranscript(u.text, u.isFinal);
   }
 
   private onError(code: SpeechErrorCode): void {
-    if (this.isFirstStart && !this.gotResultOnFirstStart) {
-      this.isFirstStart = false;
-      if (!LEGIT_FIRST_ERRORS.has(code)) this.deps.runtime().openModalId('browserUnsupported');
-      if (code === 'not-allowed' || code === 'service-not-allowed') {
-        this.deps.runtime().showToast('generic', COPY.micDenied, 6000);
-      }
-      if (code === 'aborted') this.handleAborted();
-      this.stopInternal();
-      return;
-    }
+    this.lastError = code;
+    const runtime = this.deps.runtime();
     switch (code) {
-      case 'aborted':
-        this.handleAborted();
-        this.stopInternal();
-        return;
+      case 'no-speech':
+        this.verified = true; // the engine listened and heard silence: it works
+        return; // onEnd restarts
       case 'language-not-supported':
-        this.deps.runtime().showToast('generic', COPY.languageNotSupported, 6000);
-        this.deps
-          .runtime()
-          .setLanguages({ detected: this.deps.runtime().detectedLanguage, selected: 'en-US' });
+        runtime.showToast('generic', COPY.languageNotSupported, 6000);
+        runtime.setLanguages({ detected: runtime.detectedLanguage, selected: 'en-US' });
+        this.deps.controller()?.configureMatcher({ locale: 'en-US' });
         this.adapter.setLanguage('en-US');
-        return;
+        return; // onEnd restarts in English
       case 'not-allowed':
       case 'service-not-allowed':
-        this.deps.runtime().showToast('generic', COPY.micDenied, 6000);
+        runtime.showToast('generic', COPY.micDenied, 6000);
         this.stopInternal();
         return;
+      case 'audio-capture':
+        runtime.showToast('generic', COPY.noMicrophone, 6000);
+        this.stopInternal();
+        return;
+      case 'aborted':
+        this.blocked = true;
+        if (isIPad() && isStandalone()) runtime.openModalId('ipadPwaBlocked');
+        this.stopInternal();
+        return;
+      case 'network':
+        if (!this.isOnline()) {
+          runtime.showToast('generic', COPY.speechOffline, 8000);
+          this.stopInternal();
+        } else if (!this.verified) {
+          // Online, yet the very first start cannot reach a recogniser (e.g. Brave).
+          runtime.openModalId('browserUnsupported');
+          this.stopInternal();
+        }
+        return; // verified + online: a blip, onEnd restarts
       default:
-        return; // 'no-speech', 'network', 'unknown', 'audio-capture': onEnd restarts
+        if (!this.verified) {
+          runtime.openModalId('browserUnsupported');
+          this.stopInternal();
+        }
+        return;
     }
-  }
-
-  private handleAborted(): void {
-    this.blocked = true;
-    if (isIPad() && isStandalone()) this.deps.runtime().openModalId('ipadPwaBlocked');
   }
 
   private onEnd(): void {
-    if (this.isFirstStart && !this.gotResultOnFirstStart) {
-      this.isFirstStart = false;
-      if (this.wantListening) {
-        // Ended immediately with no result and no error: silent failure (e.g. Arc).
-        this.deps.runtime().openModalId('browserUnsupported');
-        this.stopInternal();
-      }
-      return;
-    }
-    this.isFirstStart = false;
     if (this.blocked) return;
     if (!this.wantListening) {
       this.deps.onListeningChange(false);
       return;
+    }
+    if (!this.verified && this.lastError === null) {
+      if (this.now() - this.startedAt < SILENT_FAIL_MS) {
+        // Ended at once with no result and no error: silent failure (e.g. Arc).
+        this.deps.runtime().openModalId('browserUnsupported');
+        this.stopInternal();
+        return;
+      }
+      this.verified = true; // it listened for a while and timed out on silence
     }
     if (typeof document !== 'undefined' && document.visibilityState !== 'visible') return; // restart on visible
     this.tryRestart();
@@ -163,25 +202,33 @@ export class SpeechSession {
     const now = this.now();
     this.restartTimes = this.restartTimes.filter((t) => now - t < RESTART_WINDOW_MS);
     if (this.restartTimes.length >= RESTART_LIMIT) {
+      const quiet = this.lastError === null || this.lastError === 'no-speech';
+      if (quiet) {
+        // The engine keeps timing out on silence (a long pause): keep listening, just slower.
+        this.clearRetry();
+        this.retryTimer = setTimeout(() => {
+          this.retryTimer = null;
+          this.startAdapter(0);
+        }, QUIET_RESTART_MS);
+        return;
+      }
       this.deps.runtime().showToast('generic', COPY.recognitionUnstable, 6000);
       this.stopInternal();
       return;
     }
     this.restartTimes.push(now);
-    try {
-      this.adapter.start();
-    } catch {
-      this.stopInternal();
-    }
+    this.startAdapter(0);
   }
 
   private onVisibility = (): void => {
-    if (document.visibilityState === 'visible' && this.wantListening && !this.blocked) {
-      try {
-        this.adapter.start();
-      } catch {
-        /* already running or restarting */
-      }
+    if (document.visibilityState !== 'visible' || !this.wantListening || this.blocked) return;
+    if (this.retryTimer) return; // a restart is already scheduled
+    try {
+      this.adapter.start();
+      this.startedAt = this.now();
+      this.lastError = null;
+    } catch {
+      /* already running */
     }
   };
 }

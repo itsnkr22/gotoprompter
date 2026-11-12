@@ -6,7 +6,8 @@ import { safeLocalStorage } from './storage';
 
 export type ScrollingMode = 'voice' | 'sound' | 'constant';
 export type TextAlign = 'left' | 'center' | 'right';
-export type TextDirection = 'ltr' | 'rtl';
+/** 'auto' follows the script's language (right-to-left for Arabic, Hebrew, Persian, Urdu). */
+export type TextDirection = 'auto' | 'ltr' | 'rtl';
 export type FontFamily = 'mono' | 'sans' | 'serif' | 'comic' | 'dyslexic';
 
 export interface Settings {
@@ -63,7 +64,7 @@ export const DEFAULT_SETTINGS: Settings = {
   selectedAudioDeviceId: null,
   textColor: '#ffffff',
   bgColor: '#000000',
-  textDirection: 'ltr',
+  textDirection: 'auto',
   fontFamily: 'mono',
 };
 
@@ -92,7 +93,7 @@ export const SESSION_ONLY_KEYS = [
 const ENUMS = {
   scrollingMode: ['voice', 'sound', 'constant'],
   textAlign: ['left', 'center', 'right'],
-  textDirection: ['ltr', 'rtl'],
+  textDirection: ['auto', 'ltr', 'rtl'],
   fontFamily: ['mono', 'sans', 'serif', 'comic', 'dyslexic'],
 } as const;
 
@@ -167,7 +168,13 @@ export const useSettingsStore = create<SettingsStore>()(
     }),
     {
       name: 'vp.settings.v1',
-      version: 1,
+      version: 2,
+      // v1 had no 'auto' direction and stored 'ltr' for everyone: let those follow the language.
+      migrate: (persisted, version) => {
+        const p = (persisted ?? {}) as Record<string, unknown>;
+        if (version < 2 && p['textDirection'] === 'ltr') p['textDirection'] = 'auto';
+        return p as unknown as SettingsStore;
+      },
       storage: createJSONStorage(() => safeLocalStorage),
       partialize: (state) => {
         const out: Partial<Settings> = {};

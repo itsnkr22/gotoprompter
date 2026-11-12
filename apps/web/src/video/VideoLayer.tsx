@@ -1,16 +1,51 @@
 // Camera preview and video controls (spec §11.1–§11.2).
+import { useEffect, useState } from 'react';
 import { useRuntimeStore } from '../state/runtime';
 import { recordingSupported } from './recorder';
-import { flipCamera, startRecording, stopRecording, toggleVideoLayout } from './video-mode';
+import {
+  flipCamera,
+  recorder,
+  startRecording,
+  stopRecording,
+  toggleVideoLayout,
+} from './video-mode';
 
 const pill =
   'pointer-events-auto rounded-full bg-surface/90 px-4 py-2 text-sm font-medium text-fg/90 backdrop-blur transition-all hover:bg-raised hover:text-fg';
+
+/** m:ss (h:mm:ss past an hour). */
+export function formatElapsed(totalSeconds: number): string {
+  const s = Math.max(0, Math.floor(totalSeconds));
+  const pad = (n: number): string => String(n).padStart(2, '0');
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  return h > 0 ? `${h}:${pad(m)}:${pad(s % 60)}` : `${m}:${pad(s % 60)}`;
+}
+
+function useRecordingSeconds(recording: boolean): number {
+  const [seconds, setSeconds] = useState(0);
+  useEffect(() => {
+    if (!recording) {
+      setSeconds(0);
+      return;
+    }
+    const update = (): void => {
+      const t0 = recorder.startTime;
+      setSeconds(t0 ? (Date.now() - t0) / 1000 : 0);
+    };
+    update();
+    const timer = setInterval(update, 500);
+    return () => clearInterval(timer);
+  }, [recording]);
+  return seconds;
+}
 
 export function VideoControls() {
   const videoMode = useRuntimeStore((r) => r.videoMode);
   const layout = useRuntimeStore((r) => r.videoLayout);
   const recording = useRuntimeStore((r) => r.recording);
   const canRecord = recordingSupported();
+  const seconds = useRecordingSeconds(recording);
   return (
     <div
       id="videoControls"
@@ -44,6 +79,7 @@ export function VideoControls() {
         id="videoLayoutToggleBtn"
         type="button"
         title="Switch layout"
+        aria-label={layout === 'split' ? 'Switch to overlay layout' : 'Switch to split layout'}
         className={pill}
         onClick={toggleVideoLayout}
       >
@@ -55,6 +91,7 @@ export function VideoControls() {
             id="videoRecordBtn"
             type="button"
             title="Start recording"
+            aria-label="Start recording"
             className={`${recording ? 'hidden' : 'flex'} pointer-events-auto items-center gap-2 rounded-full bg-red-600/90 px-4 py-2 text-sm font-medium text-white backdrop-blur hover:bg-red-700`}
             onClick={startRecording}
           >
@@ -65,6 +102,7 @@ export function VideoControls() {
             id="videoStopBtn"
             type="button"
             title="Stop recording"
+            aria-label="Stop recording"
             className={`${recording ? 'flex' : 'hidden'} vp-recording-pulse pointer-events-auto items-center gap-2 rounded-full bg-red-600/90 px-4 py-2 text-sm font-medium text-white backdrop-blur hover:bg-red-700`}
             onClick={stopRecording}
           >
@@ -78,7 +116,9 @@ export function VideoControls() {
         className={`${recording ? 'flex' : 'hidden'} pointer-events-none items-center gap-2`}
       >
         <span className="vp-recording-pulse h-2.5 w-2.5 rounded-full bg-red-500" />
-        <span className="text-xs font-medium text-red-400">REC</span>
+        <span className="text-xs font-medium text-red-400 tabular-nums" role="timer">
+          REC {formatElapsed(seconds)}
+        </span>
       </div>
     </div>
   );

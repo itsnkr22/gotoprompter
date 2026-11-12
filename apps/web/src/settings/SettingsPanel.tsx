@@ -6,7 +6,6 @@ import { stopAllScrolling } from '../prompter/mic-state';
 import { reloadCurrentScript } from '../script/load-script';
 import { services } from '../services';
 import { LanguageDropdown } from '../setup/LanguageDropdown';
-import { useFlagsStore } from '../state/flags';
 import { useRuntimeStore } from '../state/runtime';
 import type {
   FontFamily,
@@ -43,7 +42,6 @@ const AlignIcon = ({ d }: { d: string }) => (
 
 export function SettingsPanel() {
   const s = useSettingsStore();
-  const betaHMirror = useFlagsStore((f) => f.betaHMirror);
   const toggleSettings = useRuntimeStore((r) => r.toggleSettings);
   const googleDocUrl = useRuntimeStore((r) => r.googleDocUrl);
   const panelRef = useRef<HTMLElement>(null);
@@ -204,15 +202,16 @@ export function SettingsPanel() {
         <Toggle
           id="mirrorToggle"
           labelId="mirrorModeLabel"
-          label={betaHMirror ? 'Mirror Mode (vertical)' : 'Mirror Mode'}
+          label="Mirror Mode"
+          hint="Flips top to bottom, for teleprompter glass"
           checked={s.mirrorVertical}
           onChange={(v) => setKey('mirrorVertical', v)}
         />
         <Toggle
           id="hMirrorToggle"
           rowId="hMirrorRow"
-          hidden={!betaHMirror}
           label="Mirror Mode (horizontal)"
+          hint="Flips left to right; both on = upside down"
           checked={s.mirrorHorizontal}
           onChange={(v) => setKey('mirrorHorizontal', v)}
         />
@@ -225,7 +224,7 @@ export function SettingsPanel() {
         <Toggle
           id="voiceCommandToggle"
           label="Voice Commands"
-          hint={'Say "go back", "go next", "go start" or "go finish"'}
+          hint={'Say "go back", "go forward", "go restart" or "go to the end"'}
           checked={s.voiceCommandsEnabled}
           onChange={(v) => setKey('voiceCommandsEnabled', v)}
         />
@@ -391,6 +390,13 @@ export function SettingsPanel() {
           value={s.textDirection}
           onChange={(v) => setKey('textDirection', v)}
           options={[
+            {
+              value: 'auto',
+              id: 'dirAutoBtn',
+              label: 'Auto (follow the language)',
+              ariaLabel: 'Follow the language',
+              className: 'col-span-2',
+            },
             { value: 'ltr', id: 'dirLtrBtn', label: 'Left to Right', ariaLabel: 'Left to Right' },
             { value: 'rtl', id: 'dirRtlBtn', label: 'Right to Left', ariaLabel: 'Right to Left' },
           ]}

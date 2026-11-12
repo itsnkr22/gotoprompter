@@ -1,0 +1,335 @@
+{
+  "script": "Welcome to the weekly update.\nFirst we cover the numbers.\nThen we move forward with the plan.\nFinally we take questions.",
+  "options": {
+    "voiceCommands": true
+  },
+  "events": [
+    {
+      "transcript": "welcome to the weekly"
+    },
+    {
+      "transcript": "go forward"
+    },
+    {
+      "transcript": "first we cover"
+    },
+    {
+      "transcript": "go to the end"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go previous"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go restart"
+    },
+    {
+      "transcript": "welcome to"
+    },
+    {
+      "transcript": "go to the next"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go next"
+    },
+    {
+      "transcript": "then we move"
+    },
+    {
+      "transcript": "then we move forward"
+    },
+    {
+      "transcript": "we go forward"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go to beginning"
+    },
+    {
+      "transcript": "let us go"
+    },
+    {
+      "transcript": "go bottom"
+    },
+    {
+      "transcript": "ok"
+    },
+    {
+      "transcript": "go top"
+    }
+  ],
+  "tokens": [
+    {
+      "raw": "Welcome",
+      "clean": "welcome",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 0
+    },
+    {
+      "raw": "to",
+      "clean": "to",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 1
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 2
+    },
+    {
+      "raw": "weekly",
+      "clean": "weekly",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 3
+    },
+    {
+      "raw": "update.",
+      "clean": "update",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 4
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 5
+    },
+    {
+      "raw": "First",
+      "clean": "first",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 6
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 7
+    },
+    {
+      "raw": "cover",
+      "clean": "cover",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 8
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 9
+    },
+    {
+      "raw": "numbers.",
+      "clean": "numbers",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 10
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 11
+    },
+    {
+      "raw": "Then",
+      "clean": "then",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 12
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 13
+    },
+    {
+      "raw": "move",
+      "clean": "move",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 14
+    },
+    {
+      "raw": "forward",
+      "clean": "forward",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 15
+    },
+    {
+      "raw": "with",
+      "clean": "with",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 16
+    },
+    {
+      "raw": "the",
+      "clean": "the",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 17
+    },
+    {
+      "raw": "plan.",
+      "clean": "plan",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 18
+    },
+    {
+      "raw": "",
+      "clean": "",
+      "kind": "break",
+      "skip": true,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 19
+    },
+    {
+      "raw": "Finally",
+      "clean": "finally",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 20
+    },
+    {
+      "raw": "we",
+      "clean": "we",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 21
+    },
+    {
+      "raw": "take",
+      "clean": "take",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": false,
+      "index": 22
+    },
+    {
+      "raw": "questions.",
+      "clean": "questions",
+      "kind": "word",
+      "skip": false,
+      "isNote": false,
+      "isSentenceEnd": true,
+      "index": 23
+    }
+  ],
+  "expectIndexAfterEach": [
+    1,
+    6,
+    7,
+    23,
+    23,
+    20,
+    20,
+    0,
+    1,
+    6,
+    6,
+    12,
+    13,
+    14,
+    20,
+    20,
+    0,
+    0,
+    23,
+    23,
+    0
+  ],
+  "expectResults": [
+    "near",
+    "command:go next",
+    "near",
+    "command:go finish",
+    "none",
+    "command:go back",
+    "none",
+    "command:go start",
+    "near",
+    "command:go next",
+    "none",
+    "command:go next",
+    "near",
+    "near",
+    "command:go next",
+    "none",
+    "command:go start",
+    "none",
+    "command:go finish",
+    "none",
+    "command:go start"
+  ]
+}

@@ -14,6 +14,7 @@ class FakeMediaRecorder {
   mimeType: string;
   ondataavailable: ((e: { data: Blob }) => void) | null = null;
   onstop: (() => void) | null = null;
+  onerror: (() => void) | null = null;
   constructor(_s: MediaStream, opts?: { mimeType?: string }) {
     this.mimeType = opts?.mimeType ?? 'video/webm';
   }
@@ -81,5 +82,48 @@ describe('recorder', () => {
     r2.stop();
     expect(onEmpty).toHaveBeenCalled();
     expect(download).toHaveBeenCalledTimes(1);
+  });
+
+  it('saves what was captured when the recorder errors, and never finishes twice', () => {
+    globalThis.MediaRecorder = FakeMediaRecorder as unknown as typeof MediaRecorder;
+    const download = vi.fn();
+    const onStop = vi.fn();
+    const onError = vi.fn();
+    const r = new VideoRecorder({ download, onStop, onError });
+    r.attach({} as MediaStream);
+    r.start();
+    expect(r.startTime).toBeGreaterThan(0);
+    const inner = (r as unknown as { recorder: FakeMediaRecorder }).recorder;
+    inner.onerror?.();
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(download).toHaveBeenCalledTimes(1);
+    expect(r.recording).toBe(false);
+    expect(r.startTime).toBe(0);
+    r.stop();
+    inner.onstop?.();
+    expect(download).toHaveBeenCalledTimes(1);
+    expect(onStop).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not start on a stream whose tracks have all ended, or when the recorder throws', () => {
+    globalThis.MediaRecorder = FakeMediaRecorder as unknown as typeof MediaRecorder;
+    const onStart = vi.fn();
+    const onError = vi.fn();
+    const r = new VideoRecorder({ onStart, onError });
+    r.attach({ getTracks: () => [{ readyState: 'ended' }] } as unknown as MediaStream);
+    r.start();
+    expect(onStart).not.toHaveBeenCalled();
+
+    class ThrowingRecorder extends FakeMediaRecorder {
+      override start(): void {
+        throw new Error('NotSupportedError');
+      }
+    }
+    globalThis.MediaRecorder = ThrowingRecorder as unknown as typeof MediaRecorder;
+    r.attach({ getTracks: () => [{ readyState: 'live' }] } as unknown as MediaStream);
+    r.start();
+    expect(onStart).not.toHaveBeenCalled();
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(r.recording).toBe(false);
   });
 });

@@ -1,32 +1,45 @@
 ---
-title: "A teleprompter in 60+ languages: how detection and recognition work"
-metaTitle: "Teleprompter in 60+ languages: how it works"
-description: "How a voice-following teleprompter detects your script's language, where recognition runs, mixed-language scripts, and when Sound mode is the better choice."
+title: "Multilingual scripts: how a teleprompter knows what you're reading"
+metaTitle: "How a teleprompter detects your language"
+description: "How a voice-following teleprompter works out your script's language from its alphabet and wording, handles right-to-left text, and copes with mixed scripts."
 keywords: [multilingual teleprompter, teleprompter languages, speech recognition]
 date: 2026-10-29
+updated: 2026-11-13
 image: /images/blog/teleprompter-in-60-languages.jpg
 imageAlt: Script text in several scripts and alphabets
 ---
 
-> The language is detected from the script text, so you rarely have to choose it. Recognition runs on the device on Mac and in most modern browsers. For a script that mixes languages, bracket the foreign words so they are shown but not matched. For a language the recognizer does not support, Sound mode still scrolls.
+> The language is worked out from the script text, first from its writing system and then from its wording, so you rarely have to choose it. Arabic, Hebrew, Persian and Urdu are laid out right to left automatically. For a script that mixes languages, bracket the foreign words so they are shown but not matched. For a language the recognizer does not support, Sound mode still scrolls.
 
-## Detection from the script
+## How the language is worked out
 
 A speech recognizer has to be told which language to listen for; it cannot guess from audio alone without a delay you would notice. Asking you to pick from a list of sixty every time you paste a script is the obvious solution and the annoying one.
 
-Instead, we detect the language from the text. The script is right there before you say a word, and a few sentences of text are enough to identify most languages with high confidence. The web app runs a small language-identification model over the pasted text and picks from the 34 languages the browser engines support; the Mac app does the same against the list of locales Apple's on-device recognition offers, which is more than sixty. If the guess is wrong, or the script is too short to be sure, you can pick manually from the settings and the app remembers the choice for that script.
+Instead, we read the script. It is right there before you say a word, and the web app looks at it in two passes.
+
+The first pass is the alphabet. Many writing systems belong to exactly one of the languages a recognizer offers: Greek, Hebrew, Thai, Korean, Georgian, Armenian, Tamil, Telugu and a dozen more. If most of the letters come from one of those, the question is settled without any statistics. Scripts shared by several languages get a second look at the letters only one of them uses: ї and є point to Ukrainian rather than Russian, ٹ and ے to Urdu rather than Arabic, پ and گ to Persian.
+
+The second pass is wording, for everything written in Latin letters and the remaining Cyrillic. A language-identification model compares the text against the letter patterns of about sixty languages. A few sentences are enough for most of them. Close relatives need more: one line of Danish can pass for Norwegian, a paragraph cannot.
+
+Between the two passes the web app recognises 51 of its 65 languages on its own. The other 14 are ones no detector separates reliably from a neighbour, such as Malay from Indonesian or Croatian from Serbian, and you pick those from the menu once. The Mac app does the same job against the locales Apple's on-device recognition offers, which is more than sixty. If the guess is wrong, or the script is too short to be sure, the app says so and you choose manually.
+
+## Right-to-left text and regional accents
+
+Knowing the language also fixes the layout. Arabic, Hebrew, Persian and Urdu scripts are set right to left, with lines starting at the right edge, without you touching the direction setting. You can still force either direction if a script needs it.
+
+Accent matters to a recognizer as much as language does. Brazilian and European Portuguese, British, Australian and Indian English, Mexican Spanish and Canadian French are separate entries in the menu, and when the detected language has a variant that matches your browser's own language setting, the app uses it. A reader in São Paulo gets the Brazilian recognizer without asking.
 
 Detection happens on the device as well. The text never leaves the app to be classified.
 
-## On-device recognition
+## Where the listening happens
 
 Where recognition runs matters for privacy, for latency and for whether the thing works on a plane.
 
 On Mac, gotoprompter uses Apple's Speech framework with on-device recognition. The audio is processed locally, nothing is sent anywhere, and it works offline once the dictation model for a language is installed, which macOS handles automatically for most languages in System Settings. The set of supported languages is Apple's, which is why we say "60+" rather than a fixed number: it grows with macOS releases.
 
-In the browser, the web app uses the Web Speech API. Safari and recent versions of Chrome perform recognition on the device for most of the 34 languages we offer. Some browsers and some languages may route audio to the vendor's service; the browser's own privacy policy governs that, and we mention it in ours. Firefox does not ship the API at all, so voice scrolling is unavailable there and the app offers Sound and Constant modes instead.
+In the browser, the web app uses the Web Speech API, which means the browser does the listening, not us. Where that happens depends on the browser and the language: Safari can recognise many languages on the device, while Chrome and Edge normally pass the audio to their vendor's speech service, which is also why voice scrolling there needs a connection. The browser's own privacy policy governs that, and we mention it in ours. Your script text is never sent anywhere either way. Firefox does not ship the API at all, so voice scrolling is unavailable there and the app offers Sound and Constant modes instead; those two work offline in every browser.
 
-## Mixed languages with brackets
+## Scripts that switch language
 
 Real scripts mix languages more often than language menus assume. A product name, a quotation, a greeting in the audience's language, a technical term that only exists in English.
 
@@ -48,7 +61,7 @@ Switching modes takes one click, and the display settings carry over, so trying 
 
 ## Frequently asked questions
 
-**Which 34 languages does the web app support?** The ones Chrome, Edge and Safari can recognize reliably, with automatic detection: most European languages, Arabic, Hebrew, Hindi, Chinese, Japanese, Korean, Thai, Vietnamese and others. The full list is in the language menu inside the app.
+**Which languages does the web app support?** Sixty-five: most European languages, Arabic, Hebrew, Persian and Urdu, Hindi, Bengali, Tamil, Telugu and other Indian languages, Chinese, Cantonese, Japanese, Korean, Thai, Vietnamese, Indonesian, Filipino, Swahili, Afrikaans and more. The full list is in the language menu inside the app, with the automatically detected ones marked. Which of them a given browser can actually recognise is up to that browser; if it cannot, the app tells you and falls back to English.
 
 **Does the Mac app need an internet connection to download a language?** The first time you use a language, macOS may download its on-device dictation model. After that recognition works fully offline.
 

@@ -6,7 +6,7 @@ export type VideoLayout = 'split' | 'overlay';
 export type Facing = 'user' | 'environment';
 export type ModalId =
   'browserUnsupported' | 'ipadPwaBlocked' | 'androidVideoLimit' | 'googleDocImport';
-export type ToastId = 'langDetectionWarning' | 'swUpdate' | 'generic';
+export type ToastId = 'langDetectionWarning' | 'swUpdate' | 'recordingReady' | 'generic';
 
 export interface Toast {
   id: ToastId;

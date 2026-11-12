@@ -1,7 +1,7 @@
 // Public API — docs/ENGINE_SPEC.md §1.
 
 /** Revision of docs/ENGINE_SPEC.md this package implements. Bumped when the spec changes. */
-export const ENGINE_SPEC_VERSION = 1;
+export const ENGINE_SPEC_VERSION = 2;
 
 export type {
   AutoScrollMode,
@@ -20,7 +20,15 @@ export type {
 
 export { tokenize } from './tokenizer.js';
 export { Matcher, SPOKEN_WINDOW, FAR_BACKWARD_DISTANCE } from './matcher.js';
-export { detectCommand, commandTargetIndex, createCommandState } from './commands.js';
+export {
+  detectCommand,
+  commandTargetIndex,
+  createCommandState,
+  matchCommandPhrase,
+  COMMAND_KEYWORDS,
+  MAX_COMMAND_WORDS,
+} from './commands.js';
+export type { CommandPhrase } from './commands.js';
 export {
   AutoScroller,
   wordCost,
@@ -55,6 +63,8 @@ export {
   DEFAULT_LOCALE,
   resolveLanguage,
   languageById,
+  regionalVariant,
+  LANGUAGE_COUNT,
 } from './languages.js';
 export { STOPWORDS_EN, STOPWORDS_GENERIC, DEFAULT_STOPWORDS, isStopword } from './stopwords.js';
 export { replayScenario } from './harness.js';

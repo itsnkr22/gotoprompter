@@ -1,9 +1,10 @@
 ---
-title: How to use a teleprompter on Zoom without anyone seeing it
-metaTitle: "How to use a teleprompter on Zoom"
+title: "Reading from a script on Zoom: a setup your audience can't see"
+metaTitle: "Hidden script on Zoom: a Mac setup guide"
 description: A step-by-step Zoom setup on Mac, where to put the window, what font size works, how to test the screen share, and what recordings do and do not capture.
 keywords: [teleprompter zoom, zoom notes, screen share]
 date: 2026-11-04
+updated: 2026-11-13
 image: /images/blog/how-to-use-a-teleprompter-on-zoom.jpg
 imageAlt: A floating script window next to a webcam during a Zoom call
 ---
@@ -30,7 +31,7 @@ gotoprompter for Mac turns that flag on by default. There is no plug-in to insta
 4. **Join the Zoom call** and, if you need to, share your screen or your slides. The prompter stays visible to you and absent from the share.
 5. **Talk.** The script follows your voice. If a participant asks a question, answer it; the script waits until you return to the text.
 
-## Where to put the window
+## Window placement and eye line
 
 The goal is for the distance between the camera lens and the line you are reading to be as small as possible. Every centimetre of separation shows up as your eyes pointing slightly below the lens.
 

@@ -34,6 +34,8 @@ export interface RecorderEvents {
   onStart?: () => void;
   onStop?: (info: { durationSec: number; mime: string; chunks: number }) => void;
   onEmpty?: () => void;
+  /** The recorder failed mid-recording; whatever was captured is still saved. */
+  onError?: () => void;
   download?: (blob: Blob, filename: string) => void;
 }
 
@@ -45,7 +47,8 @@ export function downloadBlob(blob: Blob, filename: string): void {
   document.body.appendChild(a);
   a.click();
   a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  // Generous: some browsers read the blob lazily, and a large file revoked early is truncated.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
 export class VideoRecorder {
@@ -65,6 +68,11 @@ export class VideoRecorder {
     return this.recorder !== null && this.recorder.state !== 'inactive';
   }
 
+  /** Epoch ms when the current recording started (0 when idle). */
+  get startTime(): number {
+    return this.recording ? this.startedAt : 0;
+  }
+
   attach(stream: MediaStream): void {
     this.streamValue = stream;
   }
@@ -76,35 +84,64 @@ export class VideoRecorder {
   start(): void {
     const stream = this.streamValue;
     if (!stream || !recordingSupported() || this.recording) return;
+    // A stream whose tracks have all ended (camera unplugged) records nothing.
+    const tracks = typeof stream.getTracks === 'function' ? stream.getTracks() : null;
+    if (tracks && tracks.length > 0 && !tracks.some((t) => t.readyState === 'live')) return;
     this.chunks = [];
     this.mime = pickMimeType();
+    let r: MediaRecorder;
     try {
-      this.recorder = this.mime
+      r = this.mime
         ? new MediaRecorder(stream, { mimeType: this.mime })
         : new MediaRecorder(stream);
     } catch {
-      this.recorder = new MediaRecorder(stream);
-      this.mime = this.recorder.mimeType;
+      try {
+        r = new MediaRecorder(stream);
+      } catch {
+        this.events.onError?.();
+        return;
+      }
+      this.mime = r.mimeType;
     }
-    this.recorder.ondataavailable = (e: BlobEvent) => {
+    r.ondataavailable = (e: BlobEvent) => {
       if (e.data && e.data.size > 0) this.chunks.push(e.data);
     };
-    this.recorder.onstop = () => this.finish();
+    r.onstop = () => {
+      if (this.recorder === r) this.finish();
+    };
+    r.onerror = () => {
+      if (this.recorder !== r) return;
+      this.events.onError?.();
+      this.stop();
+    };
+    this.recorder = r;
     this.startedAt = Date.now();
-    this.recorder.start(1000);
+    try {
+      r.start(1000);
+    } catch {
+      this.recorder = null;
+      this.events.onError?.();
+      return;
+    }
     this.events.onStart?.();
   }
 
   stop(): void {
     const r = this.recorder;
     if (!r) return;
-    if (r.state !== 'inactive') r.stop();
-    else this.finish();
+    if (r.state !== 'inactive') {
+      try {
+        r.stop();
+      } catch {
+        this.finish();
+      }
+    } else this.finish();
   }
 
   private finish(): void {
     const r = this.recorder;
-    const mime = r?.mimeType || this.mime;
+    if (!r) return; // already finished
+    const mime = r.mimeType || this.mime;
     this.recorder = null;
     const durationSec = Math.round((Date.now() - this.startedAt) / 1000);
     if (this.chunks.length === 0) {

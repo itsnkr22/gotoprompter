@@ -1,26 +1,68 @@
 // Video mode orchestration (spec §11): enter/exit, layout, flip camera, device switching.
 import { track } from '../analytics';
 import { COPY } from '../modals/copy';
-import { isAndroid } from '../platform';
+import { isAndroid, isIOS, isStandalone } from '../platform';
 import { applyDockOpacity } from '../prompter/mic-state';
 import { services } from '../services';
 import { useRuntimeStore } from '../state/runtime';
 import { useSettingsStore } from '../state/settings';
 import type { VideoLayout } from '../state/runtime';
-import { VideoRecorder, recordingSupported } from './recorder';
+import { VideoRecorder, downloadBlob, recordingSupported } from './recorder';
+
+/** Asks before the tab closes while a recording would be lost. */
+const warnBeforeUnload = (e: BeforeUnloadEvent): void => {
+  e.preventDefault();
+  e.returnValue = COPY.recordingLeaveWarning;
+};
+
+/**
+ * Hand the finished file to the user. An iOS home-screen app cannot download a blob, so there
+ * the file goes through the share sheet, opened from a button because sharing needs a tap.
+ */
+export function deliverRecording(blob: Blob, filename: string): void {
+  const canShareFiles =
+    isIOS() &&
+    isStandalone() &&
+    typeof File !== 'undefined' &&
+    typeof navigator.share === 'function' &&
+    typeof navigator.canShare === 'function';
+  if (canShareFiles) {
+    const file = new File([blob], filename, { type: blob.type });
+    if (navigator.canShare({ files: [file] })) {
+      const runtime = useRuntimeStore.getState();
+      runtime.showToast('recordingReady', COPY.recordingReady, Infinity, {
+        label: COPY.recordingSave,
+        onClick: () => {
+          navigator
+            .share({ files: [file] })
+            .then(() => useRuntimeStore.getState().dismissToast('recordingReady'))
+            .catch(() => {
+              /* sheet dismissed: the toast stays so the file can still be saved */
+            });
+        },
+      });
+      return;
+    }
+  }
+  downloadBlob(blob, filename);
+}
 
 export const recorder = new VideoRecorder({
   onStart: () => {
     useRuntimeStore.getState().setRecording(true);
     applyDockOpacity();
+    window.addEventListener('beforeunload', warnBeforeUnload);
     track('video-record-start');
   },
   onStop: ({ durationSec, mime }) => {
     useRuntimeStore.getState().setRecording(false);
     applyDockOpacity();
+    window.removeEventListener('beforeunload', warnBeforeUnload);
     track('video-record-stop', { durationSec, mime });
   },
   onEmpty: () => useRuntimeStore.getState().showToast('generic', 'Nothing was recorded.', 4000),
+  onError: () => useRuntimeStore.getState().showToast('generic', COPY.recordingFailed, 6000),
+  download: deliverRecording,
 });
 
 function previewEl(): HTMLVideoElement | null {
@@ -58,9 +100,71 @@ export function applyVideoLayout(layout: VideoLayout): void {
     scroll.style.backgroundColor = layout === 'split' ? useSettingsStore.getState().bgColor : '';
 }
 
+/** The camera vanished (unplugged, permission revoked): save what exists and leave Video mode. */
+function onCameraEnded(stream: MediaStream): void {
+  if (recorder.stream !== stream) return; // an old stream we already replaced
+  const wasRecording = recorder.recording;
+  exitVideoMode();
+  useRuntimeStore
+    .getState()
+    .showToast('generic', wasRecording ? COPY.cameraDisconnected : COPY.cameraLost, 6000);
+}
+
+function errorName(err: unknown): string {
+  return typeof err === 'object' && err !== null && 'name' in err ? String(err.name) : '';
+}
+
+/**
+ * Open the camera and microphone, degrading instead of failing: a remembered device that is
+ * gone falls back to the default one, and a missing or blocked microphone still gives a
+ * (silent) camera. Returns null after telling the user why.
+ */
+async function acquireStream(): Promise<MediaStream | null> {
+  const runtime = useRuntimeStore.getState();
+  const md = typeof navigator === 'undefined' ? undefined : navigator.mediaDevices;
+  if (!md?.getUserMedia) {
+    runtime.showToast('generic', COPY.cameraUnavailable, 6000);
+    return null;
+  }
+  let lastError: unknown;
+  try {
+    return await md.getUserMedia(getMediaConstraints());
+  } catch (err) {
+    lastError = err;
+  }
+  const settings = useSettingsStore.getState();
+  const stale =
+    errorName(lastError) === 'OverconstrainedError' || errorName(lastError) === 'NotFoundError';
+  if (stale && (settings.selectedVideoDeviceId || settings.selectedAudioDeviceId)) {
+    settings.patch({ selectedVideoDeviceId: null, selectedAudioDeviceId: null });
+    try {
+      return await md.getUserMedia(getMediaConstraints());
+    } catch {
+      /* fall through to camera-only */
+    }
+  }
+  try {
+    const stream = await md.getUserMedia({ ...getMediaConstraints(), audio: false });
+    runtime.showToast('generic', COPY.videoNoAudio, 6000);
+    return stream;
+  } catch (err) {
+    lastError = err;
+  }
+  const name = errorName(lastError);
+  const message =
+    name === 'NotFoundError' || name === 'OverconstrainedError'
+      ? COPY.cameraNotFound
+      : name === 'NotReadableError' || name === 'AbortError'
+        ? COPY.cameraBusy
+        : COPY.cameraDenied;
+  runtime.showToast('generic', message, 6000);
+  return null;
+}
+
 async function attachStream(stream: MediaStream): Promise<void> {
   const v = previewEl();
   recorder.attach(stream);
+  stream.getVideoTracks?.()[0]?.addEventListener('ended', () => onCameraEnded(stream));
   if (!v) return;
   v.srcObject = stream;
   v.muted = true;
@@ -80,11 +184,11 @@ export async function enterVideoMode(): Promise<boolean> {
   const runtime = useRuntimeStore.getState();
   if (runtime.videoMode) return true;
   if (!useSettingsStore.getState().selectedVideoDeviceId) runtime.setFacing('user');
-  let stream: MediaStream;
-  try {
-    stream = await navigator.mediaDevices.getUserMedia(getMediaConstraints());
-  } catch {
-    runtime.showToast('generic', COPY.cameraDenied, 6000);
+  const stream = await acquireStream();
+  if (!stream) return false;
+  // The prompter may have been closed while the permission prompt was open.
+  if (useRuntimeStore.getState().phase !== 'prompter' || !previewEl()) {
+    stopStream(stream);
     return false;
   }
   useRuntimeStore.getState().enterVideo();
@@ -103,7 +207,8 @@ export async function enterVideoMode(): Promise<boolean> {
 
 export function exitVideoMode(): void {
   const runtime = useRuntimeStore.getState();
-  if (!runtime.videoMode) return;
+  // Also runs when only a stream is left over, so the camera light never stays on.
+  if (!runtime.videoMode && !recorder.stream) return;
   if (recorder.recording) recorder.stop(); // still downloads
   stopStream(recorder.stream);
   recorder.detach();

@@ -1,9 +1,10 @@
 ---
-title: A free web teleprompter you don't have to download
-metaTitle: "Free web teleprompter, no download needed"
+title: "What a teleprompter in a browser tab can and can't do"
+metaTitle: "Browser teleprompter: strengths and limits"
 description: What a browser-based teleprompter can do today, how to install the web app on a phone or desktop so it works offline, and the two things it honestly cannot do.
 keywords: [free teleprompter, online teleprompter, no download, voice scrolling]
 date: 2026-11-02
+updated: 2026-11-13
 image: /images/blog/free-web-teleprompter-no-download.jpg
 imageAlt: A phone and a laptop both showing the web teleprompter
 ---
@@ -23,8 +24,8 @@ The core is the same voice engine as the Mac app. Paste a script, press start, t
 Around that core:
 
 - **Three scrolling modes.** Voice, Sound (moves while the mic hears you) and Constant (a steady crawl at a speed you set).
-- **34 languages** with automatic detection from the script text, or pick one manually.
-- **Voice commands.** "Go back", "go next", "go start" and "go finish" move by paragraph or to either end without touching the screen.
+- **65 languages.** Fifty-one are recognised from the script text itself, right-to-left scripts included; the rest, and regional accents such as Brazilian Portuguese, are one pick away in the menu.
+- **Voice commands.** "Go back", "go forward", "go restart" and "go to the end" move by paragraph or to either end without touching the screen. The app waits a beat before acting, so the same words in the middle of a sentence are treated as speech.
 - **Mirror mode.** Flip and rotate the text for a beam-splitter rig.
 - **Video recording.** Record yourself from the camera while you read, in a split or overlay layout, and download the file.
 - **Google Docs import.** Paste a link to a document shared as "Anyone with the link" and the text loads, with a refresh button for later edits.
@@ -47,7 +48,7 @@ After that it behaves like any other app. Updates arrive silently the next time 
 
 One caveat for iPad users: Apple does not allow speech recognition inside installed web apps on iPadOS. The installed app still works for Sound and Constant modes, and for reading, but for voice scrolling open the site in Safari instead.
 
-## What it can't do
+## Two things a tab cannot do
 
 We would rather you know before you plan a presentation around it.
 
@@ -61,7 +62,7 @@ Both limitations come from the browser sandbox, which is the same thing that mak
 
 **Which browsers support voice scrolling?** Chrome, Edge and Safari on desktop and mobile. Firefox does not ship the Web Speech API, so voice scrolling is unavailable there; Sound and Constant modes still work.
 
-**Does speech recognition send my voice to a server?** That depends on the browser. Safari and recent versions of Chrome recognize most languages on the device. Other browsers may use the vendor's speech service; check your browser's privacy policy if that matters for your content.
+**Does speech recognition send my voice to a server?** That depends on the browser. Safari can recognise many languages on the device, while Chrome and Edge normally send the audio to their vendor's speech service, which needs a connection; check your browser's privacy policy if that matters for your content.
 
 **Can I use it on a phone as a rig for a DSLR?** Yes. Mirror mode flips and rotates the text for a beam-splitter, and the phone keeps listening while it sits in the rig.
 

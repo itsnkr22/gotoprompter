@@ -67,4 +67,21 @@ describe('loadScript', () => {
     expect(useRuntimeStore.getState().settingsOpen).toBe(false);
     expect(stop).toHaveBeenCalledTimes(2);
   });
+
+  it('resetApp turns the camera off and saves a recording in progress', async () => {
+    const { recorder } = await import('../src/video/video-mode');
+    const track = { stop: vi.fn(), readyState: 'live' };
+    const stream = { getTracks: () => [track] } as unknown as MediaStream;
+    const stopRecording = vi.spyOn(recorder, 'stop');
+    vi.spyOn(recorder, 'recording', 'get').mockReturnValue(true);
+    recorder.attach(stream);
+    loadScript('hello there');
+    useRuntimeStore.getState().enterVideo();
+    resetApp();
+    expect(stopRecording).toHaveBeenCalled();
+    expect(track.stop).toHaveBeenCalled();
+    expect(recorder.stream).toBeNull();
+    expect(useRuntimeStore.getState().videoMode).toBe(false);
+    vi.restoreAllMocks();
+  });
 });
