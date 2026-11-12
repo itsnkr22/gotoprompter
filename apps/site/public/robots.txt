@@ -3,7 +3,7 @@
 # Site map for language models: https://gotoprompter.app/llms.txt
 # AI usage policy: https://gotoprompter.app/ai.txt
 # Markdown versions of public pages: append .md to any page URL without the trailing slash, e.g. https://gotoprompter.app/pricing.md,
-# or send Accept: text/markdown. Catalog: https://gotoprompter.app/api/md/_catalog. /_md/ holds the raw files behind them.
+# or send Accept: text/markdown. Catalog: https://gotoprompter.app/api/md/_catalog/. /_md/ holds the raw files behind them.
 # A crawler that matches a named group below ignores the * group, so every group repeats the same rules.
 # Disallow comes before Allow so first-match parsers agree with longest-match ones (RFC 9309).
 

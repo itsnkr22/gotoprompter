@@ -323,3 +323,11 @@ test('vercel.json: Link describedby header on pages, raw Markdown files noindex'
     '/_md/ is noindex',
   );
 });
+
+test('advertised /api/md/ URLs have the trailing slash (slashless ones redirect)', () => {
+  for (const f of ['llms.txt', 'llms-full.txt', 'ai.txt', 'robots.txt', '_md/_catalog.md']) {
+    const urls = read(f).match(/https:\/\/gotoprompter\.app\/api\/md\/[^\s)`;,]*/g) ?? [];
+    for (const u of urls) assert.match(u, /\/$|\/\.$/, `${f}: ${u}`);
+    if (f !== 'llms-full.txt') assert.ok(urls.length > 0, `${f} mentions /api/md/`);
+  }
+});

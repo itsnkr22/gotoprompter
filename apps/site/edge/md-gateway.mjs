@@ -2,7 +2,8 @@
 // The build (scripts/ai-files.mjs) writes one Markdown file per public page under /_md/; this module
 // serves them at:
 //   • /<page>.md               /pricing.md → /_md/pricing.md, /index.md → the homepage
-//   • /api/md/<page>           /api/md/pricing, /api/md/ → the homepage, /api/md/_catalog → catalog
+//   • /api/md/<page>/          /api/md/pricing/, /api/md/ → the homepage, /api/md/_catalog/ → catalog
+//                              (trailing slash: the site redirects slashless paths before this runs)
 //   • /<page>/ + Accept        only when text/markdown outranks text/html (see prefersMarkdown)
 // Everything else returns null and the static site answers as usual. Pure Web APIs, so it runs in
 // Node tests and in Vercel's runtime alike.
@@ -83,7 +84,7 @@ function target(pathname, accept) {
     if (rest === '_catalog')
       return {
         file: `${MD_ROOT}/_catalog.md`,
-        canonical: `${SITE}/api/md/_catalog`,
+        canonical: `${SITE}/api/md/_catalog/`,
         negotiated: false,
       };
     const page = rest ? `/${rest}/` : '/';
@@ -121,7 +122,7 @@ function headers(body, { canonical, negotiated, lastModified, status }) {
 }
 
 const notFound = (pathname) =>
-  `# Not found\n\n> There is no Markdown version of ${pathname}.\n\nEvery page that has one is listed at ${SITE}/api/md/_catalog and ${SITE}/llms.txt.\n`;
+  `# Not found\n\n> There is no Markdown version of ${pathname}.\n\nEvery page that has one is listed at ${SITE}/api/md/_catalog/ and ${SITE}/llms.txt.\n`;
 
 /**
  * Handles a request. Returns a Response for Markdown requests, or null to let the static site

@@ -123,7 +123,10 @@ test('handle: negotiation, HEAD, OPTIONS, 404 and fall-through', async () => {
     assert.match(await res.text(), /^# Not found/);
   }
 
-  const catalog = await handle(req('/api/md/_catalog'), fetchFile);
+  const catalog = await handle(req('/api/md/_catalog/'), fetchFile);
   assert.equal(catalog.status, 200);
-  assert.equal(catalog.headers.get('content-location'), 'https://gotoprompter.app/api/md/_catalog');
+  assert.equal(
+    catalog.headers.get('content-location'),
+    'https://gotoprompter.app/api/md/_catalog/',
+  );
 });
