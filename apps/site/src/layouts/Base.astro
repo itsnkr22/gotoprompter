@@ -9,6 +9,8 @@ import { organization, website, type JsonLd as JsonLdType } from '../lib/seo';
 interface Props {
   title: string;
   description: string;
+  /** 1-2 factual sentences for AI agents (<meta name="ai-summary">); defaults to the description. */
+  aiSummary?: string;
   canonical?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
@@ -22,6 +24,7 @@ interface Props {
 const {
   title,
   description,
+  aiSummary = description,
   canonical = Astro.url.pathname,
   ogImage = '/images/og-default.png',
   ogType = 'website',
@@ -46,6 +49,7 @@ const ld = [organization(), website(), ...(Array.isArray(jsonLd) ? jsonLd : [jso
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="ai-summary" content={aiSummary} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
     <meta name="theme-color" content="#000000" />

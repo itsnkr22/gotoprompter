@@ -21,11 +21,19 @@
       ]
     },
     {
-      "source": "/(.*)\\.md",
+      "source": "/((?!_astro/|_md/|app/assets/|api/md|.*\\.md$).*)",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </llms-full.txt>; rel=\"describedby\"; type=\"text/plain\", </ai.txt>; rel=\"describedby\"; type=\"text/plain\""
+        }
+      ]
+    },
+    {
+      "source": "/_md/(.*)",
       "headers": [
         { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
-        { "key": "X-Robots-Tag", "value": "noindex, follow" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
     },
     {

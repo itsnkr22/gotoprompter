@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { CONTENT_ROUTES } from '../edge/md-gateway.mjs';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const read = (p) => readFileSync(`${dist}${p}`, 'utf8');
@@ -38,7 +39,8 @@ const ROUTES = [
   '/llms.txt',
   '/llms-full.txt',
   '/ai.txt',
-  '/index.md',
+  '/_md/index.md',
+  '/_md/_catalog.md',
   '/robots.txt',
   '/sitemap-index.xml',
 ];
@@ -188,6 +190,8 @@ test(
 );
 
 test('AI files: every public page has a Markdown version, listed in llms.txt and llms-full.txt', () => {
+  const catalog = read('_md/_catalog.md');
+  const matcher = readFileSync(new URL('../../../middleware.js', import.meta.url), 'utf8');
   const llms = read('llms.txt');
   const full = read('llms-full.txt');
   const ai = read('ai.txt');
@@ -198,8 +202,8 @@ test('AI files: every public page has a Markdown version, listed in llms.txt and
   for (const p of paths) {
     const md = p === '/' ? 'index.md' : `${p.slice(1, -1)}.md`;
     const mdUrl = `https://gotoprompter.app/${md}`;
-    assert.ok(existsSync(`${dist}${md}`), `missing ${md}`);
-    const text = read(md);
+    assert.ok(existsSync(`${dist}_md/${md}`), `missing _md/${md}`);
+    const text = read(`_md/${md}`);
     assert.match(text, /^# \S/, `${md} starts with a title`);
     assert.ok(text.includes(`Canonical: https://gotoprompter.app${p}\n`), `${md} canonical`);
     assert.doesNotMatch(
@@ -216,7 +220,32 @@ test('AI files: every public page has a Markdown version, listed in llms.txt and
       page(p).includes(`<link rel="alternate" type="text/markdown" href="${mdUrl}">`),
       `${p} links its Markdown version`,
     );
+    assert.ok(catalog.includes(`(${mdUrl})`), `catalog lists ${md}`);
+    assert.ok(
+      CONTENT_ROUTES.some((r) => r.test(p)),
+      `md-gateway CONTENT_ROUTES covers ${p}`,
+    );
+    const section = p.split('/')[1] || '/';
+    if (section !== '/') assert.ok(matcher.includes(section), `middleware matcher covers ${p}`);
+    const summary = page(p).match(/<meta name="ai-summary" content="([^"]+)"/);
+    assert.ok(summary && summary[1].length > 40, `${p} has an ai-summary`);
   }
+  // Pages outside the sitemap (noindex or Mac-only while the Mac app is off) get no Markdown.
+  const mdFiles = [];
+  (function walk(dir) {
+    for (const f of readdirSync(`${dist}${dir}`, { withFileTypes: true })) {
+      if (f.isDirectory()) walk(`${dir}${f.name}/`);
+      else mdFiles.push(`${dir}${f.name}`);
+    }
+  })('_md/');
+  assert.equal(
+    mdFiles.length,
+    paths.length + 1,
+    'one Markdown file per public page, plus the catalog',
+  );
+  for (const p of ['checkout/success', 'license/portal', '404'])
+    assert.ok(!existsSync(`${dist}_md/${p}.md`), `no Markdown for ${p}`);
+  assert.ok(!readdirSync(dist).some((f) => f.endsWith('.md')), 'no .md files outside _md/');
   assert.match(llms, /^# gotoprompter\n\n> /);
   for (const h of [
     'Core pages',
@@ -275,4 +304,22 @@ test('robots.txt explicitly allows AI crawlers with the same rules as everyone e
     assert.ok(g.includes('Disallow: /checkout/'), `group ${g[0]} disallows /checkout/`);
   }
   assert.match(read('robots.txt'), /^Sitemap: https:\/\/gotoprompter\.app\/sitemap-index\.xml$/m);
+});
+
+test('vercel.json: Link describedby header on pages, raw Markdown files noindex', () => {
+  const vercel = JSON.parse(readFileSync(new URL('../../../vercel.json', import.meta.url), 'utf8'));
+  const link = vercel.headers.find((h) => h.headers.some((x) => x.key === 'Link'));
+  assert.ok(link, 'a Link header rule exists');
+  for (const f of ['/llms.txt', '/llms-full.txt', '/ai.txt'])
+    assert.ok(link.headers[0].value.includes(`<${f}>; rel="describedby"`), `Link names ${f}`);
+  const re = new RegExp(`^${link.source}$`);
+  for (const p of ['/', '/pricing/', '/blog/teleprompter-for-google-meet/'])
+    assert.ok(re.test(p), p);
+  for (const p of ['/pricing.md', '/_md/pricing.md', '/api/md/pricing', '/_astro/x.js'])
+    assert.ok(!re.test(p), p);
+  const md = vercel.headers.find((h) => h.source === '/_md/(.*)');
+  assert.ok(
+    md?.headers.some((x) => x.key === 'X-Robots-Tag'),
+    '/_md/ is noindex',
+  );
 });

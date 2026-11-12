@@ -1,12 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
+import { APP_NAME } from '../../brand';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Base from '../../layouts/Base.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !(import.meta.env.PROD && data.draft))).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Base title="Guides and comparisons" description="Reading naturally on camera, teleprompter setups, and honest comparisons.">
+<Base
+  title="Guides and comparisons"
+  description="Reading naturally on camera, teleprompter setups, and honest comparisons."
+  aiSummary={`Index of the ${APP_NAME} blog: guides to reading naturally on camera, teleprompter setups for Zoom, Google Meet and other apps, and comparisons of teleprompter options.`}
+>
   <section class="container block">
     <div class="section-head">
       <h1>Guides and comparisons</h1>

@@ -21,3 +21,4 @@ apps/mac/PrompterCore/.swiftpm/
 # Playwright
 apps/web/test-results/
 apps/web/playwright-report/
+.vercel

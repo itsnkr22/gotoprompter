@@ -5,6 +5,7 @@ import MacLanding from '../../components/MacLanding.astro';
 import defaultFaqs from '../../data/default-faqs.json';
 import Base from '../../layouts/Base.astro';
 import { breadcrumbs, softwareApp } from '../../lib/seo';
+import { MAC_AVAILABLE } from '../../launch';
 import { mergeFaqs } from '../../lib/use-cases';
 
 const faqs = mergeFaqs(defaultFaqs, {}, [], 'FaceTime, Zoom and Teams', 'Everything happens on your Mac; no audio is ever sent anywhere. It works offline.');
@@ -28,6 +29,7 @@ const ld = [
 
 <Base
   title="The teleprompter for Mac that stays invisible on screen share"
+  aiSummary={`Product page for ${APP_NAME} for Mac${MAC_AVAILABLE ? '' : ', which is coming soon and not yet available'}: a floating teleprompter window that follows your voice in 60+ languages and is excluded from screen sharing and recordings. Free for 3 scripts; Pro and Lifetime unlock unlimited scripts.`}
   description="A floating teleprompter window that follows your voice, stays on top of every app, and disappears from Zoom, Google Meet, Teams, OBS and recordings. Free for 3 scripts."
   jsonLd={ld}
 >

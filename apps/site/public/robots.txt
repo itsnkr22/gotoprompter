@@ -2,12 +2,14 @@
 # Keep in sync with https://gotoprompter.app/llms.txt and https://gotoprompter.app/ai.txt.
 # Site map for language models: https://gotoprompter.app/llms.txt
 # AI usage policy: https://gotoprompter.app/ai.txt
-# Markdown versions of public pages: append .md to any page URL without the trailing slash, e.g. https://gotoprompter.app/pricing.md
+# Markdown versions of public pages: append .md to any page URL without the trailing slash, e.g. https://gotoprompter.app/pricing.md,
+# or send Accept: text/markdown. Catalog: https://gotoprompter.app/api/md/_catalog. /_md/ holds the raw files behind them.
 # A crawler that matches a named group below ignores the * group, so every group repeats the same rules.
 # Disallow comes before Allow so first-match parsers agree with longest-match ones (RFC 9309).
 
 User-agent: *
 Disallow: /checkout/
+Disallow: /_md/
 Allow: /
 
 # AI search and user-fetch agents: allowed on public pages so answers can cite gotoprompter.
@@ -22,6 +24,7 @@ User-agent: MistralAI-User
 User-agent: Meta-ExternalFetcher
 User-agent: YouBot
 Disallow: /checkout/
+Disallow: /_md/
 Allow: /
 
 # AI training crawlers: allowed on public pages (see https://gotoprompter.app/ai.txt).
@@ -40,6 +43,7 @@ User-agent: PetalBot
 User-agent: Timpibot
 User-agent: ImagesiftBot
 Disallow: /checkout/
+Disallow: /_md/
 Allow: /
 
 Sitemap: https://gotoprompter.app/sitemap-index.xml
