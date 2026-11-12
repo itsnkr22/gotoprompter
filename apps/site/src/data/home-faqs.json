@@ -7,7 +7,7 @@
   {
     "id": "how",
     "q": "How does voice scrolling work?",
-    "a": "{{APP_NAME}} transcribes what you say on your device and matches it against your whole script, not just the next line. It advances as you speak, waits when you pause, and finds you again if you skip ahead or go back."
+    "a": "{{APP_NAME}} turns what you say into text, using your browser's speech recognition in the web app or Apple's on-device recognition on Mac, and matches it against your whole script, not just the next line. It advances as you speak, waits when you pause, and finds you again if you skip ahead or go back."
   },
   {
     "id": "web-vs-mac",
@@ -37,7 +37,7 @@
   {
     "id": "privacy",
     "q": "Is my script private?",
-    "a": "Yes. Scripts stay on your device and there is no account. Speech recognition runs in your browser or on your Mac. The only network calls the Mac app makes are license checks and update checks."
+    "a": "Yes. Scripts stay on your device and there is no account. On Mac, speech recognition runs on-device. In the web app your browser does it: Safari and recent versions of Chrome recognise most languages on the device, and some browsers use their vendor's speech service. The only network calls the Mac app makes are license checks and update checks."
   },
   {
     "id": "account",

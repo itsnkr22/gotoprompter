@@ -198,7 +198,7 @@
     "question": "Is my script private? Can you see what I read?",
     "category": "Privacy & support",
     "platforms": ["macOS", "web"],
-    "answerHtml": "<p>No. Scripts and audio stay on your device; there is no account and nothing is uploaded. The Mac app contacts our server only to validate your license and check for updates, and the web app only when you import a Google Doc you chose. We can't access your Mac or your scripts, so when you email for help please include the details we ask for.</p>",
+    "answerHtml": "<p>No. Scripts stay on your device, there is no account, and we never receive your scripts or your voice. On Mac, speech recognition runs on-device, so audio never leaves your Mac. In the web app your browser does the recognition: Safari and recent versions of Chrome handle most languages on the device, and some browsers send audio to their vendor's speech service under the browser's own privacy policy. The Mac app contacts our server only to validate your license and check for updates, and the web app only when you import a Google Doc you chose. We can't access your Mac or your scripts, so when you email for help please include the details we ask for.</p>",
     "keywords": "data upload server local remote",
     "searchPhrases": ["is it private", "do you store my scripts"],
     "videoUrl": null
